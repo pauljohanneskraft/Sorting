@@ -1,4 +1,5 @@
-//
+import Cocoa
+
 // CompareElement
 // Created by Paul Kraft on 04.12.15.
 
@@ -11,14 +12,12 @@ class CompareElement : Comparable
 	}
 }
 
-func ==(x: CompareElement, y: CompareElement) -> Bool
-{
+func ==(x: CompareElement, y: CompareElement) -> Bool {
 	if x.description == y.description { return true }
 	return false
 }
 
-func <(x: CompareElement, y: CompareElement) -> Bool
-{
+func <(x: CompareElement, y: CompareElement) -> Bool {
 	if x.description < y.description { return true }
 	return false
 }

@@ -1,6 +1,5 @@
 import Cocoa
 
-//
 // Sort
 // Created by Paul Kraft on 03.12.15.
 
@@ -15,11 +14,12 @@ class Sort<T : CompareElement>
 			//bubbleSort,
 			//insertionSort,
 			//quickSort,
-			//quickSortRandom,
-			//quickSortThreaded,
-			quickSortRandomArray,
-			//quickSortRandomThreadedArray,
-			quickSortRandomThreaded
+			quickSortRandom,
+			quickSortThreaded,
+            quickSortRandomThreaded,
+            quickSortArray
+			//quickSortRandomArray
+			//quickSortRandomThreadedArray
 		]
 	}
 	
@@ -116,7 +116,7 @@ class Sort<T : CompareElement>
 		if unsorted.count == 0 { return [] }
 		var l : [T] = []
 		var r : [T] = []
-		let pivotIndex = Int(arc4random_uniform(UInt32(unsorted.count)))
+        let pivotIndex = Int(arc4random_uniform(UInt32(unsorted.count)))
 		let pivot = unsorted[pivotIndex]
 		for i in 0..<unsorted.count {
 			if (i != pivotIndex) {
@@ -160,20 +160,40 @@ class Sort<T : CompareElement>
 	private func quickSortRandomThreadedArrayRecursive(var sorted: [T], _ start : Int, _ end: Int) -> [T]
 	{
 		if (end-start) > 0 {
-			let pivotIndex = Int(arc4random_uniform(UInt32(end - start))) + start
-			let pivot = sorted[pivotIndex]
-			for i in start..<pivotIndex {
-				if pivot < sorted[i] { sorted.insert(sorted.removeAtIndex(i), atIndex: pivotIndex) }
-			}
-			for i in pivotIndex+1..<sorted.count {
-				if sorted[i] < pivot { sorted.insert(sorted.removeAtIndex(i), atIndex: 0) }
-			}
-			dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), {
-				self.quickSortRandomThreadedArrayRecursive(sorted, start, pivotIndex)
-				self.quickSortRandomThreadedArrayRecursive(sorted, pivotIndex + 1, end)
-				dispatch_async(dispatch_get_main_queue(), {
-				})
-			})
+			var pivotIndex = Int(arc4random_uniform(UInt32(end - start))) + start
+            dispatch_barrier_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                let pivot = sorted[pivotIndex]
+                for i in start..<pivotIndex {
+                    if pivot < sorted[i] {
+                        if(pivotIndex == end) { sorted.append(sorted.removeAtIndex(i)) }
+                        else { sorted.insert(sorted.removeAtIndex(i), atIndex: pivotIndex) }
+                        pivotIndex--
+                    }
+                }
+                for i in pivotIndex+1..<sorted.count {
+                    if sorted[i] < pivot {
+                        sorted.insert(sorted.removeAtIndex(i), atIndex: start)
+                        pivotIndex++
+                    }
+                }
+            });
+            if(end-start) > 20
+            {
+                let group = dispatch_group_create();
+                dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                    self.quickSortRandomThreadedArrayRecursive(sorted, start, pivotIndex)
+                });
+            
+                dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                    self.quickSortRandomThreadedArrayRecursive(sorted, pivotIndex + 1, end)
+                });
+                dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
+            }
+            else
+            {
+                self.quickSortRandomThreadedArrayRecursive(sorted, start, pivotIndex)
+                self.quickSortRandomThreadedArrayRecursive(sorted, pivotIndex + 1, end)
+            }
 		}
 		return sorted
 	}
@@ -191,24 +211,82 @@ class Sort<T : CompareElement>
 		if (end-start) > 0 {
 			var pivotIndex = Int(arc4random_uniform(UInt32(end - start))) + start
 			let pivot = sorted[pivotIndex]
-			for i in start..<pivotIndex {
-				if pivot < sorted[i] 
-				{
-					sorted.insert(sorted.removeAtIndex(i), atIndex: pivotIndex)
-					pivotIndex--
-				}
-			}
-			for i in pivotIndex+1..<end {
-				if sorted[i] < pivot {
-					sorted.insert(sorted.removeAtIndex(i), atIndex: start) 
-					pivotIndex++
-				}
-			}
+            for i in start..<pivotIndex {
+                if pivot < sorted[i] {
+                    if(pivotIndex == end) { sorted.append(sorted.removeAtIndex(i)) }
+                    else { sorted.insert(sorted.removeAtIndex(i), atIndex: pivotIndex + 1) }
+                    pivotIndex--
+                }
+            }
+            for i in pivotIndex+1..<sorted.count {
+                if sorted[i] < pivot {
+                    sorted.insert(sorted.removeAtIndex(i), atIndex: start)
+                    pivotIndex++
+                }
+            }
+
 			self.quickSortRandomArrayRecursive(sorted, start, pivotIndex)
 			self.quickSortRandomArrayRecursive(sorted, pivotIndex + 1, end)
 		}
 		return sorted
 	}
+    
+    func quickSortArray(unsorted: [T]) -> (name: String, array: [T]) {
+        var sorted : [T] = []
+        for i in 0..<unsorted.count {
+            sorted.append(unsorted[i])
+        }
+        return ("QuickSortArray", quickSortArrayRecursive(sorted, 0, unsorted.count))
+    }
+    
+    private func quickSortArrayRecursive(var sorted: [T], _ start : Int, _ end: Int) -> [T]
+    {
+        if end > start {
+            var pivotIndex = Int(arc4random_uniform(UInt32(end - start))) + start
+            var pivot = sorted[pivotIndex]
+            let la1 = [] + sorted[start..<pivotIndex]
+            let ra1 = [] + sorted[pivotIndex+1..<end]
+            printQuickSortStep(la1, pivot, ra1)
+			var l = start
+			var r = end-1
+			while l < r && l <= pivotIndex && r >= pivotIndex {
+				while (l <= pivotIndex && sorted[l] < pivot) { l++ }
+				while (r >= pivotIndex  && pivot < sorted[r]) { r-- }
+				if (l <= pivotIndex && r >= pivotIndex && r != l) {
+                    let tmp = sorted[r]
+                    sorted[r] = sorted[l]
+                    sorted[l] = tmp
+                    if(l == pivotIndex) {
+                        pivotIndex = r
+                        pivot = sorted[pivotIndex]
+                    }
+                    if(r == pivotIndex) {
+                        pivotIndex = l
+                        pivot = sorted[pivotIndex]
+                    }
+                }
+			}
+            
+            let la2 = [] + sorted[start..<pivotIndex]
+            let ra2 = [] + sorted[pivotIndex+1..<end]
+            printQuickSortStep(la2, pivot, ra2)
+            
+            self.quickSortArrayRecursive(sorted, start, pivotIndex)
+            self.quickSortArrayRecursive(sorted, pivotIndex + 1, end)
+        }
+        return sorted
+    }
+
+    private func printQuickSortStep(left: [T], _ pivot: T, _ right: [T]) {
+        for i in 0..<left.count {
+            print(" ", left[i].description)
+        }
+        print(pivot.description)
+        for i in 0..<right.count {
+            print(" ", right[i].description)
+        }
+        print("------------------------------------\n")
+    }
 	
     func bubbleSort(unsorted: [T]) -> (String, [T])
 	{

@@ -1,5 +1,5 @@
 import Cocoa
-//
+
 // UseCase.swift
 // Created by Paul Kraft on 04.12.15.
 
@@ -9,10 +9,10 @@ class UseCase
 	{
 		var unsorted : [Number] = []
 		var s : [[(name: String, array: [Number], time: Double)]] = []
-		for _ in 1...4
+		for _ in 1...1
 		{
 			let start : Double = Double(NSDate().timeIntervalSince1970*1000)
-			for _ in 1...10000
+			for _ in 1...4
 			{
 				unsorted.append(Number())
 			}
@@ -51,7 +51,7 @@ class UseCase
 	
 	func printComparedSortingAlgorithms(info: [(name: String, array: [Number], time: Double)], _ printAllOut: Bool) {
 		for i in 0..<info.count {
-			print(info[i].name, "(", info[i].time, " ms )")
+			//print(info[i].name, "(", info[i].time, " ms )")
 			if printAllOut {
 				for j in 0..<info[i].array.count {
 					print(info[i].array[j].description)
