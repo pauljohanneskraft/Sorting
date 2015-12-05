@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "154"
             endingLineNumber = "154"
-            landmarkName = "quickSortRandomThreadedRecursive(_:_:)"
+            landmarkName = "quickSortRandomThreadedRecursive(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "146"
             endingLineNumber = "146"
-            landmarkName = "quickSortRandomThreadedRecursive(_:_:)"
+            landmarkName = "quickSortRandomThreadedRecursive(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
