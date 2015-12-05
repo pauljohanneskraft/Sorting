@@ -9,7 +9,6 @@ class UseCase
 	{
 		var unsorted : [Number] = []
 		var s : [[(name: String, array: [Number], time: Double)]] = []
-        let rounds = 10
         var anz = elements
         var elementsS = ""
         while anz >= 1000 {
@@ -21,23 +20,20 @@ class UseCase
             anz = Int(anz/1000)
         }
         elementsS = "\(Int(anz % 1000))" + elementsS
-		for i in 1...rounds
-		{
-            
+		for i in 1...rounds {
             print("round \(i) of \(rounds): \(elementsS) elements")
-			let start = Double(NSDate().timeIntervalSince1970*1000)
+			let start = Double(NSDate().timeIntervalSince1970)
 			for _ in 1...elements
 			{
 				unsorted.append(Number())
 			}
-			let end : Double = Double(NSDate().timeIntervalSince1970*1000)
-			let a = compareSortingAlgorithms(unsorted, (end - start), false)
+			let end : Double = Double(NSDate().timeIntervalSince1970)
+			let a = compareSortingAlgorithms(unsorted, (end - start)*1000, true)
 			s.append(a)
 			printComparedSortingAlgorithms(a, false)
 		}
 		
-		for i in 0...Sort<Number>().sortingAlgorithms.count
-		{
+		for i in 0..<Sort<Number>().sortingAlgorithms.count+2 {
 			var medianTime : Double = 0
 			var times : Double = 0
 			for j in 0..<s.count {
@@ -66,13 +62,29 @@ class UseCase
     func compareSortingAlgorithms(unsorted: [Number], _ initTime: Double, _ showIndividualResults: Bool) -> [(name: String, array: [Number], time: Double)] {
 		var all : [(name: String, array: [Number], time: Double)] = []
 		all.append(("Start", unsorted, initTime))
-        var finished = "\t"
-		for i in 0..<(Sort<Number>()).sortingAlgorithms.count {
+        var unsortedInt : [Int] = []
+        for i in 0..<unsorted.count {
+            unsortedInt.append(unsorted[i].description)
+        }
+        let start = NSDate()
+        unsortedInt.sortInPlace()
+        let end = Double(NSDate().timeIntervalSinceDate(start))*1000
+        var unsortedNotInt : [Number] = []
+        for i in 0..<unsortedInt.count {
+            unsortedNotInt.append(Number(unsortedInt[i]))
+        }
+        all.append(("SortInPlace", unsortedNotInt, end))
+        if showIndividualResults {
+            print("\t\(all[1].name): \(Int(all[1].time)) ms", terminator: "")
+        }
+        
+		for i in 0..<Sort<Number>().sortingAlgorithms.count {
             all.append( self.testAlg( (Sort<Number>()).sortingAlgorithms[i], unsorted))
-            finished += "\(all[i+1].name): \(Int(all[i+1].time)) ms"
-            if (i < (Sort<Number>().sortingAlgorithms.count - 1)) { finished += ",\t"}
+            if showIndividualResults {
+                print("\t\(all[i+2].name): \(Int(all[i+2].time)) ms", terminator: "")
+            }
 		}
-        if(showIndividualResults) { print("\(finished)\n") }
+        print("\n")
 		return all
 	}
 	
@@ -96,9 +108,8 @@ class UseCase
 	}
 	
 	func testAlg(sort: (([Number]) -> (name: String, array: [Number])), _ unsorted: [Number]) -> (name: String, array: [Number], time: Double) {
-		let start = Double(NSDate().timeIntervalSince1970*1000)
-		let sort = sort(unsorted)
-		let end = Double(NSDate().timeIntervalSince1970*1000);
-		return (sort.name, sort.array, (end - start))
+		let start = NSDate()
+        let sort = sort(unsorted)
+		return (sort.name, sort.array, Double(NSDate().timeIntervalSinceDate(start))*1000)
 	}
 }
