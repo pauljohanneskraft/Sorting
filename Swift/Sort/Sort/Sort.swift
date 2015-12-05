@@ -13,13 +13,13 @@ class Sort<T : CompareElement>
 		sortingAlgorithms = [
 			//bubbleSort,
 			//insertionSort,
-			quickSort,
-			quickSortRandom,
-            quickSortMedian,
+			//quickSort,
+			//quickSortRandom,
+            //quickSortMedian,
 			quickSortThreaded,
             quickSortRandomThreaded,
             quickSortMedianThreaded,
-            quickSortArray
+            //quickSortArray
 		]
 	}
 	
@@ -172,7 +172,7 @@ class Sort<T : CompareElement>
 	}
     
     func quickSortMedianThreaded(unsorted: [T]) -> (name: String, array: [T]) {
-        return ("QuickSortMedianThreaded", quickSortMedianThreadedRecursive(unsorted, 0))
+        return ("QuickSortMedianThreaded", quickSortMedianThreadedRecursive(unsorted))
     }
     
     private func quickSortMedianThreadedRecursive(unsorted: [T]) -> [T] {
