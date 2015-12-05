@@ -5,19 +5,33 @@ import Cocoa
 
 class UseCase
 {
-	init()
+    init(_ rounds: Int, _ elements: Int)
 	{
 		var unsorted : [Number] = []
 		var s : [[(name: String, array: [Number], time: Double)]] = []
-		for _ in 1...1
+        let rounds = 10
+        var anz = elements
+        var elementsS = ""
+        while anz >= 1000 {
+            var a = "\(Int(anz % 1000))"
+            while a.characters.count < 3 {
+                a = "0" + a
+            }
+            elementsS = ".\(a)\(elementsS)"
+            anz = Int(anz/1000)
+        }
+        elementsS = "\(Int(anz % 1000))" + elementsS
+		for i in 1...rounds
 		{
-			let start : Double = Double(NSDate().timeIntervalSince1970*1000)
-			for _ in 1...4
+            
+            print("round \(i) of \(rounds): \(elementsS) elements")
+			let start = Double(NSDate().timeIntervalSince1970*1000)
+			for _ in 1...elements
 			{
 				unsorted.append(Number())
 			}
-			let end : Double = Double(NSDate().timeIntervalSince1970*1000) 
-			let a = compareSortingAlgorithms(unsorted, (end - start))
+			let end : Double = Double(NSDate().timeIntervalSince1970*1000)
+			let a = compareSortingAlgorithms(unsorted, (end - start), false)
 			s.append(a)
 			printComparedSortingAlgorithms(a, false)
 		}
@@ -30,22 +44,35 @@ class UseCase
 				medianTime += Double(s[j][i].time)
 				times++
 			}
-			print(s[0][i].name + ":", Double(round(medianTime/(times))/1000), "s")
+            var output = s[0][i].name + ":"
+            while output.characters.count < 26 {
+                output += " "
+            }
+            for _ in 0...(10-String(Int(medianTime/times)).characters.count) {
+                output += " "
+            }
+            output += String(Int(medianTime/times))
+            output += " ms for " + String(s[0][i].array.count) + " elements."
+			print(output)
+            var separator = ""
+            for _ in 0..<(output.characters.count) {
+                separator += "-"
+            }
+            print(separator)
 		}
 		
 	}
-	
-	
-	func compareSortingAlgorithms(unsorted: [Number], _ initTime: Double) -> [(name: String, array: [Number], time: Double)] {
+    
+    func compareSortingAlgorithms(unsorted: [Number], _ initTime: Double, _ showIndividualResults: Bool) -> [(name: String, array: [Number], time: Double)] {
 		var all : [(name: String, array: [Number], time: Double)] = []
 		all.append(("Start", unsorted, initTime))
-		let group = dispatch_group_create();
+        var finished = "\t"
 		for i in 0..<(Sort<Number>()).sortingAlgorithms.count {
-			dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-				all.append( self.testAlg( (Sort<Number>()).sortingAlgorithms[i], unsorted))
-			});
+            all.append( self.testAlg( (Sort<Number>()).sortingAlgorithms[i], unsorted))
+            finished += "\(all[i+1].name): \(Int(all[i+1].time)) ms"
+            if (i < (Sort<Number>().sortingAlgorithms.count - 1)) { finished += ",\t"}
 		}
-		dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
+        if(showIndividualResults) { print("\(finished)\n") }
 		return all
 	}
 	
@@ -53,18 +80,15 @@ class UseCase
 		for i in 0..<info.count {
 			//print(info[i].name, "(", info[i].time, " ms )")
 			if printAllOut {
-				for j in 0..<info[i].array.count {
-					print(info[i].array[j].description)
-				}
+				for j in 0..<info[i].array.count { print(info[i].array[j].description) }
 			}
 			else
 			{
 				if(i > 0 && i < info.count) {
 					for j in 0..<info[i].array.count {
 						if(!(info[1].array[j].description == info[i].array[j].description)) {
-							print(info[i].array[j].description)
+							print(info[i].name, info[i].array[j].description)
 						}
-						
 					}
 				}
 			}
