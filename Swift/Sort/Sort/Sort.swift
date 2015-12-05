@@ -13,13 +13,13 @@ class Sort<T : CompareElement>
 		sortingAlgorithms = [
 			//bubbleSort,
 			//insertionSort,
-			quickSort,
-			quickSortRandom,
-            quickSortMedian,
+			//quickSort,
+			//quickSortRandom,
+            //quickSortMedian,
 			quickSortThreaded,
             quickSortRandomThreaded,
             quickSortMedianThreaded,
-            quickSortArray
+            //quickSortArray
 		]
 	}
 	
