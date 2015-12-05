@@ -16,10 +16,11 @@ class Sort<T : CompareElement>
 			//quickSort,
 			//quickSortRandom,
             //quickSortMedian,
-			quickSortThreaded,
+			//quickSortThreaded,
             quickSortRandomThreaded,
             quickSortMedianThreaded,
-            //quickSortArray
+            quickSortArray,
+            quickSortArrayThreaded,
 		]
 	}
 	
@@ -209,28 +210,27 @@ class Sort<T : CompareElement>
         return l + r
     }
 
-	
     func quickSortArray(unsorted: [T]) -> (name: String, array: [T]) {
         var sorted : [T] = []
         for i in 0..<unsorted.count {
             sorted.append(unsorted[i])
         }
-        sorted = quickSortArrayRecursive(sorted, 0, sorted.count - 1)
+        quickSortArrayRecursive(&sorted, 0, sorted.count - 1)
         return ("QuickSortArray", sorted)
     }
     
-    private func quickSortArrayRecursive(var sorted: [T], _ start : Int, _ end: Int) -> [T]
+    private func quickSortArrayRecursive(inout sorted: [T], _ start : Int, _ end: Int) -> [T]
     {
         if end > start {
             let pivot : Int
-            (sorted, pivot) = quickSortArrayPartition(sorted, start, end)
-            sorted = self.quickSortArrayRecursive(sorted, start, pivot - 1)
-            sorted = self.quickSortArrayRecursive(sorted, pivot + 1, end)
+            pivot = quickSortArrayPartition(&sorted, start, end)
+            self.quickSortArrayRecursive(&sorted, start, pivot - 1)
+            self.quickSortArrayRecursive(&sorted, pivot + 1, end)
         }
         return sorted
     }
     
-    private func quickSortArrayPartition(var sorted: [T], _ start : Int, _ end: Int) -> (array: [T], pivot: Int)
+    private func quickSortArrayPartition(inout sorted: [T], _ start : Int, _ end: Int) -> Int
     {
         var i = start
         for j in (start + 1)...end {
@@ -240,10 +240,64 @@ class Sort<T : CompareElement>
             }
         }
         (sorted[i], sorted[start]) = (sorted[start], sorted[i])
-        return (sorted, i)
+        return i
     }
     
-    func bubbleSort(unsorted: [T]) -> (String, [T])
+    func quickSortArrayThreaded(unsorted: [T]) -> (name: String, array: [T]) {
+        var sorted : [T] = []
+        for i in 0..<unsorted.count {
+            sorted.append(unsorted[i])
+        }
+        return ("QuickSortArrayThreaded", quickSortArrayThreadedRecursive(sorted))
+    }
+    
+    private func quickSortArrayThreadedRecursive(var sorted: [T]) -> [T]
+    {
+        if sorted.count > 1 {
+            let pivot : Int
+            pivot = quickSortArrayThreadedPartition(&sorted)
+            var sortedleft : [T] = []
+            var sortedright: [T] = []
+            if threadCount + 2 < MAX_THREADS {
+                threadCount += 2
+                let group = dispatch_group_create();
+                dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                    sortedleft  = self.quickSortArrayThreadedRecursive(sorted[0..<pivot] + [])
+                });
+                
+                dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                    sortedright = self.quickSortArrayThreadedRecursive(sorted[pivot+1..<sorted.count] + [])
+                });
+                dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
+                threadCount -= 2
+            }
+            else
+            {
+                sortedleft  = self.quickSortArrayThreadedRecursive(sorted[0..<pivot] + [])
+                sortedright = self.quickSortArrayThreadedRecursive(sorted[pivot+1..<sorted.count] + [])
+            }
+            
+            return sortedleft + sorted[pivot...pivot] + sortedright
+        }
+        if sorted.count == 1 { return sorted }
+        return []
+    }
+    
+    private func quickSortArrayThreadedPartition(inout sorted: [T]) -> (Int)
+    {
+        var i = 0
+        for j in 1...(sorted.count-1) {
+            if sorted[j] < sorted[0] {
+                i++
+                (sorted[i], sorted[j]) = (sorted[j], sorted[i])
+            }
+        }
+        (sorted[i], sorted[0]) = (sorted[0], sorted[i])
+        return i
+    }
+
+    
+    func bubbleSort(unsorted: [T]) -> (name: String, array: [T])
 	{
 		var sorted : [T] = []
 		for i in 0..<unsorted.count{

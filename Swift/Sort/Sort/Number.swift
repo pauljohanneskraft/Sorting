@@ -6,8 +6,10 @@ import Cocoa
 class Number : CompareElement
 {
 	private let POWER = 9
-	init()
-	{
+	init(){
 		super.init(Int(arc4random_uniform(UInt32(pow(Double(10),Double(POWER))))))
 	}
+    override init(_ desc : Int){
+        super.init(desc)
+    }
 }
