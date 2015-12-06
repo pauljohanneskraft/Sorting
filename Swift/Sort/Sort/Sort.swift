@@ -16,11 +16,11 @@ class Sort<T:Comparable>
 			//quickSort,
 			//quickSortRandom,
             //quickSortMedian,
-			//quickSortThreaded,
+			quickSortThreaded,
             //quickSortRandomThreaded,
             //quickSortMedianThreaded,
             //quickSortArray,
-            quickSortArrayThreaded,
+            //quickSortArrayThreaded,
 		]
 	}
 	
@@ -118,7 +118,7 @@ class Sort<T:Comparable>
     
     
     func quickSortMedian(unsorted: [T]) -> (name: String, array: [T]) {
-        return ("QuickSortMedian", quickSortMedianThreadedRecursive(unsorted))
+        return ("QuickSortMedian", quickSortMedianRecursive(unsorted))
     }
     
     private func quickSortMedianRecursive(unsorted: [T]) -> [T] {
