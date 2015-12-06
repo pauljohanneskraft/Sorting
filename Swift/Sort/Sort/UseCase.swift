@@ -5,8 +5,9 @@ import Cocoa
 
 class UseCase
 {
-    init(_ rounds: Int, _ elements: Int)
+    init(rounds: Int, elements: Int, showResultsOfRound: Bool, showAllArrays: Bool)
 	{
+        if (elements < 1 || rounds < 1) { return }
 		var unsorted : [Number] = []
 		var s : [[(name: String, array: [Number], time: Double)]] = []
         var anz = elements
@@ -20,19 +21,21 @@ class UseCase
             anz = Int(anz/1000)
         }
         elementsS = "\(Int(anz % 1000))" + elementsS
-		for i in 1...rounds {
-            print("round \(i) of \(rounds): \(elementsS) elements")
-			let start = Double(NSDate().timeIntervalSince1970)
-			for _ in 1...elements
-			{
-				unsorted.append(Number())
-			}
-			let end : Double = Double(NSDate().timeIntervalSince1970)
-			let a = compareSortingAlgorithms(unsorted, (end - start)*1000, true)
-			s.append(a)
-			printComparedSortingAlgorithms(a, false)
+        for i in 1...rounds {
+            unsorted = []
+            let start = Double(NSDate().timeIntervalSince1970)
+            for _ in 1...elements
+            {
+                unsorted.append(Number())
+            }
+            let end : Double = Double(NSDate().timeIntervalSince1970)
+            print("round \(i) \t of \(rounds): \(unsorted.count) elements")
+            let a = self.compareSortingAlgorithms(unsorted, (end - start)*1000, showResultsOfRound)
+            s.append(a)
+            self.printComparedSortingAlgorithms(a, showAllArrays)
 		}
 		
+        print("")
 		for i in 0..<Sort<Number>().sortingAlgorithms.count+2 {
 			var medianTime : Double = 0
 			var times : Double = 0
@@ -79,12 +82,12 @@ class UseCase
         }
         
 		for i in 0..<Sort<Number>().sortingAlgorithms.count {
-            all.append( self.testAlg( (Sort<Number>()).sortingAlgorithms[i], unsorted))
+            all.append(self.testAlg(Sort<Number>().sortingAlgorithms[i], unsorted))
             if showIndividualResults {
                 print("\t\(all[i+2].name): \(Int(all[i+2].time)) ms", terminator: "")
             }
 		}
-        print("\n")
+        if showIndividualResults { print("\n") }
 		return all
 	}
 	
@@ -95,14 +98,14 @@ class UseCase
 				for j in 0..<info[i].array.count { print(info[i].array[j].description) }
 			}
 			else
-			{
+			{/*
 				if(i > 0 && i < info.count) {
 					for j in 0..<info[i].array.count {
 						if(!(info[1].array[j].description == info[i].array[j].description)) {
 							print(info[i].name, info[i].array[j].description)
 						}
 					}
-				}
+				}*/
 			}
 		}
 	}
@@ -110,6 +113,7 @@ class UseCase
 	func testAlg(sort: (([Number]) -> (name: String, array: [Number])), _ unsorted: [Number]) -> (name: String, array: [Number], time: Double) {
 		let start = NSDate()
         let sort = sort(unsorted)
-		return (sort.name, sort.array, Double(NSDate().timeIntervalSinceDate(start))*1000)
+        let end = Double(NSDate().timeIntervalSinceDate(start))*1000
+		return (sort.name, sort.array, end)
 	}
 }

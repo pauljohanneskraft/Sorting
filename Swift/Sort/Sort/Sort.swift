@@ -3,7 +3,7 @@ import Cocoa
 // Sort
 // Created by Paul Kraft on 03.12.15.
 
-class Sort<T : CompareElement>
+class Sort<T:Comparable>
 {
 	var sortingAlgorithms : [([T] -> (String, [T]))] = []
     let MAX_THREADS = 12
@@ -17,9 +17,9 @@ class Sort<T : CompareElement>
 			//quickSortRandom,
             //quickSortMedian,
 			//quickSortThreaded,
-            quickSortRandomThreaded,
-            quickSortMedianThreaded,
-            quickSortArray,
+            //quickSortRandomThreaded,
+            //quickSortMedianThreaded,
+            //quickSortArray,
             quickSortArrayThreaded,
 		]
 	}
@@ -38,18 +38,17 @@ class Sort<T : CompareElement>
 	}
 	
 	func quickSort(unsorted: [T]) -> (name: String, array: [T]) {
+        if unsorted.count < 2 { return ("QuickSort", unsorted) }
 		var l : [T] = []
 		var r : [T] = []
-		if unsorted.count > 0 {
-			let pivot = unsorted[0]
-			for i in 1..<unsorted.count {
-				if unsorted[i] < pivot { l.append(unsorted[i]) }
-				else { r.append(unsorted[i]) }
-			}
-			r = self.quickSort(r).array
-			l = self.quickSort(l).array
-			l.append(pivot)
-		}
+        let pivot = unsorted[0]
+        for i in 1..<unsorted.count {
+            if unsorted[i] < pivot { l.append(unsorted[i]) }
+            else { r.append(unsorted[i]) }
+        }
+        r = self.quickSort(r).array
+        l = self.quickSort(l).array
+        l.append(pivot)
 		return ("QuickSort", l + r)
 	}
 	
@@ -59,7 +58,7 @@ class Sort<T : CompareElement>
 	
 	private func quickSortThreadedRecursive(unsorted: [T]) -> [T]
 	{
-		if unsorted.count == 0 { return [] }
+		if unsorted.count < 2 { return unsorted }
 		var l : [T] = []
 		var r : [T] = []
 		let pivot = unsorted[0]
@@ -67,30 +66,35 @@ class Sort<T : CompareElement>
 			if unsorted[i] < pivot { l.append(unsorted[i]) }
 			else { r.append(unsorted[i]) }
 		}
-		if threadCount + 2 < MAX_THREADS {
+        
+        if threadCount + 2 <= MAX_THREADS {
             threadCount += 2
-			let group = dispatch_group_create();
-			dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-				r = self.quickSortThreadedRecursive(r)
-			});
-
-			dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-				l = self.quickSortThreadedRecursive(l)
-			});
-			
-			dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
+            let group = dispatch_group_create();
+            dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
+                r = self.quickSortThreadedRecursive(r)
+            });
+            dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
+                l = self.quickSortThreadedRecursive(l)
+            });
+            dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
             threadCount -= 2
-		}
-		else {
-			r = self.quickSortThreadedRecursive(r)
-			l = self.quickSortThreadedRecursive(l)
-		}
+        }
+        else {
+            r = self.quickSortThreadedRecursive(r)
+            l = self.quickSortThreadedRecursive(l)
+        }
 		l.append(pivot)
 		return l + r
 	}
 
+
+    func quickSortRandom(unsorted: [T]) -> (name: String, array: [T]) {
+        return ("QuickSortRandom", quickSortRandomRecursive(unsorted))
+    }
 	
-	func quickSortRandom(unsorted: [T]) -> (name: String, array: [T]) {
+    private func quickSortRandomRecursive(unsorted: [T]) -> [T]
+    {
+        if unsorted.count < 2 { return unsorted } //empty or one element
 		var l : [T] = []
 		var r : [T] = []
 		if unsorted.count > 0 {
@@ -108,29 +112,33 @@ class Sort<T : CompareElement>
 			l = self.quickSortRandom(l).array
 			l.append(pivot)
 		}
-		return ("QuickSortRandom", l + r)
+		return l + r
 	}
     
     
+    
     func quickSortMedian(unsorted: [T]) -> (name: String, array: [T]) {
+        return ("QuickSortMedian", quickSortMedianThreadedRecursive(unsorted))
+    }
+    
+    private func quickSortMedianRecursive(unsorted: [T]) -> [T] {
+        if unsorted.count < 2 { return unsorted } //empty or one element
         var l : [T] = []
         var r : [T] = []
-        if unsorted.count > 0 {
-            let pivotIndex = unsorted.count/2
-            let pivot = unsorted[pivotIndex]
-            for i in 0..<pivotIndex {
-                if unsorted[i] < pivot { l.append(unsorted[i]) }
-                else { r.append(unsorted[i]) }
-            }
-            for i in pivotIndex+1..<unsorted.count {
-                if unsorted[i] < pivot { l.append(unsorted[i]) }
-                else { r.append(unsorted[i]) }
-            }
-            r = self.quickSortRandom(r).array
-            l = self.quickSortRandom(l).array
-            l.append(pivot)
+        let pivotIndex = unsorted.count/2
+        let pivot = unsorted[pivotIndex]
+        for i in 0..<pivotIndex {
+            if unsorted[i] < pivot { l.append(unsorted[i]) }
+            else { r.append(unsorted[i]) }
         }
-        return ("QuickSortMedian", l + r)
+        for i in pivotIndex+1..<unsorted.count {
+            if unsorted[i] < pivot { l.append(unsorted[i]) }
+            else { r.append(unsorted[i]) }
+        }
+        r = self.quickSortRandom(r).array
+        l = self.quickSortRandom(l).array
+        l.append(pivot)
+        return l + r
     }
 
 	
@@ -139,7 +147,7 @@ class Sort<T : CompareElement>
 	}
 	
 	private func quickSortRandomThreadedRecursive(unsorted: [T]) -> [T] {
-		if unsorted.count == 0 { return [] }
+		if unsorted.count < 2 { return unsorted }
 		var l : [T] = []
 		var r : [T] = []
         let pivotIndex = Int(arc4random_uniform(UInt32(unsorted.count)))
@@ -150,14 +158,14 @@ class Sort<T : CompareElement>
 				else                   { r.append(unsorted[i]) }
 			}
 		}
-		if threadCount + 2 < MAX_THREADS {
+		if threadCount + 2 <= MAX_THREADS {
             threadCount += 2
 			let group = dispatch_group_create();
-			dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+			dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
 				r = self.quickSortRandomThreadedRecursive(r)
 			});
 
-			dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+			dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
 				l = self.quickSortRandomThreadedRecursive(l)
 			});
 			dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
@@ -177,7 +185,7 @@ class Sort<T : CompareElement>
     }
     
     private func quickSortMedianThreadedRecursive(unsorted: [T]) -> [T] {
-        if unsorted.count == 0 { return [] }
+        if unsorted.count < 2 { return unsorted }
         var l : [T] = []
         var r : [T] = []
         let pivotIndex = unsorted.count/2
@@ -188,14 +196,14 @@ class Sort<T : CompareElement>
                 else                   { r.append(unsorted[i]) }
             }
         }
-        if threadCount + 2 < MAX_THREADS {
+        if threadCount + 2 <= MAX_THREADS {
             threadCount += 2
             let group = dispatch_group_create();
-            dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
                 r = self.quickSortMedianThreadedRecursive(r)
             });
             
-            dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
                 l = self.quickSortMedianThreadedRecursive(l)
             });
             dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
@@ -219,7 +227,7 @@ class Sort<T : CompareElement>
         return ("QuickSortArray", sorted)
     }
     
-    private func quickSortArrayRecursive(inout sorted: [T], _ start : Int, _ end: Int) -> [T]
+    private func quickSortArrayRecursive(inout sorted: [T], _ start : Int, _ end: Int)
     {
         if end > start {
             let pivot : Int
@@ -227,7 +235,6 @@ class Sort<T : CompareElement>
             self.quickSortArrayRecursive(&sorted, start, pivot - 1)
             self.quickSortArrayRecursive(&sorted, pivot + 1, end)
         }
-        return sorted
     }
     
     private func quickSortArrayPartition(inout sorted: [T], _ start : Int, _ end: Int) -> Int
@@ -253,34 +260,28 @@ class Sort<T : CompareElement>
     
     private func quickSortArrayThreadedRecursive(var sorted: [T]) -> [T]
     {
-        if sorted.count > 1 {
-            let pivot : Int
-            pivot = quickSortArrayThreadedPartition(&sorted)
-            var sortedleft : [T] = []
-            var sortedright: [T] = []
-            if threadCount + 2 < MAX_THREADS {
-                threadCount += 2
-                let group = dispatch_group_create();
-                dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-                    sortedleft  = self.quickSortArrayThreadedRecursive(sorted[0..<pivot] + [])
-                });
-                
-                dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-                    sortedright = self.quickSortArrayThreadedRecursive(sorted[pivot+1..<sorted.count] + [])
-                });
-                dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
-                threadCount -= 2
-            }
-            else
-            {
+        if sorted.count < 2 { return sorted }
+        let pivot = quickSortArrayThreadedPartition(&sorted)
+        var sortedleft:[T] = [], sortedright:[T] = []
+        if threadCount + 2 <= MAX_THREADS {
+            threadCount += 2
+            let group = dispatch_group_create();
+            dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
                 sortedleft  = self.quickSortArrayThreadedRecursive(sorted[0..<pivot] + [])
-                sortedright = self.quickSortArrayThreadedRecursive(sorted[pivot+1..<sorted.count] + [])
-            }
+            });
             
-            return sortedleft + sorted[pivot...pivot] + sortedright
+            dispatch_group_async(group,dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), {
+                sortedright = self.quickSortArrayThreadedRecursive(sorted[pivot+1..<sorted.count] + [])
+            });
+            dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
+            threadCount -= 2
         }
-        if sorted.count == 1 { return sorted }
-        return []
+        else
+        {
+            sortedleft  = self.quickSortArrayThreadedRecursive(sorted[0..<pivot] + [])
+            sortedright = self.quickSortArrayThreadedRecursive(sorted[pivot+1..<sorted.count] + [])
+        }
+        return sortedleft + sorted[pivot...pivot] + sortedright
     }
     
     private func quickSortArrayThreadedPartition(inout sorted: [T]) -> (Int)
