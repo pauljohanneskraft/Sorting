@@ -12,7 +12,7 @@ class Number : Comparable, CustomStringConvertible
 {
     private let value : Int
     var description : String {
-        return "Number: \(value)"
+        return "\(value)"
     }
     init(){
         value = Int(arc4random_uniform(UInt32.max))

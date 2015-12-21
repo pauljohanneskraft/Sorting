@@ -16,6 +16,7 @@
 		9B6E7B101C2840F90047BEAC /* QuickSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E7B071C2840F90047BEAC /* QuickSort.swift */; };
 		9B6E7B111C2840F90047BEAC /* SelectionSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E7B081C2840F90047BEAC /* SelectionSort.swift */; };
 		9B6E7B121C2840F90047BEAC /* ShellSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E7B091C2840F90047BEAC /* ShellSort.swift */; };
+		9B6E7B151C28423F0047BEAC /* AVLBinaryTreeSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6E7B141C28423F0047BEAC /* AVLBinaryTreeSort.swift */; };
 		9B70D25A1C11DBBA001082A9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B70D2551C11DBBA001082A9 /* main.swift */; };
 		9B70D25B1C11DBBA001082A9 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B70D2561C11DBBA001082A9 /* Number.swift */; };
 		9B70D25D1C11DBBA001082A9 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B70D2581C11DBBA001082A9 /* Test.swift */; };
@@ -44,6 +45,7 @@
 		9B6E7B071C2840F90047BEAC /* QuickSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuickSort.swift; path = "Sort/sorting algorithms/QuickSort.swift"; sourceTree = "<group>"; };
 		9B6E7B081C2840F90047BEAC /* SelectionSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectionSort.swift; path = "Sort/sorting algorithms/SelectionSort.swift"; sourceTree = "<group>"; };
 		9B6E7B091C2840F90047BEAC /* ShellSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShellSort.swift; path = "Sort/sorting algorithms/ShellSort.swift"; sourceTree = "<group>"; };
+		9B6E7B141C28423F0047BEAC /* AVLBinaryTreeSort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AVLBinaryTreeSort.swift; path = "Sort/sorting algorithms/AVLBinaryTreeSort.swift"; sourceTree = "<group>"; };
 		9B70D2401C11D960001082A9 /* Sort */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sort; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B70D2551C11DBBA001082A9 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = Sort/main.swift; sourceTree = "<group>"; };
 		9B70D2561C11DBBA001082A9 /* Number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Number.swift; path = Sort/Number.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				9B6E7B011C2840F90047BEAC /* BinaryTreeSort.swift */,
+				9B6E7B141C28423F0047BEAC /* AVLBinaryTreeSort.swift */,
 				9B6E7B021C2840F90047BEAC /* BubbleSort.swift */,
 				9B6E7B031C2840F90047BEAC /* HeapSort.swift */,
 				9B6E7B041C2840F90047BEAC /* InsertionSort.swift */,
@@ -163,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B6E7B151C28423F0047BEAC /* AVLBinaryTreeSort.swift in Sources */,
 				9B70D25B1C11DBBA001082A9 /* Number.swift in Sources */,
 				9B6E7B0E1C2840F90047BEAC /* IntroSort.swift in Sources */,
 				9B6E7B0D1C2840F90047BEAC /* InsertionSort.swift in Sources */,
