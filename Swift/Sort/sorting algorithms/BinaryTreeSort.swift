@@ -17,16 +17,16 @@ private func binaryTreeSortRecursive<T: Comparable>(unsorted: [T]) -> [T] {
 }
 
 private class BinaryTree<T: Comparable> {
-    private var root: binaryTreeElement<T>
+    private var root: BinaryTreeElement<T>
     
     convenience init(_ array: [T]) {
-        self.init(binaryTreeLeaf<T>())
+        self.init(BinaryTreeLeaf<T>())
         for i in 0..<array.count {
             root = root.insert(array[i])
         }
     }
     
-    init(_ root: binaryTreeElement<T>) {
+    init(_ root: BinaryTreeElement<T>) {
         self.root = root
     }
     
@@ -39,9 +39,9 @@ private class BinaryTree<T: Comparable> {
     }
 }
 
-private class binaryTreeElement<T:Comparable> {
-    func insert(newData: T) -> binaryTreeElement<T> {
-        return binaryTreeNode<T>(newData)
+private class BinaryTreeElement<T:Comparable> {
+    func insert(newData: T) -> BinaryTreeElement<T> {
+        return BinaryTreeNode<T>(newData)
     }
     
     func array() -> [T] {
@@ -49,22 +49,22 @@ private class binaryTreeElement<T:Comparable> {
     }
 }
 
-private class binaryTreeNode<T: Comparable> : binaryTreeElement<T> {
+private class BinaryTreeNode<T: Comparable> : BinaryTreeElement<T> {
     let data : T
-    var left : binaryTreeElement<T>
-    var right: binaryTreeElement<T>
+    var left : BinaryTreeElement<T>
+    var right: BinaryTreeElement<T>
     
     convenience init(_ newData: T) {
-        self.init(newData, left: binaryTreeLeaf<T>(), right: binaryTreeLeaf<T>())
+        self.init(newData, left: BinaryTreeLeaf<T>(), right: BinaryTreeLeaf<T>())
     }
     
-    init(_ newData: T, left: binaryTreeElement<T>, right: binaryTreeElement<T>) {
+    init(_ newData: T, left: BinaryTreeElement<T>, right: BinaryTreeElement<T>) {
         self.data = newData
         self.left = left
         self.right = right
     }
     
-    override func insert(newData: T) -> binaryTreeElement<T> {
+    override func insert(newData: T) -> BinaryTreeElement<T> {
         if newData < self.data { left  =  left.insert(newData) }
         else                   { right = right.insert(newData) }
         return self
@@ -77,7 +77,7 @@ private class binaryTreeNode<T: Comparable> : binaryTreeElement<T> {
     }
 }
 
-private class binaryTreeLeaf<T: Comparable> : binaryTreeElement<T> {}
+private class BinaryTreeLeaf<T: Comparable> : BinaryTreeElement<T> {}
 
 
 

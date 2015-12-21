@@ -8,14 +8,13 @@
 //
 
 let              times = 1
-let             rounds = 10
-let           elements = 1000
+let             rounds = 1000
+let           elements = 50
 let showResultsOfRound = false
 let      showAllArrays = false
 
 let sortingAlgorithms : [[Number] -> (String, [Number])] = [
-    //
-    shellSort,
+    //shellSort,
     //mergeSort,
     //mergeSortThreaded,
     //selectionSort,
@@ -27,16 +26,16 @@ let sortingAlgorithms : [[Number] -> (String, [Number])] = [
     //quickSortMedian,
     //quickSortMedianThreaded,
     //quickSortRandom,
-    //
-    quickSortRandomThreaded,
+    //quickSortRandomThreaded,
     //
     introSortMedianThreaded,
     //introSortMedian,
-    //
-    heapSort,
+    //heapSort,
     //bubbleSort
     //
-    binaryTreeSort
+    binaryTreeSort,
+    //
+    avlBinaryTreeSort
 ]
 
 for i in 0..<times {

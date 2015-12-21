@@ -135,6 +135,7 @@ class Test {
 			//print(info[i].name, "(", info[i].time, " ms )")
 			if printAllOut {
 				for j in 0..<info[i].array.count { print(info[i].array[j].getValue()) }
+                print("\n")
 			}
 			else
 			{
