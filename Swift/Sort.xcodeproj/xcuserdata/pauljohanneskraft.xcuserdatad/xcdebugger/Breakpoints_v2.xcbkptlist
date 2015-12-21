@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Sort/Test.swift"
-            timestampString = "471925153.902302"
+            timestampString = "472415473.330187"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "init(rounds:elements:showResultsOfRound:showAllArrays:sortingAlgorithms:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,53 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Sort/sorting algorithms/AVLBinaryTreeSort.swift"
-            timestampString = "472408211.427973"
+            timestampString = "472424720.005449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "251"
+            endingLineNumber = "251">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sort/sorting algorithms/AVLBinaryTreeSort.swift"
+            timestampString = "472424720.005449"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "252"
+            endingLineNumber = "252">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sort/sorting algorithms/AVLBinaryTreeSort.swift"
+            timestampString = "472424720.005449"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "259"
+            endingLineNumber = "259">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Sort/sorting algorithms/AVLBinaryTreeSort.swift"
+            timestampString = "472424720.005449"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "level()"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,27 +196,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Sort/sorting algorithms/AVLBinaryTreeSort.swift"
-            timestampString = "472408211.427973"
+            timestampString = "472424720.005449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "level()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Sort/sorting algorithms/AVLBinaryTreeSort.swift"
-            timestampString = "472408211.427973"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "level()"
             landmarkType = "5">
          </BreakpointContent>

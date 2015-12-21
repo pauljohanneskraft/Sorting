@@ -16,8 +16,7 @@ class Test {
         for i in 1...rounds {
             unsorted = []
             let start = Double(NSDate().timeIntervalSince1970)
-            for _ in 0..<elements
-            {
+            for _ in 0..<elements {
                 unsorted.append(Number())
             }
             let end : Double = Double(NSDate().timeIntervalSince1970)
@@ -68,7 +67,7 @@ class Test {
                 avgTime = " " + avgTime
             }
             var output = s[0][i].name + ":"
-            while output.characters.count < 26 {
+            while output.characters.count < 30 {
                 output += " "
             }
             output += avgTime + " ms for " + stringWithThousandsPoint(s[0][i].array.count) + " elements."
@@ -132,8 +131,8 @@ class Test {
 	
 	func printComparedSortingAlgorithms(info: [(name: String, array: [Number], time: Double)], _ printAllOut: Bool) {
 		for i in 0..<info.count {
-			//print(info[i].name, "(", info[i].time, " ms )")
 			if printAllOut {
+                print(info[i].name, "(", info[i].time, " ms )")
 				for j in 0..<info[i].array.count { print(info[i].array[j].getValue()) }
                 print("\n")
 			}

@@ -17,71 +17,81 @@ private func binaryTreeSortRecursive<T: Comparable>(unsorted: [T]) -> [T] {
 }
 
 private class BinaryTree<T: Comparable> {
-    private var root: BinaryTreeElement<T>
+    private var root: BinaryTreeElement<T>?
     
     convenience init(_ array: [T]) {
-        self.init(BinaryTreeLeaf<T>())
+        self.init(nil)
         for i in 0..<array.count {
-            root = root.insert(array[i])
+            insert(array[i])
         }
     }
     
-    init(_ root: BinaryTreeElement<T>) {
+    init(_ root: BinaryTreeElement<T>?) {
         self.root = root
     }
     
     func insert(newData: T) {
-        root = root.insert(newData)
+        if root == nil { root = BinaryTreeElement(newData) }
+        else           { root!.insert(newData) }
     }
     
     func array() -> [T] {
-        return root.array()
-    }
-}
-
-private class BinaryTreeElement<T:Comparable> {
-    func insert(newData: T) -> BinaryTreeElement<T> {
-        return BinaryTreeNode<T>(newData)
+        if root == nil { return [] }
+        return root!.array()
     }
     
-    func array() -> [T] {
-        return []
+    func dot() -> String {
+        var res = "\tdigraph g { \n\t\tgraph [ordering = out] \n"
+        if root != nil { res += "\(root!.dot())"}
+        return  res + "\t}\n"
     }
 }
 
-private class BinaryTreeNode<T: Comparable> : BinaryTreeElement<T> {
-    let data : T
-    var left : BinaryTreeElement<T>
-    var right: BinaryTreeElement<T>
+
+private class BinaryTreeElement<T: Comparable> {
+    private let data: T
+    private var  left: BinaryTreeElement<T>?
+    private var right: BinaryTreeElement<T>?
     
     convenience init(_ newData: T) {
-        self.init(newData, left: BinaryTreeLeaf<T>(), right: BinaryTreeLeaf<T>())
+        self.init(newData, left: nil, right: nil)
     }
     
-    init(_ newData: T, left: BinaryTreeElement<T>, right: BinaryTreeElement<T>) {
+    init(_ newData: T, left: BinaryTreeElement<T>?, right: BinaryTreeElement<T>?) {
         self.data = newData
         self.left = left
         self.right = right
     }
     
-    override func insert(newData: T) -> BinaryTreeElement<T> {
-        if newData < self.data { left  =  left.insert(newData) }
-        else                   { right = right.insert(newData) }
-        return self
+    func insert(newData: T) {
+        if newData < self.data {
+            if  left == nil { left = BinaryTreeElement<T>(newData) }
+            else            { left!.insert(newData) }
+        }
+        else {
+            if right == nil { right = BinaryTreeElement<T>(newData) }
+            else            { right!.insert(newData) }
+        }
     }
     
-    override func array() -> [T] {
-        var res = left.array()
+    func array() -> [T] {
+        var res: [T] = []
+        if left  != nil { res +=  left!.array() }
         res.append(data)
-        return res + right.array()
+        if right != nil { res += right!.array() }
+        return res
+    }
+    
+    func dot() -> String {
+        var a = ""
+        if  left != nil { a += "\t\t\(self.data) -> \( left!.data) [label=left] \n" }
+        if right != nil { a += "\t\t\(self.data) -> \(right!.data) [label=right]\n" }
+        
+        if  left != nil { a +=  left!.dot() }
+        if right != nil { a += right!.dot() }
+        return a
     }
 }
-
-private class BinaryTreeLeaf<T: Comparable> : BinaryTreeElement<T> {}
-
-
-
-
 
 
 
