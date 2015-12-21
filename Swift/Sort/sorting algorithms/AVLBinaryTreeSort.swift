@@ -1,5 +1,5 @@
 //
-//  AVLAVLBinaryTreeSort.swift
+//  AVLBinaryTreeSort.swift
 //  Sort
 //
 //  Created by Paul Kraft on 21.12.15.
