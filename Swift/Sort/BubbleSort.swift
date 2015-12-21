@@ -22,6 +22,6 @@ func bubbleSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
             }
         }
     }
-        while(didChange)
+    while(didChange)
     return ("BubbleSort", sorted)
 }
