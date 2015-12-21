@@ -65,15 +65,15 @@
 		9B4DCF5D1C28262300EDDF1E /* sorting algorithms */ = {
 			isa = PBXGroup;
 			children = (
-				9B4DCF5A1C2825A500EDDF1E /* BubbleSort.swift */,
-				9B4DCF581C28258800EDDF1E /* QuickSort.swift */,
-				9B4DCF561C28255800EDDF1E /* InsertionSort.swift */,
-				9B4DCF541C28254100EDDF1E /* ShellSort.swift */,
-				9B4DCF521C28252700EDDF1E /* MergeSort.swift */,
-				9B4DCF501C28250A00EDDF1E /* IntroSort.swift */,
-				9B4DCF4E1C2824D100EDDF1E /* HeapSort.swift */,
 				9B5CE6AC1C2811A600ED45E4 /* BinaryTreeSort.swift */,
+				9B4DCF5A1C2825A500EDDF1E /* BubbleSort.swift */,
+				9B4DCF4E1C2824D100EDDF1E /* HeapSort.swift */,
+				9B4DCF561C28255800EDDF1E /* InsertionSort.swift */,
+				9B4DCF501C28250A00EDDF1E /* IntroSort.swift */,
+				9B4DCF521C28252700EDDF1E /* MergeSort.swift */,
 				9B5CE6AE1C28120600ED45E4 /* SelectionSort.swift */,
+				9B4DCF541C28254100EDDF1E /* ShellSort.swift */,
+				9B4DCF581C28258800EDDF1E /* QuickSort.swift */,
 			);
 			name = "sorting algorithms";
 			sourceTree = "<group>";
