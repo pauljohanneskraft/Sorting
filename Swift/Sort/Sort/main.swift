@@ -32,6 +32,8 @@ let sortingAlgorithms : [[Number] -> (String, [Number])] = [
     //
     introSortMedianThreaded,
     //introSortMedian,
+    //
+    heapSort,
     //bubbleSort
     //
     binaryTreeSort
