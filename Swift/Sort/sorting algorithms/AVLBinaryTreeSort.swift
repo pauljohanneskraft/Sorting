@@ -1,5 +1,5 @@
 //
-//  AVLBinaryTreeSort.swift
+//  AVLAVLBinaryTreeSort.swift
 //  Sort
 //
 //  Created by Paul Kraft on 21.12.15.
@@ -8,8 +8,6 @@
 
 import Cocoa
 
-//just to illustrate how an average-level-tree looks like, when used for sorting
-//for sorting, it's less efficient than BinaryTreeSort, because a rotation takes a long time compared to a a-little-longer path.
 
 func avlBinaryTreeSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
     return ("AVLBinaryTreeSort", avlBinaryTreeSortRecursive(unsorted))
@@ -20,136 +18,122 @@ private func avlBinaryTreeSortRecursive<T: Comparable>(unsorted: [T]) -> [T] {
 }
 
 private class AVLBinaryTree<T: Comparable> {
-    private var root: AVLBinaryTreeElement<T>
+    private var root: AVLBinaryTreeElement<T>?
     
     convenience init(_ array: [T]) {
-        self.init(AVLBinaryTreeLeaf<T>())
+        self.init(nil)
         for i in 0..<array.count {
-            root = root.insert(array[i])
-            //print(dot())
+            insert(array[i])
         }
     }
     
-    init(_ root: AVLBinaryTreeElement<T>) {
+    init(_ root: AVLBinaryTreeElement<T>?) {
         self.root = root
     }
     
-    func dot() -> String {
-        return "\tdigraph g { \n\t\tgraph [ordering = out] \n\(root.dot()) \t}\n"
-    }
-    
     func insert(newData: T) {
-        root = root.insert(newData)
+        if root != nil { root = root!.insert(newData) }
+        else           { root = AVLBinaryTreeElement(newData) }
     }
     
     func array() -> [T] {
-        return root.array()
-    }
-}
-
-private class AVLBinaryTreeElement<T:Comparable> {
-    init() {
-        balance = -1
-    }
-    var  left: AVLBinaryTreeElement<T> { get { return self } set { } }
-    var right: AVLBinaryTreeElement<T> { get { return self } set { } }
-
-    func insert(newData: T) -> AVLBinaryTreeElement<T> {
-        return AVLBinaryTreeNode<T>(newData)
+        if root == nil { return [] }
+        return root!.array()
     }
     
     func dot() -> String {
-        return ""
+        var res = "\tdigraph g { \n\t\tgraph [ordering = out] \n"
+        if root != nil { res += "\(root!.dot())"}
+        return  res + "\t}\n"
     }
     
-    func array() -> [T] {
-        return []
+    func size() -> Int {
+        if root == nil { return 0 }
+        return root!.size()
     }
-    
-    func isNode() -> Bool {
-        return false
-    }
-    
-    private var data : T? { return nil }
-    private var balance: Int
 }
 
-private class AVLBinaryTreeNode<T: Comparable> : AVLBinaryTreeElement<T> {
-    private let dataObject: T
-    private var  leftElement: AVLBinaryTreeElement<T>
-    private var rightElement: AVLBinaryTreeElement<T>
-    override var  left: AVLBinaryTreeElement<T> { get { return  leftElement } set {  leftElement = newValue } }
-    override var right: AVLBinaryTreeElement<T> { get { return rightElement } set { rightElement = newValue } }
-    override private var data : T? { return dataObject }
+
+private class AVLBinaryTreeElement<T: Comparable> {
+    private let data: T
+    private var  left: AVLBinaryTreeElement<T>?
+    private var right: AVLBinaryTreeElement<T>?
+    var balance: Int = -1
     
     convenience init(_ newData: T) {
-        self.init(newData, left: AVLBinaryTreeLeaf<T>(), right: AVLBinaryTreeLeaf<T>())
+        self.init(newData, left: nil, right: nil)
     }
     
-    init(_ newData: T, left: AVLBinaryTreeElement<T>, right: AVLBinaryTreeElement<T>) {
-        self.dataObject = newData
-        self.leftElement = left
-        self.rightElement = right
-        super.init()
-        self.balance = max(left.balance, right.balance) + 1
+    init(_ newData: T, left: AVLBinaryTreeElement<T>?, right: AVLBinaryTreeElement<T>?) {
+        self.data = newData
+        self.left = left
+        self.right = right
     }
     
-    override func insert(newData: T) -> AVLBinaryTreeElement<T> {
-        if newData < self.data { left  =  left.insert(newData) }
-        else                   { right = right.insert(newData) }
-        updateBalance()
+    func insert(newData: T) -> AVLBinaryTreeElement {
+        if newData < self.data {
+            if  left == nil { left = AVLBinaryTreeElement<T>(newData) }
+            else            { left = left!.insert(newData) }
+        }
+        else {
+            if right == nil { right = AVLBinaryTreeElement<T>(newData) }
+            else            { right = right!.insert(newData) }
+        }
         return level()
     }
     
-    private func level() -> AVLBinaryTreeElement<T> {
-        if left.balance - right.balance > 1 {
+    private func updateBalance() -> (left: Int, right: Int) {
+        var lb: Int = -1, rb: Int = -1
+        if  left != nil { lb = left!.balance }
+        if right != nil { rb = right!.balance }
+        self.balance = max(lb, rb) + 1
+        return (lb, rb)
+    }
+    
+    private func level() -> AVLBinaryTreeElement {
+        let balances = updateBalance()
+        if balances.left - balances.right > 1 {
             //print("rotate right")
             let tmp = left
-            self.left = left.right
-            tmp.right = self
-            return tmp
+            self.left = left!.right
+            tmp!.right = self
+            return tmp!
         }
-        else if left.balance - right.balance < -1 {
+        else if balances.left - balances.right < -1 {
             //print("rotate left")
             let tmp = right
-            self.right = right.left
-            tmp.left = self
-            return tmp
+            self.right = right!.left
+            tmp!.left = self
+            return tmp!
         }
         return self
     }
     
-    override func dot() -> String {
+    func array() -> [T] {
+        var res: [T] = []
+        if left  != nil { res = res + left!.array() }
+        res.append(data)
+        if right != nil { res = res + right!.array() }
+        return res
+    }
+    
+    func size() -> Int {
+        var erg = 1
+        if  left != nil { erg +=  left!.size() }
+        if right != nil { erg += right!.size() }
+        return erg
+    }
+    
+    func dot() -> String {
         var a = ""
-        if  left.isNode() { a += "\t\t\(self.data!) -> \( left.data!) [label=left] \n" }
-        if right.isNode() { a += "\t\t\(self.data!) -> \(right.data!) [label=right]\n" }
+        if  left != nil { a += "\t\t\(self.data) -> \( left!.data) [label=left] \n" }
+        if right != nil { a += "\t\t\(self.data) -> \(right!.data) [label=right]\n" }
         
-        a += left.dot()
-        a += right.dot()
+        if  left != nil { a +=  left!.dot() }
+        if right != nil { a += right!.dot() }
         return a
     }
-    
-    override func isNode() -> Bool {
-        return true
-    }
-    
-    func updateBalance() {
-        balance = max(left.balance, right.balance) + 1
-    }
-    
-    override func array() -> [T] {
-        var res = left.array()
-        res.append(data!)
-        return res + right.array()
-    }
 }
-
-private class AVLBinaryTreeLeaf<T: Comparable> : AVLBinaryTreeElement<T> {}
-
-
-
-
-
 
 
 
