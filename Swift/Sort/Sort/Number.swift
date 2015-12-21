@@ -1,15 +1,36 @@
 import Cocoa
 
-// Number
-// Created by Paul Kraft on 04.12.15.
+//
+//  Number.swift
+//  Sort
+//
+//  Created by Paul Kraft on 13.12.15.
+//  Copyright © 2015 Paul Kraft. All rights reserved.
+//
 
-class Number : CompareElement
+class Number : Comparable, CustomStringConvertible
 {
-	private let POWER = 9
-	init(){
-		super.init(Int(arc4random_uniform(UInt32(pow(Double(10),Double(POWER))))))
-	}
-    override init(_ desc : Int){
-        super.init(desc)
+    private let value : Int
+    var description : String {
+        return "Number: \(value)"
     }
+    init(){
+        value = Int(arc4random_uniform(UInt32.max))
+    }
+    init(_ value : Int){
+        self.value = value
+    }
+    func getValue() -> Int {
+        return value
+    }
+}
+
+func ==(x: Number, y: Number) -> Bool {
+    if x.value == y.value { return true }
+    return false
+}
+
+func <(x: Number, y: Number) -> Bool {
+    if x.value < y.value { return true }
+    return false
 }
