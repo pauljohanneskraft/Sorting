@@ -8,35 +8,35 @@
 //
 
 let              times = 1
-let             rounds = 20
-let           elements = 1000
-let showResultsOfRound = false
+let             rounds = 1
+let           elements = 100000
+let showResultsOfRound = true
 let      showAllArrays = false
 
 let sortingAlgorithms : [[Number] -> (String, [Number])] = [
-    //
-    avlBinaryTreeSort,
-    //
-    avlBinaryTreeCompositeSort,
-    //
-    binaryTreeCompositeSort,
+    //avlBinaryTreeCompositeSort,
+    //avlBinaryTreeSort,
+    //binaryTreeCompositeSort,
     //
     binaryTreeSort,
     //bubbleSort,
     //heapSort,
     //insertionSort,
     //introSortMedian,
-    //introSortMedianThreaded,
+    //
+    introSortMedianThreaded,
     //mergeSort,
     //mergeSortThreaded,
     //selectionSort,
-    //shellSort,
+    //
+    shellSort,
     //quickSortFirst,
     //quickSortFirstThreaded,
     //quickSortInPlace,
     //quickSortInPlaceThreaded,
     //quickSortMedian,
-    //quickSortMedianThreaded,
+    //
+    quickSortMedianThreaded,
     //quickSortRandom,
     //quickSortRandomThreaded,
 ]

@@ -1,5 +1,3 @@
-import Cocoa
-
 //
 //  Number.swift
 //  Sort
@@ -7,6 +5,8 @@ import Cocoa
 //  Created by Paul Kraft on 13.12.15.
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
+
+import Cocoa
 
 class Number : Comparable, CustomStringConvertible
 {
