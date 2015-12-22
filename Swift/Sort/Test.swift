@@ -96,7 +96,7 @@ class Test {
         all.append(("Creation(Array)", unsorted, initTime)) // adding creation time
         
         if showIndividualResults {
-            print("\t\(all[0].name): \(stringWithThousandsPoint(all[0].time)) ms", terminator: "")
+            print("\t\t\(all[0].name): \(stringWithThousandsPoint(all[0].time)) ms")
         }
         
         let start = NSDate()
@@ -105,7 +105,7 @@ class Test {
         all.append(("Sort(Swift)", s, end)) // adding swift-integrated-search
         
         if showIndividualResults {
-            print("\t\(all[1].name): \(stringWithThousandsPoint(all[1].time)) ms", terminator: "")
+            print("\t\t\(all[1].name): \(stringWithThousandsPoint(all[1].time)) ms")
         }
         
         var u = unsorted
@@ -115,14 +115,14 @@ class Test {
         all.append(("SortInPlace(Swift)", u, end1))
         
         if showIndividualResults {
-            print("\t\(all[2].name): \(stringWithThousandsPoint(all[2].time)) ms", terminator: "")
+            print("\t\t\(all[2].name): \(stringWithThousandsPoint(all[2].time)) ms")
         }
         
 		for i in 0..<sortingAlgorithms.count {
             let a = self.testAlg(sortingAlgorithms[i], unsorted)
             all.append((a.name, a.array, a.time))
             if showIndividualResults {
-                print("\t\(a.name): \(stringWithThousandsPoint(a.time)) ms", terminator: "")
+                print("\t\t\(a.name): \(stringWithThousandsPoint(a.time)) ms")
             }
 		}
         if showIndividualResults { print("\n") }
