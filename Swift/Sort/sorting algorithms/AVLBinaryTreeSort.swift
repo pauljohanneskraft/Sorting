@@ -8,7 +8,6 @@
 
 import Cocoa
 
-
 func avlBinaryTreeSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
     return ("AVLBinaryTreeSort", avlBinaryTreeSortRecursive(unsorted))
 }
@@ -22,8 +21,8 @@ private class AVLBinaryTree<T: Comparable> {
     
     convenience init(_ array: [T]) {
         self.init(nil)
-        for i in 0..<array.count {
-            insert(array[i])
+        for i in array {
+            insert(i)
         }
     }
     
@@ -52,7 +51,6 @@ private class AVLBinaryTree<T: Comparable> {
         return root!.size()
     }
 }
-
 
 private class AVLBinaryTreeElement<T: Comparable> {
     private let data: T

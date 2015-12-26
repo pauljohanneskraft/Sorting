@@ -21,8 +21,8 @@ private class BinaryTree<T: Comparable> {
     
     convenience init(_ array: [T]) {
         self.init(nil)
-        for i in 0..<array.count {
-            insert(array[i])
+        for i in array {
+            insert(i)
         }
     }
     

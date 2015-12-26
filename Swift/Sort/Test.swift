@@ -78,15 +78,18 @@ class Test {
             }
             print(separator)
 		}
-        print("max time: " + maxAvgTimeName + ", min time: " + minAvgTimeName)
+        print("")
+        print("max time: \(maxAvgTimeName) (\(stringWithThousandsPoint(maxAvgTime)) ms), "
+            + "min time: \(minAvgTimeName) (\(stringWithThousandsPoint(minAvgTime)) ms)")
         if minAvgTime < minAvgSwiftTime {
             print("Yeah! The faster built-in algorithm " + minAvgSwiftTimeName + " was beaten by " + minAvgTimeName
-                + "! (\(stringWithThousandsPoint(minAvgTime - minAvgSwiftTime)))")
+                + "! (\(stringWithThousandsPoint(minAvgTime - minAvgSwiftTime)) ms difference)")
         }
         if minAvgTime < maxAvgSwiftTime {
             print("Yeah! The slower built-in algorithm " + maxAvgSwiftTimeName + " was beaten by " + minAvgTimeName
-                + "! (\(stringWithThousandsPoint(minAvgTime - minAvgSwiftTime)))")
+                + "! (\(stringWithThousandsPoint(minAvgTime - minAvgSwiftTime)) ms difference)")
         }
+        print("\n\n")
 	}
     
     func compareSortingAlgorithms(unsorted: [Number], _ initTime: Double, _ showIndividualResults: Bool, _ sortingAlgorithms: [([Number]->(String, [Number]))]) -> [(name: String, array: [Number], time: Double)] {
