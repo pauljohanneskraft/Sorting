@@ -21,8 +21,8 @@ private class BinaryTreeComposite<T: Comparable> {
     
     convenience init(_ array: [T]) {
         self.init(BinaryTreeCompositeLeaf<T>())
-        for i in 0..<array.count {
-            root = root.insert(array[i])
+        for i in array {
+            root = root.insert(i)
         }
     }
     

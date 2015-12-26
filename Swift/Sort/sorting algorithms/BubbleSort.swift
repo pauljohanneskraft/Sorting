@@ -6,22 +6,34 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-func bubbleSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
-    var sorted : [T] = []
-    for i in 0..<unsorted.count{
-        sorted.append(unsorted[i]);
-    }
+func bubbleSort<T: Comparable>(var unsorted: [T]) -> (name: String, array: [T]) {
     var didChange = false
     repeat
     {
         didChange = false
-        for i in 0..<sorted.count - 1 {
-            if sorted[i+1] < sorted[i] {
+        for i in 0..<unsorted.count - 1 {
+            if unsorted[i+1] < unsorted[i] {
                 didChange = true
-                sorted.insert(sorted.removeAtIndex(i+1), atIndex: i);
+                (unsorted[i], unsorted[i+1]) = (unsorted[i+1], unsorted[i])
             }
         }
     }
     while(didChange)
-    return ("BubbleSort", sorted)
+    return ("BubbleSort", unsorted)
+}
+
+func bubbleSortInPlace<T: Comparable>(inout unsorted: [T]) -> (name: String, array: [T]) {
+    var didChange = false
+    repeat
+    {
+        didChange = false
+        for i in 0..<unsorted.count - 1 {
+            if unsorted[i+1] < unsorted[i] {
+                didChange = true
+                (unsorted[i], unsorted[i+1]) = (unsorted[i+1], unsorted[i])
+            }
+        }
+    }
+        while(didChange)
+    return ("BubbleSort", unsorted)
 }

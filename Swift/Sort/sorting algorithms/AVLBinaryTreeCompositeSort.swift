@@ -25,9 +25,8 @@ private class AVLBinaryTreeComposite<T: Comparable> {
     
     convenience init(_ array: [T]) {
         self.init(AVLBinaryTreeCompositeLeaf<T>())
-        for i in 0..<array.count {
-            root = root.insert(array[i])
-            //print(dot())
+        for i in array {
+            root = root.insert(i)
         }
     }
     
