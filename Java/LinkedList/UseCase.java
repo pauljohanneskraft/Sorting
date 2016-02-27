@@ -1,16 +1,13 @@
-package SortingAlgs;
+package LinkedList;
 import java.util.*;
 
 class UseCase {
 	public static void main(String[] args) {
-		LinkedList<Number> n = new LinkedList<Number>();
-		for(int i = 0; i < 500000; i++) {
-			n.add(new Number());
+		LinkedList<Nummer> n = new LinkedList<Nummer>();
+		for(int i = 0; i < 5000; i++) {
+			n.add(new Nummer());
 		}
-		long start = System.currentTimeMillis();
-		LinkedList<Number> qs = (new QuickSortThreaded<Number>(n)).sort(n);
-		System.out.println("QuickSortThreaded: " + (System.currentTimeMillis() - start) + " ms");
-		
+		new QuickSortThreaded<Nummer>(n, System.currentTimeMillis()).start();
 		
 		/*
 		for(int i = 0; i < n.size(); i++) {

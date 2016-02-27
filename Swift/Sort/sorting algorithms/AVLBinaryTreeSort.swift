@@ -24,6 +24,7 @@ private class AVLBinaryTree<T: Comparable> {
         for i in array {
             insert(i)
         }
+        //print("\n\tavl\n", dot())
     }
     
     init(_ root: AVLBinaryTreeElement<T>?) {
@@ -132,23 +133,3 @@ private class AVLBinaryTreeElement<T: Comparable> {
         return a
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

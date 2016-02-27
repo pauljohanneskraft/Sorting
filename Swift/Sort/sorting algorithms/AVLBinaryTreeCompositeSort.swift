@@ -28,6 +28,7 @@ private class AVLBinaryTreeComposite<T: Comparable> {
         for i in array {
             root = root.insert(i)
         }
+        //print("\n\tavl composite\n", dot())
     }
     
     init(_ root: AVLBinaryTreeCompositeElement<T>) {
@@ -144,26 +145,3 @@ private class AVLBinaryTreeCompositeNode<T: Comparable> : AVLBinaryTreeComposite
 }
 
 private class AVLBinaryTreeCompositeLeaf<T: Comparable> : AVLBinaryTreeCompositeElement<T> {}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

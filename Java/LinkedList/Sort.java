@@ -1,4 +1,4 @@
-package SortingAlgs;
+package LinkedList;
 import java.util.*;
 
 //
@@ -6,5 +6,5 @@ import java.util.*;
 // Created by Paul Kraft on 03.12.15.
 
 public abstract class Sort<T> extends Thread {
-	abstract <T> LinkedList<T> sort(LinkedList<T> liste);
+	abstract <T> void sort(LinkedList<T> liste);
 }

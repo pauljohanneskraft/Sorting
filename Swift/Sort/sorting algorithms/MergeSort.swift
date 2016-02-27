@@ -6,30 +6,41 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-import Cocoa
+import Cocoa // threads
 
+// in-place, single-threaded, faster for smaller arrays
 func mergeSort<T: Comparable>(unsorted: [T]) -> (String, [T]) {
-    return ("MergeSort", mergeSortRecursive(unsorted))
+    var sorted = unsorted
+    mergeSort(&sorted)
+    return ("MergeSort", sorted)
 }
 
-private func mergeSortRecursive<T: Comparable>(unsorted: [T]) -> [T] {
-    if unsorted.count < 2 { return unsorted }
-    let one = mergeSortRecursive(unsorted[0..<unsorted.count/2] + [])
-    let two = mergeSortRecursive(unsorted[unsorted.count/2..<unsorted.count] + [])
-    return merge(one, two)
+func mergeSort<T: Comparable>(inout array: [T]) {
+    mergeSort(&array, 0..<array.count)
 }
 
-private func merge<T: Comparable>(var one: [T], var _ two: [T]) -> [T] {
-    var res : [T] = []
-    while one.count > 0 && two.count > 0 {
-        if one[0] <= two[0] { res.append(one.removeAtIndex(0)) }
-        else                { res.append(two.removeAtIndex(0)) }
+private func mergeSort<T: Comparable>(inout array: [T], _ range: Range<Int>) {
+    if range.count < 2 { return }
+    let mid = (range.startIndex + range.endIndex) / 2
+    mergeSort(&array, range.startIndex..<mid)
+    mergeSort(&array, mid..<range.endIndex)
+    merge(&array, range, mid)
+}
+
+// in-place merging
+private func merge<T: Comparable>(inout array: [T], _ range: Range<Int>, var _ mid: Int) {
+    for left in range {
+        if left >= mid { return }
+        if array[left] > array[mid] {
+            array.insert(array.removeAtIndex(mid), atIndex: left)
+            mid++
+        }
+        if range.endIndex <= mid { return }
     }
-    while one.count > 0     { res.append(one.removeAtIndex(0)) }
-    while two.count > 0     { res.append(two.removeAtIndex(0)) }
-    return res
 }
 
+
+// multi-threaded variant, out-of-place, faster for bigger arrays
 func mergeSortThreaded<T: Comparable>(unsorted: [T]) -> (String, [T]) {
     return ("MergeSortThreaded", mergeSortThreadedRecursive(unsorted))
 }
@@ -54,4 +65,15 @@ private func mergeSortThreadedRecursive<T: Comparable>(unsorted: [T]) -> [T] {
         r = mergeSortThreadedRecursive(unsorted[unsorted.count/2..<unsorted.count] + [])
     }
     return merge(l, r)
+}
+
+private func merge<T: Comparable>(var one: [T], var _ two: [T]) -> [T] {
+    var res : [T] = []
+    while one.count > 0 && two.count > 0 {
+        if one[0] <= two[0] { res.append(one.removeAtIndex(0)) }
+        else                { res.append(two.removeAtIndex(0)) }
+    }
+    while one.count > 0     { res.append(one.removeAtIndex(0)) }
+    while two.count > 0     { res.append(two.removeAtIndex(0)) }
+    return res
 }

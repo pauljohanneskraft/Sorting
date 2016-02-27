@@ -10,18 +10,15 @@ import Cocoa
 
 class Number : Comparable, CustomStringConvertible
 {
-    private let value : Int
+    let value : Int
     var description : String {
         return "\(value)"
     }
     init(){
         value = Int(arc4random_uniform(UInt32.max))
     }
-    init(_ value : Int){
+    init(_ value: Int){
         self.value = value
-    }
-    func getValue() -> Int {
-        return value
     }
 }
 

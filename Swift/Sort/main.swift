@@ -9,7 +9,7 @@
 
 let              times = 1
 let             rounds = 1
-let           elements = 100000
+let           elements = 100
 let showResultsOfRound = true
 let      showAllArrays = false
 
@@ -17,14 +17,13 @@ let sortingAlgorithms : [[Number] -> (String, [Number])] = [
     //avlBinaryTreeCompositeSort,
     //avlBinaryTreeSort,
     //binaryTreeCompositeSort,
-    //
-    binaryTreeSort,
+    //binaryTreeSort,
     //bubbleSort,
     //heapSort,
     //insertionSort,
+    //introSortInPlace,
     //introSortMedian,
-    //
-    introSortMedianThreaded,
+    //introSortMedianThreaded,
     //mergeSort,
     //mergeSortThreaded,
     //selectionSort,
@@ -32,11 +31,10 @@ let sortingAlgorithms : [[Number] -> (String, [Number])] = [
     shellSort,
     //quickSortFirst,
     //quickSortFirstThreaded,
-    //quickSortInPlace,
+    //quickSort,
     //quickSortInPlaceThreaded,
     //quickSortMedian,
-    //
-    quickSortMedianThreaded,
+    //quickSortMedianThreaded,
     //quickSortRandom,
     //quickSortRandomThreaded,
 ]

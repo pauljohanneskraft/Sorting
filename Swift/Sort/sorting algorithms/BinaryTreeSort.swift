@@ -24,6 +24,7 @@ private class BinaryTree<T: Comparable> {
         for i in array {
             insert(i)
         }
+        //print("\n\tnormal\n", dot())
     }
     
     init(_ root: BinaryTreeElement<T>?) {
@@ -92,23 +93,3 @@ private class BinaryTreeElement<T: Comparable> {
         return a
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
