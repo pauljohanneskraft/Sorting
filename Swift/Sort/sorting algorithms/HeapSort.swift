@@ -50,10 +50,16 @@ func heapSort<T: Comparable> (var unsorted: [T]) -> (name: String, array: [T]) {
     var sorted: [T] = []
     while unsorted.count > 1 {
         sorted.insert(unsorted[0], atIndex: 0)
-        (unsorted[0], unsorted[unsorted.count-1]) = (unsorted[unsorted.count-1], unsorted[0])
+        unsorted[0] <-> unsorted[unsorted.count-1]
         unsorted.removeLast()
         maxHeapify(&unsorted, rootIndex: 0)
     }
     sorted.insert(unsorted[0], atIndex: 0)
     return ("HeapSort", sorted)
+}
+
+func heapSort<T: Comparable> (inout sorted: [T], _ range: Range<Int>) {
+    var unsorted: [T] = sorted[range] + []
+    unsorted = heapSort(unsorted).array
+    sorted = sorted[0..<range.startIndex] + unsorted + sorted[range.endIndex..<sorted.count]
 }

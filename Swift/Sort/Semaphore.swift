@@ -11,10 +11,11 @@ import Cocoa
 class Semaphore {
     private static let MAX = 13
     private static var count = 1
-    private static let lock = NSLock()
+    private static let semaphoreLock = NSLock()
+    static let lock = NSLock()
     
     class func add(new: Int) -> Bool {
-        return synchronized(lock) {
+        return synchronized(semaphoreLock) {
             if count + new <= MAX {
                 count += new
                 return true
@@ -23,8 +24,20 @@ class Semaphore {
         }
     }
     
+    class func tryThreaded(new: Int, _ op: () -> ()) -> Bool {
+        return synchronized(semaphoreLock) {
+            if count + new <= MAX {
+                count += new
+                op()
+                count -= new
+                return true
+            }
+            return false
+        }
+    }
+
     class func delete(old: Int) {
-        synchronized(lock) {
+        synchronized(semaphoreLock) {
             count -= old
             if count < 0 {
                 count = 0

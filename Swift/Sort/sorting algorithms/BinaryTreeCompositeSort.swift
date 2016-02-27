@@ -24,6 +24,7 @@ private class BinaryTreeComposite<T: Comparable> {
         for i in array {
             root = root.insert(i)
         }
+        //print("\n\tcomposite\n", dot())
     }
     
     init(_ root: BinaryTreeCompositeElement<T>) {
@@ -111,17 +112,3 @@ private class BinaryTreeCompositeNode<T: Comparable> : BinaryTreeCompositeElemen
 }
 
 private class BinaryTreeCompositeLeaf<T: Comparable> : BinaryTreeCompositeElement<T> {}
-
-
-
-
-
-
-
-
-
-
-
-
-
-

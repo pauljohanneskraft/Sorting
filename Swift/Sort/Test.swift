@@ -136,7 +136,7 @@ class Test {
 		for i in 0..<info.count {
 			if printAllOut {
                 print(info[i].name, "(", info[i].time, " ms )")
-				for j in 0..<info[i].array.count { print(info[i].array[j].getValue()) }
+				for j in 0..<info[i].array.count { print(info[i].array[j].value) }
                 print("\n")
 			}
 			else
@@ -144,7 +144,7 @@ class Test {
 				if(i > 0) {
 					for j in 0..<info[i].array.count {
                         if(!(info[1].array[j] == info[i].array[j])) {
-                            print(info[i].name, info[i].array[j].getValue())
+                            print(info[i].name, info[i].array[j].value)
                         }
                     }
 				}
