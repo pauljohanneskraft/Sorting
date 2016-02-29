@@ -1,10 +1,3 @@
-
-/**
- * Write a description of class Number here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Number implements Comparable {
     Number(int number) {
         this.value = number;

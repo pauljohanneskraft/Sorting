@@ -9,6 +9,7 @@ public class Run<T extends Comparable> {
     public long time;
     public T[] array;
     public String name;
+    private static final boolean printAllElements = false;
     
     Run(long time, T[] array, String name) {
         this.time = time;
@@ -17,18 +18,30 @@ public class Run<T extends Comparable> {
     }
     
     public String toString() {
-        String out = name + ":\t" + time + "\tms.";
-        if(!isSorted()) {
-            out += "\n";
-            for(int i = 0; i < array.length; i++) {
-                out += array[i] + ", ";
+        String out = "\t" + name + ": ";
+        while(out.length() < 20) {
+            out = out + " ";
+        }
+        String t = time + "";
+        while(t.length() < (""+Integer.MAX_VALUE).length()) {
+            t = " " + t;
+        }
+        out = out + t + "\tms, " + array.length + " elements, ";
+        out += "sorted: " + (isSorted() ? "Yes" : "No");
+        if(printAllElements) {
+            if (!isSorted()) {
+                out += "\n";
+                for(int i = 0; i < array.length; i++) {
+                    out += array[i] + ", ";
+                }
+                out = out.substring(0, out.length() - 2);
             }
         }
         return out;
     }
     
-    private boolean isSorted() {
-        for (int i = 0; i < array.length - 1; i++) {
+    boolean isSorted() {
+        for (int i = 0; i < (array.length < 100 ? (array.length - 1) : 100); i += 2) {
             if (array[i].compareTo(array[i+1]) > 0) {
                 return false;
             }

@@ -1,13 +1,9 @@
 package sorting_algorithms;
 
 import java.util.*;
-/**
- * building a binary tree and printing out in order.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class BinaryTreeSort<T extends Comparable> extends Sort<T> {
+
     private class Knot {
         Knot left = null;
         Knot right = null;
@@ -34,18 +30,32 @@ public class BinaryTreeSort<T extends Comparable> extends Sort<T> {
     }
     
     public BinaryTreeSort(T[] array) { super(array); }
+    BinaryTreeSort(T[] array, int left, int right) { super(array, left, right); }
     
     private Knot root;
     
     public void run() {
-        saveArray(array);
-        T[] arr = (T[])(root.getArray().toArray());
+        saveArray();
+        retrieveArray();
+        root = null;
+    }
+
+    private void retrieveArray() {
+        ArrayList<T> sorted = root.getArray();
+        int range = right - left;
+        if(range == length - 1) {
+            array = sorted.toArray(array);
+        } else {
+            for(int i = 0; i <= range; i++) {
+                array[left + i] = sorted.get(i);
+            }
+        }
     }
     
-    private void saveArray(T[] array) {
-        if(root == null) root = new Knot(array[0]);
-        else root.insert(array[0]);
-        for(int i = 1; i < length; i++) {
+    private void saveArray() {
+        if(root == null) root = new Knot(array[left]);
+        else root.insert(array[left]);
+        for(int i = left + 1; i <= right; i++) {
             root.insert(array[i]);
         }
     }
