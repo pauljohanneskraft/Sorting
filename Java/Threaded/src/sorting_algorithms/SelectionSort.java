@@ -1,6 +1,7 @@
 package sorting_algorithms;
 
 public class SelectionSort<T extends Comparable> extends Sort<T> {
+    public SelectionSort() {}
     public SelectionSort(T[] array) {
         super(array);
     }

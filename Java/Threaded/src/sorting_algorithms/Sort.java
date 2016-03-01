@@ -1,6 +1,7 @@
 package sorting_algorithms;
 
 public abstract class Sort<T extends Comparable> extends Thread {
+    protected Sort() {}
     protected Sort(T[] array) {
         this(array, 0, array.length - 1);
     }
@@ -16,11 +17,16 @@ public abstract class Sort<T extends Comparable> extends Thread {
     protected int left;
     protected int right;
     
-    public void setArray(T[] array) {
+    protected void setArray(T[] array) {
         this.array = array;
         this.length = array.length;
         this.left = 0;
         this.right = array.length - 1;
+    }
+
+    public void sort(T[] array) {
+        setArray(array);
+        run();
     }
     
     public T[] getArray() { return array; }
@@ -30,4 +36,6 @@ public abstract class Sort<T extends Comparable> extends Thread {
         array[i] = array[j];
         array[j] = tmp;
     }
+
+    public abstract void run();
 }

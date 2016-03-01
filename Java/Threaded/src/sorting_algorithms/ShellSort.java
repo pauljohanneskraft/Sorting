@@ -1,6 +1,7 @@
 package sorting_algorithms;
 
 public class ShellSort<T extends Comparable> extends Sort<T> {
+    public ShellSort() {}
     public ShellSort(T[] array) { super(array); }
     ShellSort(T[] array, int left, int right) { super(array, left, right); }
 

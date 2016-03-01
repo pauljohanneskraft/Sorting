@@ -1,24 +1,14 @@
 package sorting_algorithms;
 
-/**
- * Created by pauljohanneskraft on 28.02.16.
- */
 public class QuickSort<T extends Comparable> extends Sort<T> {
-
+    public QuickSort() {}
     public QuickSort(T[] array) {
         this(array, 0, array.length - 1);
     }
-
-    private QuickSort(T[] array, int left, int right) {
+    protected QuickSort(T[] array, int left, int right) {
         super(array);
         this.left = left;
         this.right = right;
-    }
-
-    public void setArray(T[] array) {
-        super.setArray(array);
-        this.left = 0;
-        this.right = length - 1;
     }
 
     public void run() {
@@ -33,16 +23,16 @@ public class QuickSort<T extends Comparable> extends Sort<T> {
         }
     }
 
-    private int partition() {
+    protected int partition() {
         int i = left;
         int j = right - 1;
         T p = array[right];
         do {
-            while(array[i].compareTo(p) <= 0 && i < right) { i++; }
-            while(array[j].compareTo(p) >= 0 && j > left) { j--; }
+            while(p.compareTo(array[i]) >= 0 && i < right) { i++; }
+            while(p.compareTo(array[j]) <= 0 && j > left) { j--; }
             if(i < j) { swap(i,j); }
         } while(i < j);
-        if(array[i].compareTo(p) > 0) { swap(i, right); }
+        if(p.compareTo(array[i]) < 0) { swap(i, right); }
         return i;
     }
 

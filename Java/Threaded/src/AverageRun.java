@@ -3,7 +3,7 @@
  */
 public class AverageRun implements Comparable {
     public AverageRun(double time, String name) {
-        time = (int)(10*time);
+        time = (long)(10*time);
         this.time = (time)/10;
         this.name = name;
     }
@@ -23,7 +23,7 @@ public class AverageRun implements Comparable {
         while(name.length() < namelength) {
             name = name + "_";
         }
-        int timelength = 10;
+        int timelength = (Long.MAX_VALUE + "").length();
         String time = " " + this.time;
         while(time.length() < timelength) {
             time = "_" + time;

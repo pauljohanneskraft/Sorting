@@ -1,3 +1,5 @@
+
+
 public class Number implements Comparable {
     Number(int number) {
         this.value = number;
@@ -17,7 +19,7 @@ public class Number implements Comparable {
     }
     
     public String toString() {
-        String out = value + "";
+        String out = UseCase.addDots(value) + "";
         while(out.length() < (Integer.MAX_VALUE + "").length()) {
             out = "0" + out;
         }

@@ -2,6 +2,7 @@
 package sorting_algorithms;
 
 public class InsertionSort<T extends Comparable> extends Sort<T> {
+    public InsertionSort() {}
     public InsertionSort(T[] array) { super(array); }
     InsertionSort(T[] array, int left, int right) { super(array, left, right); }
     

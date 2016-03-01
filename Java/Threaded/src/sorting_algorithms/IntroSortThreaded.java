@@ -1,80 +1,67 @@
 package sorting_algorithms;
 
-/**
- * Created by pauljohanneskraft on 28.02.16.
- */
-public class IntroSortThreaded<T extends Comparable> extends Sort<T> {
 
+public class IntroSortThreaded<T extends Comparable> extends IntroSort<T> {
+    public IntroSortThreaded() {}
     public IntroSortThreaded(T[] array) {
         super(array);
-        this.depth = 2*(int)(Math.log(array.length));
+        depth = 2*(int)(Math.log(array.length));
     }
 
     IntroSortThreaded(T[] array, int left, int right, int depth) {
-        super(array, left, right);
-        this.depth = depth;
+        super(array, left, right, depth);
     }
 
     public void setArray(T[] array) {
         super.setArray(array);
-        this.depth = 2*(int)(Math.log(array.length));
+        depth = 2*(int)(Math.log(array.length));
     }
 
-    private int depth = 400;
-    private static int count = 0;
+    private static int maxThreads = 20;
 
     public void run() {
         if(left >= right) { return; }
-        else if(right - left < 20) {
+        if(right - left < 20) {
             Sort sort = (new SelectionSort(array, left, right));
             sort.start();
             try { sort.join(); } catch(Exception e) {
                 System.out.println("Exception, join()");
             }
+            return;
         }
-        else if(depth <= 0) {
+        if(depth <= 0) {
             Sort sort = (new BinaryTreeSort(array, left, right));
             sort.start();
             try { sort.join(); } catch(Exception e) {
                 System.out.println("Exception, join()");
             }
+            return;
         }
-        else {
-            int pivot = partition();
-            if(count < 20) {
-                Sort leftsort = (new IntroSortThreaded(array, left, pivot - 1, depth - 1));
-                leftsort.start();
-                Sort rightsort = (new IntroSortThreaded(array, pivot + 1, right, depth - 1));
-                rightsort.start();
-                try {
-                    leftsort.join();
-                    rightsort.join();
-                } catch(Exception e) {}
-            }
-            else {
-                depth--;
-                int right = this.right;
-                this.right = pivot - 1;
-                run();
-                this.left = pivot + 1;
-                this.right = right;
-                run();
-            }
-
+        int pivot = partition();
+        IntroSort leftsort;
+        IntroSort rightsort;
+        int threadCount = 0;
+        if(pivot - left > 50 && maxThreads > 0) {
+            maxThreads--;
+            leftsort = new IntroSortThreaded<>(array, left, pivot - 1, depth - 1);
+            threadCount++;
+        } else {
+            leftsort = new IntroSort<>(array, left, pivot - 1, depth - 1);
         }
-    }
-
-    private int partition() {
-        int i = left;
-        int j = right - 1;
-        T p = array[right];
-        do {
-            while(array[i].compareTo(p) <= 0 && i < right) { i++; }
-            while(array[j].compareTo(p) >= 0 && j > left) { j--; }
-            if(i < j) { swap(i,j); }
-        } while(i < j);
-        if(array[i].compareTo(p) > 0) { swap(i, right); }
-        return i;
+        if(right - pivot > 50 && maxThreads > 0) {
+            maxThreads--;
+            rightsort = new IntroSortThreaded<>(array, pivot + 1, right, depth - 1);
+            threadCount++;
+        } else {
+            rightsort = new IntroSort<>(array, pivot + 1, right, depth - 1);
+        }
+        rightsort.start();
+        leftsort.start();
+        try {
+            leftsort.join();
+            rightsort.join();
+        } catch(Exception e) {}
+        maxThreads += threadCount;
     }
 
     public String toString() {

@@ -11,7 +11,7 @@ import Cocoa
 import Foundation
 
 func introSortInPlace<T: Comparable>(inout unsorted: [T]) -> (String, [T]) {
-    let maxDepth : Int = Int(log2(Double(unsorted.count)))
+    let maxDepth = Int(log2(Double(unsorted.count)))
     introSortInPlaceRecursive(&unsorted, 0..<unsorted.count, maxDepth)
     return ("IntroSortInPlace", unsorted)
 }
@@ -34,8 +34,8 @@ private func introSortInPlaceRecursive<T: Comparable>(inout unsorted: [T], _ ran
     }
     print("did run")
     let pivot:Int = partition(&unsorted, range)
-    //introSortInPlaceRecursive(&unsorted, range.startIndex..<pivot, depthLimit - 1)
-    //introSortInPlaceRecursive(&unsorted, (pivot+1)..<range.endIndex, depthLimit - 1)
+    introSortInPlaceRecursive(&unsorted, range.startIndex..<pivot, depthLimit - 1)
+    introSortInPlaceRecursive(&unsorted, (pivot+1)..<range.endIndex, depthLimit - 1)
 }
 
 /*

@@ -9,7 +9,7 @@ public class Run<T extends Comparable> {
     public long time;
     public T[] array;
     public String name;
-    private static final boolean printAllElements = false;
+    private static final boolean printAllElements = true;
     
     Run(long time, T[] array, String name) {
         this.time = time;
@@ -19,14 +19,14 @@ public class Run<T extends Comparable> {
     
     public String toString() {
         String out = "\t" + name + ": ";
-        while(out.length() < 20) {
+        while(out.length() < 30) {
             out = out + " ";
         }
-        String t = time + "";
-        while(t.length() < (""+Integer.MAX_VALUE).length()) {
+        String t = UseCase.addDots(time) + "";
+        while(t.length() < (""+Long.MAX_VALUE).length()) {
             t = " " + t;
         }
-        out = out + t + "\tms, " + array.length + " elements, ";
+        out = out + t + " ms, " + array.length + " elements, ";
         out += "sorted: " + (isSorted() ? "Yes" : "No");
         if(printAllElements) {
             if (!isSorted()) {

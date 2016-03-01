@@ -1,17 +1,15 @@
 package sorting_algorithms;
 
-/**
- * Write a description of class QuickSort here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class QuickSortThreaded<T extends Comparable> extends Sort<T> {
+public class QuickSortThreaded<T extends Comparable> extends QuickSort<T> {
     private static final int LIMIT = 20;
-    
+
+    public QuickSortThreaded() {}
+
     public QuickSortThreaded(T[] array) {
         this(array, 0, array.length - 1);
     }
+
+    private static int maxThreads = 5;
     
     private QuickSortThreaded(T[] array, int left, int right) {
         super(array);
@@ -28,38 +26,31 @@ public class QuickSortThreaded<T extends Comparable> extends Sort<T> {
     public void run() {
         if(left < right) {
             int pivot = partition();
-            if(pivot - left > LIMIT && right - pivot > LIMIT) {
-                Sort leftsort = (new QuickSortThreaded(array, left, pivot - 1));
-                leftsort.start();
-                Sort rightsort = (new QuickSortThreaded(array, pivot + 1, right));
-                rightsort.start();
-                try {
-                    leftsort.join();
-                    rightsort.join();
-                } catch(Exception e) {}
+            QuickSort leftsort;
+            QuickSort rightsort;
+            int threadCount = 0;
+            if(right - pivot > 50 && maxThreads > 0) {
+                maxThreads--;
+                leftsort = (new QuickSortThreaded<>(array, left, pivot - 1));
+                threadCount++;
+            } else {
+                leftsort = new QuickSort<>(array, left, pivot - 1);
             }
-            else {
-                int right = this.right;
-                this.right = pivot - 1;
-                run();
-                this.left = pivot + 1;
-                this.right = right;
-                run();
+            if(pivot - left > 50 && maxThreads > 0) {
+                maxThreads--;
+                rightsort = (new QuickSortThreaded<>(array, pivot + 1, right));
+                threadCount++;
+            } else {
+                rightsort = new QuickSort<>(array, pivot + 1, right);
             }
+            leftsort.start();
+            rightsort.start();
+            try {
+                leftsort.join();
+                rightsort.join();
+            } catch(Exception e) {}
+            maxThreads += threadCount;
         }
-    }
-    
-    private int partition() {
-        int i = left;
-        int j = right - 1;
-        T p = array[right];
-        do {
-            while(array[i].compareTo(p) <= 0 && i < right) { i++; }
-            while(array[j].compareTo(p) >= 0 && j > left) { j--; }
-            if(i < j) { swap(i,j); }
-        } while(i < j);
-        if(array[i].compareTo(p) > 0) { swap(i, right); }
-        return i;
     }
 
     public String toString() { return "QuickSortThreaded"; }
