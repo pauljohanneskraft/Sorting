@@ -24,9 +24,8 @@ func shellSort<T: Comparable>(inout array: [T], _ range: Range<Int>) {
     while columns[s] > range.count { s++ }
     
     for k in s..<columns.count {
-        let h = columns[k] + range.minElement()!;
+        let h = columns[k] + range.startIndex;
         
-        // Sortiere die "Spalten" mit Insertionsort
         for i in h..<range.endIndex {
             let t = array[i];
             var j = i;
