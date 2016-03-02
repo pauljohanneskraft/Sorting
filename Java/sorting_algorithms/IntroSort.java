@@ -1,5 +1,7 @@
 package sorting_algorithms;
 
+import javax.swing.tree.*;
+
 public class IntroSort<T extends Comparable> extends QuickSort<T> {
     public IntroSort() {}
     public IntroSort(T[] array) {
@@ -23,12 +25,14 @@ public class IntroSort<T extends Comparable> extends QuickSort<T> {
         if(left >= right) { return; }
         if(right - left < 20) {
             Sort sort = new InsertionSort<>(array, left, right);
-            sort.run();
+            sort.start();
+            try{ sort.join(); } catch(Throwable e) {}
             return;
         }
         if(depth <= 0) {
             Sort sort = new AVLBinaryTreeSort<>(array, left, right);
-            sort.run();
+            sort.start();
+            try{ sort.join(); } catch(Throwable e) {}
             return;
         }
         depth--;
