@@ -1,7 +1,7 @@
 package sorting_algorithms;
 
 public class QuickSortThreaded<T extends Comparable> extends QuickSort<T> {
-    private static final int LIMIT = 20;
+    private static final int LIMIT = 50;
 
     public QuickSortThreaded() {}
 
@@ -9,7 +9,7 @@ public class QuickSortThreaded<T extends Comparable> extends QuickSort<T> {
         this(array, 0, array.length - 1);
     }
 
-    private static int maxThreads = 5;
+    private static int maxThreads = Runtime.getRuntime().availableProcessors();
     
     private QuickSortThreaded(T[] array, int left, int right) {
         super(array);
@@ -18,6 +18,7 @@ public class QuickSortThreaded<T extends Comparable> extends QuickSort<T> {
     }
 
     public void setArray(T[] array) {
+        maxThreads = Runtime.getRuntime().availableProcessors();
         super.setArray(array);
         this.left = 0;
         this.right = length - 1;
@@ -29,26 +30,28 @@ public class QuickSortThreaded<T extends Comparable> extends QuickSort<T> {
             QuickSort leftsort;
             QuickSort rightsort;
             int threadCount = 0;
-            if(right - pivot > 50 && maxThreads > 0) {
+            if(right - pivot > LIMIT && maxThreads > 0) {
                 maxThreads--;
                 leftsort = (new QuickSortThreaded<>(array, left, pivot - 1));
                 threadCount++;
             } else {
                 leftsort = new QuickSort<>(array, left, pivot - 1);
             }
-            if(pivot - left > 50 && maxThreads > 0) {
+            if(pivot - left > LIMIT && maxThreads > 0) {
                 maxThreads--;
                 rightsort = (new QuickSortThreaded<>(array, pivot + 1, right));
                 threadCount++;
             } else {
                 rightsort = new QuickSort<>(array, pivot + 1, right);
             }
-            leftsort.start();
-            rightsort.start();
+            try {
+                leftsort.start();
+                rightsort.start();
+            } catch(Throwable e) {throw e;}
             try {
                 leftsort.join();
                 rightsort.join();
-            } catch(Exception e) {}
+            } catch(Throwable e) {}
             maxThreads += threadCount;
         }
     }

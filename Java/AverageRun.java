@@ -24,7 +24,7 @@ public class AverageRun implements Comparable {
             name = name + "_";
         }
         int timelength = (Long.MAX_VALUE + "").length();
-        String time = " " + this.time;
+        String time = " " + UseCase.addDots(this.time);
         while(time.length() < timelength) {
             time = "_" + time;
         }
