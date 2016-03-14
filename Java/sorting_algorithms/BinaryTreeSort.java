@@ -3,6 +3,8 @@ package sorting_algorithms;
 import java.util.*;
 
 // could throw a StackOverflowError, when inserting values, when array is already sorted.
+// partially solved by using "binary insertion" (inserting, so that a sorted array makes a perfectly balanced tree)
+// -> less likely to be too "one-sided".
 public class BinaryTreeSort<T extends Comparable> extends Sort<T> {
 
     public BinaryTreeSort() {}

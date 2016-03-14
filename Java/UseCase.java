@@ -127,7 +127,6 @@ public class UseCase {
         }
         System.out.println("\n");
         showStats();
-        QuickSortInt.main(new String[0]);
     }
     
     private static void showStats() {
