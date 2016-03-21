@@ -1,35 +1,11 @@
+
 #include <iostream>
+#include "sorting algorithms/QuickSort.h"
+#include "Comparable/Number.h"
 
 using namespace std;
 
-void quickSort(int arr[], int left, int right) {
-    int i = left, j = right;
-    int tmp;
-    int pivot = arr[(left + right) / 2];
-
-    /* partition */
-    while (i <= j) {
-        while (arr[i] < pivot)
-            i++;
-        while (arr[j] > pivot)
-            j--;
-        if (i <= j) {
-            tmp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = tmp;
-            i++;
-            j--;
-        }
-    };
-
-    /* recursion */
-    if (left < j)
-        quickSort(arr, left, j);
-    if (i < right)
-        quickSort(arr, i, right);
-}
-
-bool isSorted(int array[]) {
+bool isSorted(Comparable* array[]) {
     for(int i = 0; i < sizeof(array); i++) {
         if(array[i] > array[i + 1]) {
             return false;
@@ -38,10 +14,10 @@ bool isSorted(int array[]) {
     return true;
 }
 
-void printArray(int array[]) {
+void printArray(Comparable* array[]) {
     printf("array: [");
     for(int i = 0; i < sizeof(array); i++) {
-        cout << array[i];
+        cout << array[i]->getValue();
         if(i != sizeof(array) - 1) {
             printf(", ");
         }
@@ -50,12 +26,13 @@ void printArray(int array[]) {
 }
 
 int main() {
-    int array[1000];
+    Comparable *array[1000];
     cout << sizeof(array);
-    for(int i = 0; i < sizeof(array); i++) {
-        array[i] = (int)random();
+    for(int i = 0; i < (sizeof(array)/sizeof(array[0])); i++) {
+        array[i] = new Number((int)random());
     }
-    quickSort(array, 0, sizeof(array));
+    QuickSort* q = new QuickSort();
+    q->sort(array);
     printArray(array);
     printf("sorted? ");
     printf((isSorted(array) ? "true" : "false"));
