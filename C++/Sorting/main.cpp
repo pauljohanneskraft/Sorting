@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include "Number.h"
+#include "Number.hpp"
 #include "QuickSort.hpp"
 #include "BubbleSort.hpp"
 #include "BinaryTreeSort.hpp"

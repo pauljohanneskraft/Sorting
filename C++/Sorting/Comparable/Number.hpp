@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <string>
-#include "Comparable.h"
+#include "Comparable.hpp"
 
 using namespace std;
 

@@ -10,7 +10,7 @@
 #define Sort_hpp
 
 #include <stdio.h>
-#include "Comparable.h"
+#include "Comparable.hpp"
 
 class Sort {
 public:

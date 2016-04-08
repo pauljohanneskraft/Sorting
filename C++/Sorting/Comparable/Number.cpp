@@ -2,7 +2,7 @@
 // Created by Paul Kraft on 16.03.16.
 //
 
-#include "Number.h"
+#include "Number.hpp"
 #include <climits>
 
 Number::Number(int num) : number(num) {}
