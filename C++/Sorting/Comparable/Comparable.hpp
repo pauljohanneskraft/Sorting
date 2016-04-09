@@ -10,11 +10,11 @@ using namespace std;
 
 
 class Comparable {
-    public:
-        virtual bool operator >  (Comparable* op2);
-        virtual bool operator <  (Comparable* op2);
-        virtual bool operator == (Comparable* op2);
-        virtual string getValue() const = 0;
+public:
+    virtual bool operator >  (Comparable* op2);
+    virtual bool operator <  (Comparable* op2);
+    virtual bool operator == (Comparable* op2);
+    virtual string getValue() const = 0;
 };
 
 
