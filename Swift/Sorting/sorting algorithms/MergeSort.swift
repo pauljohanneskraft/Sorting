@@ -28,12 +28,13 @@ private func mergeSort<T: Comparable>(inout array: [T], _ range: Range<Int>) {
 }
 
 // in-place merging
-private func merge<T: Comparable>(inout array: [T], _ range: Range<Int>, var _ mid: Int) {
+private func merge<T: Comparable>(inout array: [T], _ range: Range<Int>, _ mid: Int) {
+    var mid = mid
     for left in range {
         if left >= mid { return }
         if array[left] > array[mid] {
             array.insert(array.removeAtIndex(mid), atIndex: left)
-            mid++
+            mid += 1
         }
         if range.endIndex <= mid { return }
     }
@@ -67,7 +68,8 @@ private func mergeSortThreadedRecursive<T: Comparable>(unsorted: [T]) -> [T] {
     return merge(l, r)
 }
 
-private func merge<T: Comparable>(var one: [T], var _ two: [T]) -> [T] {
+private func merge<T: Comparable>(one: [T], _ two: [T]) -> [T] {
+    var one = one, two = two
     var res : [T] = []
     while one.count > 0 && two.count > 0 {
         if one[0] <= two[0] { res.append(one.removeAtIndex(0)) }

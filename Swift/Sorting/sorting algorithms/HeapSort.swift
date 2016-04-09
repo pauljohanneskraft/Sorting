@@ -44,7 +44,8 @@ private func buildMaxHeap<T: Comparable> (inout array: [T]) {
     }
 }
 
-func heapSort<T: Comparable> (var unsorted: [T]) -> (name: String, array: [T]) {
+func heapSort<T: Comparable> (unsorted: [T]) -> (name: String, array: [T]) {
+    var unsorted = unsorted
     if unsorted.count < 2 { return ("HeapSort", unsorted) }
     buildMaxHeap(&unsorted)
     var sorted: [T] = []

@@ -26,8 +26,10 @@ let sortingAlgorithms : [[Number] -> (String, [Number])] = [
     //introSortInPlace,
     //introSortMedian,
     //introSortMedianThreaded,
-    //mergeSort,
-    //mergeSortThreaded,
+    //
+    mergeSort,
+    //
+    mergeSortThreaded,
     //selectionSort,
     //shellSort,
     //quickSortFirst,
