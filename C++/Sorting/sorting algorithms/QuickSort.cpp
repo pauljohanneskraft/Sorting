@@ -9,7 +9,7 @@
 #include "QuickSort.hpp"
 #include <iostream>
 
-QuickSort::QuickSort() : Sort("QuickSort") {}
+QuickSort::QuickSort() : Sort("QuickSort    ") {}
 
 void QuickSort::sort(Comparable *array[], int length) {
     sort(array, 0, length - 1);
