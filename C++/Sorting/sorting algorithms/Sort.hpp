@@ -20,6 +20,7 @@ public:
 protected:
     const string name;
     virtual void sort(Comparable *array[], int left, int right) = 0;
+    void swap(Comparable *array[], int c1, int c2);
 };
 
 #endif /* Sort_hpp */

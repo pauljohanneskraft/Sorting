@@ -11,3 +11,9 @@
 Sort::Sort(string name) : name(name) {}
 
 string Sort::getName() { return name; }
+
+void Sort::swap(Comparable *array[], int c1, int c2) {
+    Comparable *tmp = array[c1];
+    array[c1] = array[c2];
+    array[c2] = tmp;
+}
