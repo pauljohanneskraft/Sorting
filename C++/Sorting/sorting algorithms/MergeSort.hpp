@@ -10,5 +10,17 @@
 #define MergeSort_hpp
 
 #include <stdio.h>
+#include "Sort.hpp"
+
+class MergeSort : public Sort {
+public:
+    MergeSort();
+    void sort(Comparable *array[], int length);
+protected:
+    void sort(Comparable *array[], int left, int right);
+private:
+    void merge(Comparable *array[], int left, int mid, int right);
+};
+
 
 #endif /* MergeSort_hpp */
