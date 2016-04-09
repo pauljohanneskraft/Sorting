@@ -19,7 +19,7 @@ func insertionSort<T: Comparable>(inout array: [T]) {
 func insertionSort<T: Comparable>(inout array: [T], _ range: Range<Int>) {
     for i in range {
         var k = range.startIndex
-        while(k < i && array[k] < array[i]) { k++ }
+        while(k < i && array[k] < array[i]) { k += 1 }
         array.insert(array.removeAtIndex(i), atIndex: k)
     }
 }

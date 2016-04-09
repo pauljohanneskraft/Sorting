@@ -32,8 +32,8 @@ func partition<T: Comparable>(inout array: [T], _ range: Range<Int>) -> Int {
     let rdm:Int = range.endIndex - 1 //Int(arc4random_uniform(UInt32(range.count)) + range.startIndex
     let pivot = array[rdm]
     repeat {
-        while array[i] <= pivot && i < range.endIndex { i++ }
-        while array[j] >= pivot && j > range.startIndex { j-- }
+        while array[i] <= pivot && i < j { i += 1 }
+        while array[j] >= pivot && j > i { j -= 1 }
         if i < j { array[i] <-> array[j] }
     } while i < j
     if array[i] > pivot { array[i] <-> array[rdm] }

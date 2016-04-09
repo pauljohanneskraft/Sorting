@@ -40,7 +40,7 @@ private func buildMaxHeap<T: Comparable> (inout array: [T]) {
     var mid: Int = array.count/2
     while mid >= 0 {
         maxHeapify(&array, rootIndex: mid)
-        mid--;
+        mid -= 1;
     }
 }
 

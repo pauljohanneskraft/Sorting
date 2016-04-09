@@ -21,7 +21,7 @@ func shellSort<T: Comparable>(inout array: [T]) {
 
 func shellSort<T: Comparable>(inout array: [T], _ range: Range<Int>) {
     var s = 0
-    while columns[s] > range.count { s++ }
+    while columns[s] > range.count { s += 1 }
     
     for k in s..<columns.count {
         let h = columns[k] + range.startIndex;

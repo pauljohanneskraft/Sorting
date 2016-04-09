@@ -44,7 +44,7 @@ class Test {
 			var times : Double = 0
 			for j in 0..<s.count {
 				medianTime += Double(s[j][i].time)
-				times++
+				times += 1
 			}
             if i < 3 && i > 0 && minAvgSwiftTime > medianTime/times {
                 minAvgSwiftTimeName = s[0][i].name
