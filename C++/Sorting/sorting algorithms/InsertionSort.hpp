@@ -16,7 +16,6 @@ class InsertionSort : public Sort {
 public:
     InsertionSort();
     virtual void sort(Comparable *array[], int length);
-protected:
     virtual void sort(Comparable *array[], int left, int right);
 };
 

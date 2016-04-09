@@ -8,7 +8,7 @@
 
 #include "BubbleSort.hpp"
 
-BubbleSort::BubbleSort() : Sort("BubbleSort   ") {}
+BubbleSort::BubbleSort() : Sort("BubbleSort\t\t\t") {}
 
 void BubbleSort::sort(Comparable *array[], int length) {
     sort(array, 0, length - 1);

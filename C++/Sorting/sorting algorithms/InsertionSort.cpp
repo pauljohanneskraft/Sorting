@@ -8,7 +8,7 @@
 
 #include "InsertionSort.hpp"
 
-InsertionSort::InsertionSort() : Sort("InsertionSort") {}
+InsertionSort::InsertionSort() : Sort("InsertionSort\t\t") {}
 
 void InsertionSort::sort(Comparable *array[], const int length) {
     sort(array, 0, length - 1);

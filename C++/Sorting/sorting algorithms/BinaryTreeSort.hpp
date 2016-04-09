@@ -19,7 +19,7 @@ public:
     Comparable *info;
     Node(Comparable *info);
     ~Node();
-    void insert(Comparable *info);
+    virtual void insert(Comparable *info);
     void getArray(Comparable *array[], const int length);
     int getArray(Comparable *array[], const int length, int index);
     string dot();
@@ -32,7 +32,6 @@ public:
     void sort(Comparable* array[], int length);
 protected:
     void sort(Comparable* array[], int left, int right);
-private:
     Node *root;
     string dot();
     void insert(Comparable *info);

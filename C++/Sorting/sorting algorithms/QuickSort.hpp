@@ -15,6 +15,7 @@
 class QuickSort : public Sort {
 public:
     QuickSort();
+    QuickSort(string name);
     virtual void sort(Comparable *array[], int length);
 protected:
     virtual void sort(Comparable *array[], int left, int right);

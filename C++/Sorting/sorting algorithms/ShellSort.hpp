@@ -16,7 +16,6 @@ class ShellSort : public Sort {
 public:
     ShellSort();
     void sort(Comparable *array[], int length);
-protected:
     void sort(Comparable *array[], int left, int right);
 };
 

@@ -8,7 +8,7 @@
 
 #include "MergeSort.hpp"
 
-MergeSort::MergeSort() : Sort("MergeSort    ") {}
+MergeSort::MergeSort() : Sort("MergeSort\t\t\t") {}
 
 void MergeSort::sort(Comparable *array[], int length) {
     sort(array, 0, length - 1);

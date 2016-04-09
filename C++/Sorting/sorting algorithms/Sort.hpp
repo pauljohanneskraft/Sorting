@@ -17,9 +17,9 @@ public:
     Sort(string name);
     string getName();
     virtual void sort(Comparable *array[], int length) = 0;
+    virtual void sort(Comparable *array[], int left, int right) = 0;
 protected:
     const string name;
-    virtual void sort(Comparable *array[], int left, int right) = 0;
     void swap(Comparable *array[], int c1, int c2);
 };
 

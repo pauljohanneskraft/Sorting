@@ -9,7 +9,7 @@
 #include "ShellSort.hpp"
 
 
-ShellSort::ShellSort() : Sort("ShellSort    ") {}
+ShellSort::ShellSort() : Sort("ShellSort\t\t\t") {}
 
 void ShellSort::sort(Comparable *array[], int length) {
     sort(array, 0, length - 1);

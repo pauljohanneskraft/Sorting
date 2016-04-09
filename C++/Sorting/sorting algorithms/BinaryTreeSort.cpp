@@ -10,7 +10,7 @@
 #include <iostream>
 #include <string>
 
-BinaryTreeSort::BinaryTreeSort() : Sort("BinaryTreeSort") {}
+BinaryTreeSort::BinaryTreeSort() : Sort("BinaryTreeSort\t\t") {}
 
 void BinaryTreeSort::sort(Comparable* array[], int length) {
     sort(array, 0, length - 1);

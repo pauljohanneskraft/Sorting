@@ -8,7 +8,7 @@
 
 #include "SelectionSort.hpp"
 
-SelectionSort::SelectionSort() : Sort("SelectionSort") {}
+SelectionSort::SelectionSort() : Sort("SelectionSort\t\t") {}
 
 void SelectionSort::sort(Comparable *array[], int length) {
     sort(array, 0, length -1);
