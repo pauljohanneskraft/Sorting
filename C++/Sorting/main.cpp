@@ -15,9 +15,12 @@
 #include "MergeSort.hpp"
 #include "InsertionSort.hpp"
 #include "ShellSort.hpp"
+#include "AVLBinaryTreeSort.hpp"
+#include "IntroSort.hpp"
 #include <ctime>
 #include <sstream>
 #include <locale>
+#include <climits>
 
 using namespace std;
 
@@ -41,49 +44,65 @@ string convertToLocaleNumber(long number) {
     return s.str();
 }
 
+long* testOneRound(int round, int length, int lengthOfAlgs, Sort *algorithms[]) {
+    cout << endl << "round " << round + 1  << " : " << length << " elements."<< endl;
+    
+    long times[lengthOfAlgs];
+    
+    // test sorting algorithms
+    Comparable *array[length];
+    
+    for(int i = 0; i < length; i++) {
+        array[i] = new Number(rand() & 0xFFFF);
+    }
+    
+    //printComparableArray(array, length);
+    
+    for(int i = 0; i < lengthOfAlgs; i++) {
+        if(algorithms[i] != nullptr) {
+            long start = clock();
+            Comparable *array1[length];
+            
+            for(int j = 0; j < length; j++) {
+                array1[j] = array[j];
+            }
+            
+            algorithms[i]->sort(array1, length);
+            
+            times[i] = (long)((clock() - start)/double(CLOCKS_PER_SEC)*1000);
+            
+            cout << "\t" << algorithms[i]->getName() << " " << (isSorted(array1, length) ? "sorted" : "didn't sort") << " in " << convertToLocaleNumber(times[i]) << " ms." << endl;
+            
+            //printComparableArray(array1, length);
+        }
+    }
+    return times;
+}
+
 int main(int argc, const char * argv[]) {
     srand((int)(time(0)));
     
-    const int length = 10000;
+    const int length = 100000;
     const int rounds = 10;
-    const int lengthOfAlgs = 5;
+    const int lengthOfAlgs = 9;
     long times[rounds][lengthOfAlgs];
     
     Sort *algorithms[lengthOfAlgs];
     
     algorithms[0] = new QuickSort;
     algorithms[1] = new ShellSort;
-    algorithms[2] = new InsertionSort;
-    algorithms[3] = new SelectionSort;
-    algorithms[4] = new MergeSort;
+    //algorithms[2] = new SelectionSort;
+    //algorithms[3] = new InsertionSort;
+    algorithms[4] = new IntroSort;
+    algorithms[5] = new AVLBinaryTreeSort;
+    algorithms[6] = new BinaryTreeSort;
+    //algorithms[7] = new BubbleSort;
+    algorithms[8] = new MergeSort;
     
     for(int round = 0; round < rounds; round++) {
-        cout << endl << "round " << round+1  << " : " << length << " elements."<< endl;
-        
-        // test sorting algorithms
-        Comparable *array[length];
-        
-        for(int i = 0; i < length; i++) {
-            array[i] = new Number(rand());
-        }
-        
-        //printComparableArray(array, length);
-        
+        long *t = testOneRound(round, length, lengthOfAlgs, algorithms);
         for(int i = 0; i < lengthOfAlgs; i++) {
-            long start = clock();
-            Comparable *array1[length];
-            
-            for(int i = 0; i < length; i++) {
-                array1[i] = array[i];
-            }
-            
-            algorithms[i]->sort(array1, length);
-            
-            times[round][i] = (long)((clock() - start)/double(CLOCKS_PER_SEC)*1000);
-            
-            cout << "\t" << algorithms[i]->getName() << " " << (isSorted(array1, length) ? "sorted" : "didn't sort") << " in " << convertToLocaleNumber(times[round][i]) << " ms." << endl;
-            
-            //printComparableArray(array1, length);
+            times[round][i] = t[i];
         }
     }
     
@@ -99,10 +118,15 @@ int main(int argc, const char * argv[]) {
         }
     }
     
-    cout << endl;
+    cout << endl << "|-----------------------------------------------|" << endl;
     
     for(int i = 0; i < lengthOfAlgs; i++) {
-        cout << algorithms[i]->getName() << "\t\t" << (double)(time[i])/rounds << " ms." << endl;
+        if(algorithms[i] != nullptr) {
+            string a = to_string((int)(time[i]/rounds));
+            while(a.size() < to_string(INT_MAX).size()) { a = " " + a; }
+            cout << "|\t" << algorithms[i]->getName() << "\t\t" << a << " ms.\t|" << endl;
+            cout << "|-----------------------------------------------|" << endl;
+        }
     }
     
     cout << endl;
