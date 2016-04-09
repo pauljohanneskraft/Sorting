@@ -11,6 +11,10 @@
 #include "QuickSort.hpp"
 #include "BubbleSort.hpp"
 #include "BinaryTreeSort.hpp"
+#include "SelectionSort.hpp"
+#include "MergeSort.hpp"
+#include "InsertionSort.hpp"
+#include "ShellSort.hpp"
 #include <ctime>
 #include <sstream>
 #include <locale>
@@ -40,19 +44,21 @@ string convertToLocaleNumber(long number) {
 int main(int argc, const char * argv[]) {
     srand((int)(time(0)));
     
-    const int length = 1000;
+    const int length = 10000;
     const int rounds = 10;
-    const int lengthOfAlgs = 3;
+    const int lengthOfAlgs = 5;
     long times[rounds][lengthOfAlgs];
     
     Sort *algorithms[lengthOfAlgs];
     
     algorithms[0] = new QuickSort;
-    algorithms[1] = new BubbleSort;
-    algorithms[2] = new BinaryTreeSort;
+    algorithms[1] = new ShellSort;
+    algorithms[2] = new InsertionSort;
+    algorithms[3] = new SelectionSort;
+    algorithms[4] = new MergeSort;
     
     for(int round = 0; round < rounds; round++) {
-        cout << endl << "round " << round+1 << endl;
+        cout << endl << "round " << round+1  << " : " << length << " elements."<< endl;
         
         // test sorting algorithms
         Comparable *array[length];
@@ -60,6 +66,8 @@ int main(int argc, const char * argv[]) {
         for(int i = 0; i < length; i++) {
             array[i] = new Number(rand());
         }
+        
+        //printComparableArray(array, length);
         
         for(int i = 0; i < lengthOfAlgs; i++) {
             long start = clock();
@@ -79,7 +87,7 @@ int main(int argc, const char * argv[]) {
         }
     }
     
-    long time[lengthOfAlgs];
+    double time[lengthOfAlgs];
     
     for(int i = 0; i < lengthOfAlgs; i++) {
         time[i] = 0;
@@ -94,7 +102,7 @@ int main(int argc, const char * argv[]) {
     cout << endl;
     
     for(int i = 0; i < lengthOfAlgs; i++) {
-        cout << algorithms[i]->getName() << ":\t" << (double)(time[i])/rounds << " ms." << endl;
+        cout << algorithms[i]->getName() << "\t\t" << (double)(time[i])/rounds << " ms." << endl;
     }
     
     cout << endl;
