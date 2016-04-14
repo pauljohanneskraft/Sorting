@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "Sort.h"
 #import "QuickSort.h"
+#import "BubbleSort.h"
+#import "InsertionSort.h"
+#import "SelectionSort.h"
+#import "MergeSort.h"
+#import "IntroSort.h"
 
 bool isSorted(NSMutableArray *array) {
     for( long i = 0; i < array.count - 1; i++ ) {
@@ -29,42 +34,45 @@ bool equals(NSMutableArray *array1, NSMutableArray *array2) {
     return true;
 }
 
+void printArray(NSMutableArray *array) {
+    for(int i = 0; i < array.count; i++) {
+        NSLog(@"%@", [array objectAtIndex:i]);
+    }
+}
+
+double testalg(Class algorithm, NSMutableArray *array) {
+    double start = CFAbsoluteTimeGetCurrent();
+    [algorithm sort:array];
+    double end = CFAbsoluteTimeGetCurrent();
+    return (end-start)*1000;
+}
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        const int length = 3;
+        const int length = 30000;
         NSMutableArray *array = [NSMutableArray array];
         for (int i = 0; i < length; i++) {
             [array addObject: [NSNumber numberWithInt: arc4random()%20000]];
         }
-        NSMutableArray *copy = [array mutableCopy];
-        [QuickSort sort:copy];
-        if( equals(array, copy) ) {
-            NSLog(@"equals");
-        } else {
-            NSLog(@"doesn't equal");
+        NSArray *algorithms = @[
+                                //[BubbleSort class],
+                                [QuickSort class],
+                                //[InsertionSort class],
+                                //[SelectionSort class],
+                                [MergeSort class],
+                                [IntroSort class]
+                                ];
+        for(int i = 0; i < algorithms.count; i++) {
+            id algo = [algorithms objectAtIndex:i];
+            NSMutableArray *copy = [array mutableCopy];
+            double time = testalg(algo, copy);
+            if( !isSorted(copy) ) {
+                NSLog(@"%@ didn't sort in %f ms.", NSStringFromClass(algo), time);
+                printArray(copy);
+            } else {
+                NSLog(@"%@ sorted in %f ms.", NSStringFromClass(algo), time);
+            }
         }
-        for(int i = 0; i < length; i++) {
-            NSLog(@"%@", array[i]);
-        }
-        if( isSorted(copy) ) {
-            NSLog(@"sorted");
-        } else {
-            NSLog(@"not sorted");
-        }
-        /*
-        for(int i = 0; i < 1; i++) {
-            NSMutableArray *nums;
-            NSNumber *num1 = [NSNumber numberWithInteger:10];
-            NSNumber *num2 = [NSNumber numberWithInteger:20];
-            [nums addObject:num1];
-            [nums addObject:num2];
-         
-            if(nums[0] < nums[1]) NSLog(@"%@ < %@", num1, num2);
-            else if( nums[0] > nums[1]) NSLog(@"%@ > %@", num1, num2);
-            else NSLog(@"%@ == %@", num1, num2);
-         
-        }
-         */
     }
     return 0;
 }
