@@ -6,8 +6,8 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Array where Element : Comparable {
-    mutating func bubbleSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
+extension Array {
+    mutating func bubbleSort(by order: (Element, Element) throws -> Bool) rethrows {
         var didChange = false
         repeat {
             didChange = false
@@ -18,5 +18,11 @@ extension Array where Element : Comparable {
                 }
             }
         } while didChange
+    }
+}
+
+extension Array where Element : Comparable {
+    mutating func bubbleSort() {
+        self.bubbleSort(by: { $0 < $1 })
     }
 }

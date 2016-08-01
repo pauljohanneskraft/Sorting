@@ -7,11 +7,18 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Array where Element : Comparable {
-    mutating func introSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
+extension Array {
+    mutating func introSort(by order: (Element, Element) throws -> Bool) rethrows {
         
     }
 }
+
+extension Array where Element : Comparable {
+    mutating func introSort() {
+        self.introSort(by: { $0 < $1 })
+    }
+}
+
 
 // import Cocoa
 // import Foundation

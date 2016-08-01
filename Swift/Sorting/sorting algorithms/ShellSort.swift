@@ -6,8 +6,9 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Array where Element : Comparable {
-    mutating func shellSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
+extension Array {
+    public mutating func shellSort
+        (by order: (Element, Element) throws -> Bool) rethrows {
         // f_{k} = 2^k-1, but in reverse
         let columns = [8388607, 4194303, 2097151, 1048575, 524287, 262143, 131071, 65535, 32767, 16383, 8191, 4095, 2047, 1023, 511, 255, 127, 63, 31, 15, 7, 3, 1]
         var s = 0
@@ -26,6 +27,12 @@ extension Array where Element : Comparable {
                 self[j] = t;
             }
         }
+    }
+}
+
+extension Array where Element : Comparable {
+    public mutating func shellSort() {
+        shellSort { $0 < $1 }
     }
 }
 

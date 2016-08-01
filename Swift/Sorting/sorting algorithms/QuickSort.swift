@@ -8,11 +8,18 @@
 
 import Cocoa
 
-extension Array where Element : Comparable {
-    mutating func quickSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
+extension Array {
+    mutating func quickSort(by order: (Element, Element) throws -> Bool) rethrows {
         
     }
 }
+
+extension Array where Element : Comparable {
+    mutating func quickSort() {
+        self.quickSort(by: { $0 < $1 })
+    }
+}
+
 /*
 func quickSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
     var sorted = unsorted
