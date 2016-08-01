@@ -8,6 +8,7 @@
 
 import Foundation
 
+/*
 let              times = 1
 let             rounds = 5
 let           elements = 500
@@ -19,8 +20,7 @@ let sortingAlgorithms : [[Number] -> (String, [Number])] = [
     //avlBinaryTreeSort,
     //binaryTreeCompositeSort,
     //binaryTreeSort,
-    //
-    bubbleSort,
+    //bubbleSort,
     //heapSort,
     //insertionSort,
     //introSortInPlace,
@@ -28,8 +28,7 @@ let sortingAlgorithms : [[Number] -> (String, [Number])] = [
     //introSortMedianThreaded,
     //
     mergeSort,
-    //
-    mergeSortThreaded,
+    //mergeSortThreaded,
     //selectionSort,
     //shellSort,
     //quickSortFirst,
@@ -50,3 +49,4 @@ for i in 0..<times {
             showAllArrays:showAllArrays,
             sortingAlgorithms: sortingAlgorithms)
     }
+ */
