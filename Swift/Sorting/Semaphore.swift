@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/*
 class Semaphore {
     private static let MAX = 13
     private static var count = 1
@@ -48,9 +49,10 @@ class Semaphore {
 }
 
 //from https://gist.github.com/kristopherjohnson/d12877ee9a901867f599
-func synchronized<L : NSLocking, T>(lock: L, criticalSection: () -> T) -> T { //with return type
+func synchronized<L : NSLocking, T>(_ lock: L, criticalSection: () -> T) -> T { //with return type
     lock.lock()
     let a = criticalSection()
     lock.unlock()
     return a
 }
+*/
