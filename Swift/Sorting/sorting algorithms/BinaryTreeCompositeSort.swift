@@ -8,14 +8,12 @@
 
 import Cocoa
 
-func binaryTreeCompositeSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
-    return ("BinaryTreeCompositeSort", binaryTreeCompositeSortRecursive(unsorted))
+extension Array where Element : Comparable {
+    mutating func binaryTreeCompositeSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
+        
+    }
 }
-
-private func binaryTreeCompositeSortRecursive<T: Comparable>(unsorted: [T]) -> [T] {
-    return BinaryTreeComposite<T>(unsorted).array()
-}
-
+/*
 private class BinaryTreeComposite<T: Comparable> {
     private var root: BinaryTreeCompositeElement<T>
     
@@ -112,3 +110,4 @@ private class BinaryTreeCompositeNode<T: Comparable> : BinaryTreeCompositeElemen
 }
 
 private class BinaryTreeCompositeLeaf<T: Comparable> : BinaryTreeCompositeElement<T> {}
+ */
