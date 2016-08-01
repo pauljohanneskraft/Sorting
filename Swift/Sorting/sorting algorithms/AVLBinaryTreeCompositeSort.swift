@@ -8,10 +8,26 @@
 
 import Cocoa
 
+extension Array where Element : Comparable {
+    mutating func avlBinaryTreeCompositeSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
+        
+    }
+}
+
+/*
+private struct AVLBinaryTreeComposite < Element : Comparable > : BinTree {
+}
+
+private protocol AVLBinaryTreeCompositeNode : BinTreeNode {
+    
+}
+ */
+
 //just to illustrate how an average-level-tree looks like, when used for sorting
 //for sorting, it's less efficient than BinaryTreeCompositeSort, because a rotation takes a long time compared to a a-little-longer path.
 //this avl-tree uses the composite pattern, too, so left != nil is not necessary
 
+/*
 func avlBinaryTreeCompositeSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
     return ("AVLBinaryTreeCompositeSort", avlBinaryTreeCompositeSortRecursive(unsorted))
 }
@@ -145,3 +161,5 @@ private class AVLBinaryTreeCompositeNode<T: Comparable> : AVLBinaryTreeComposite
 }
 
 private class AVLBinaryTreeCompositeLeaf<T: Comparable> : AVLBinaryTreeCompositeElement<T> {}
+ 
+ */
