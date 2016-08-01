@@ -8,22 +8,20 @@
 
 import Cocoa
 
-func avlBinaryTreeSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
-    return ("AVLBinaryTreeSort", avlBinaryTreeSortRecursive(unsorted))
+extension Array where Element : Comparable {
+    mutating func avlBinaryTreeSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
+        
+    }
 }
 
-private func avlBinaryTreeSortRecursive<T: Comparable>(unsorted: [T]) -> [T] {
-    return AVLBinaryTree<T>(unsorted).array()
-}
 
-private class AVLBinaryTree<T: Comparable> {
+/*
+private struct AVLBinaryTree<T: Comparable> {
     private var root: AVLBinaryTreeElement<T>?
     
-    convenience init(_ array: [T]) {
+    init(_ array: [T]) {
         self.init(nil)
-        for i in array {
-            insert(i)
-        }
+        for i in array { insert(i) }
         //print("\n\tavl\n", dot())
     }
     
@@ -31,7 +29,7 @@ private class AVLBinaryTree<T: Comparable> {
         self.root = root
     }
     
-    func insert(newData: T) {
+    mutating func insert(_ newData: T) {
         if root != nil { root = root!.insert(newData) }
         else           { root = AVLBinaryTreeElement(newData) }
     }
@@ -69,7 +67,7 @@ private class AVLBinaryTreeElement<T: Comparable> {
         self.right = right
     }
     
-    func insert(newData: T) -> AVLBinaryTreeElement {
+    func insert(_ newData: T) -> AVLBinaryTreeElement {
         if newData < self.data {
             if  left == nil { left = AVLBinaryTreeElement<T>(newData) }
             else            { left = left!.insert(newData) }
@@ -133,3 +131,4 @@ private class AVLBinaryTreeElement<T: Comparable> {
         return a
     }
 }
+ */

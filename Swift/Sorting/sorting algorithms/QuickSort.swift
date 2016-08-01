@@ -8,17 +8,23 @@
 
 import Cocoa
 
+extension Array where Element : Comparable {
+    mutating func quickSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
+        
+    }
+}
+/*
 func quickSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
     var sorted = unsorted
     quickSort(&sorted, 0..<sorted.count)
     return ("quickSortInPlace", sorted)
 }
 
-func quickSort<T: Comparable>(inout unsorted: [T]) {
+func quickSort<T: Comparable>( unsorted: inout [T]) {
     quickSort(&unsorted, 0..<unsorted.count)
 }
 
-private func quickSort<T: Comparable>(inout array: [T], _ range: Range<Int>) {
+private func quickSort<T: Comparable>( array: inout [T], _ range: Range<Int>) {
     if range.count < 2 { return }
     let pivot = partition(&array, range)
     if range.startIndex < pivot - 1 { quickSort(&array, range.startIndex..<(pivot-1)) }
@@ -39,7 +45,7 @@ func partition<T: Comparable>(inout array: [T], _ range: Range<Int>) -> Int {
     if array[i] > pivot { array[i] <-> array[rdm] }
     return i
 }
-
+*/
 
 
 

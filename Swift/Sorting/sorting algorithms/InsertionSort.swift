@@ -6,21 +6,12 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-func insertionSort<T: Comparable>(array: [T]) -> (name: String, array: [T]) {
-    var sorted = array
-    insertionSort(&sorted)
-    return ("InsertionSort", sorted)
-}
-
-func insertionSort<T: Comparable>(inout array: [T]) {
-    insertionSort(&array, 0..<array.count)
-}
-
-func insertionSort<T: Comparable>(inout array: [T], _ range: Range<Int>) {
-    for i in range {
-        var k = range.startIndex
-        while(k < i && array[k] < array[i]) { k += 1 }
-        array.insert(array.removeAtIndex(i), atIndex: k)
+extension Array where Element : Comparable {
+    mutating func insertionSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
+        for i in indices {
+            var k = 0
+            while try k < i && order(self[k], self[i]) { k += 1 }
+            self.insert(self.remove(at: i), at: k)
+        }
     }
 }
-

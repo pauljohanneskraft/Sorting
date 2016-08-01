@@ -6,6 +6,13 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
+extension Array where Element : Comparable {
+    mutating func mergeSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
+        
+    }
+}
+
+/*
 import Cocoa // threads
 
 // in-place, single-threaded, faster for smaller arrays
@@ -18,7 +25,7 @@ func mergeSort<T: Comparable>(unsorted: [T]) -> (String, [T]) {
 func mergeSort<T: Comparable>(inout array: [T]) {
     mergeSort(&array, 0..<array.count)
 }
-
+ 
 private func mergeSort<T: Comparable>(inout array: [T], _ range: Range<Int>) {
     if range.count < 2 { return }
     let mid = (range.startIndex + range.endIndex) / 2
@@ -79,3 +86,4 @@ private func merge<T: Comparable>(one: [T], _ two: [T]) -> [T] {
     while two.count > 0     { res.append(two.removeAtIndex(0)) }
     return res
 }
+*/
