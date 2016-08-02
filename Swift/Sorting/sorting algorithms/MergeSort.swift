@@ -6,6 +6,48 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
+extension Array {
+    public mutating func mergeSort(by order: (Element, Element) throws -> Bool) rethrows {
+        guard count > 1 else { return }
+        try self.mergeSort(in: 0..<count, by: order)
+    }
+    
+    public mutating func mergeSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
+        guard range.count > 1 else { return }
+        let mid = (range.startIndex + range.endIndex) / 2
+        try self.mergeSort(in: range.startIndex..<mid, by: order)
+        try self.mergeSort(in: mid..<range.endIndex, by: order)
+        // print("will merge", self[range])
+        try self.merge(range: range, mid: mid, by: order)
+        let inRange = self[range]
+        // print("merged to", inRange, try inRange.isSorted(by: order))
+        assert(try! inRange.isSorted(by: order))
+    }
+    
+    // in-place merging
+    private mutating func merge(range: CountableRange<Int>, mid: Int, by order: (Element, Element) throws -> Bool) rethrows {
+        var mid = mid
+        for left in range {
+            // print(self[range], left, range, mid)
+            if left > mid { /* print("left > mid");*/ return }
+            if try order(self[mid], self[left]) {
+                insert(remove(at: mid), at: left)
+                mid += 1
+            }
+            if range.endIndex <= mid { /* print("endIndex <= mid"); */ return }
+            // print(self[range], left, range, mid)
+        }
+    }
+}
+
+public extension Array where Element : Comparable {
+    public mutating func mergeSort() {
+        self.mergeSort(by: { $0 < $1 })
+    }
+}
+
+
+/*
 import Cocoa // threads
 
 // in-place, single-threaded, faster for smaller arrays
@@ -18,7 +60,7 @@ func mergeSort<T: Comparable>(unsorted: [T]) -> (String, [T]) {
 func mergeSort<T: Comparable>(inout array: [T]) {
     mergeSort(&array, 0..<array.count)
 }
-
+ 
 private func mergeSort<T: Comparable>(inout array: [T], _ range: Range<Int>) {
     if range.count < 2 { return }
     let mid = (range.startIndex + range.endIndex) / 2
@@ -79,3 +121,4 @@ private func merge<T: Comparable>(one: [T], _ two: [T]) -> [T] {
     while two.count > 0     { res.append(two.removeAtIndex(0)) }
     return res
 }
+*/

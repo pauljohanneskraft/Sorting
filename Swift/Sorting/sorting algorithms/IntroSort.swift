@@ -7,9 +7,22 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-import Cocoa
-import Foundation
+extension Array {
+    mutating func introSort(by order: (Element, Element) throws -> Bool) rethrows {
+        
+    }
+}
 
+extension Array where Element : Comparable {
+    mutating func introSort() {
+        self.introSort(by: { $0 < $1 })
+    }
+}
+
+
+// import Cocoa
+// import Foundation
+/*
 func introSortInPlace<T: Comparable>(inout unsorted: [T]) -> (String, [T]) {
     let maxDepth = Int(log2(Double(unsorted.count)))
     introSortInPlaceRecursive(&unsorted, 0..<unsorted.count, maxDepth)
@@ -37,7 +50,7 @@ private func introSortInPlaceRecursive<T: Comparable>(inout unsorted: [T], _ ran
     introSortInPlaceRecursive(&unsorted, range.startIndex..<pivot, depthLimit - 1)
     introSortInPlaceRecursive(&unsorted, (pivot+1)..<range.endIndex, depthLimit - 1)
 }
-
+*/
 /*
 private func partitionInPlace<T: Comparable>(inout unsorted : [T], _ range: Range<Int>) -> Int {
     var low :Int = range.startIndex
@@ -78,7 +91,7 @@ private func insertionSort<T:Comparable>(inout unsorted: [T], _ left: Int, _ rig
         unsorted[i] <-> unsorted[k]
     }
 }*/
-
+/*
 func introSortMedianThreaded<T: Comparable>(unsorted: [T]) -> (String, [T]) {
     return ("IntroSortMedianThreaded", introSortMedianThreadedRecursive(unsorted, Int(floor(log(Double(unsorted.count))))))
 }
@@ -185,4 +198,4 @@ private func partitionInPlace<T:Comparable>(inout array: [T], _ left: Int, _ rig
     return i
 }
 */
-
+*/

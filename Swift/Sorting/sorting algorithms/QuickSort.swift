@@ -8,50 +8,43 @@
 
 import Cocoa
 
-func quickSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
-    var sorted = unsorted
-    quickSort(&sorted, 0..<sorted.count)
-    return ("quickSortInPlace", sorted)
+extension Array {
+    public mutating func quickSort(by order: (Element, Element) throws -> Bool) rethrows {
+        try self.quickSort(in: 0..<count, by: order)
+    }
+    
+    public mutating func quickSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
+        guard range.count > 1 else { return }
+        
+        let pivot = try partition(in: range, by: order)
+        try quickSort(in: range.startIndex ..< pivot    , by: order)
+        try quickSort(in: (pivot+1) ..< range.endIndex  , by: order)
+    }
+    
+    mutating func partition(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows -> Int {
+        
+        let endIndex = range.endIndex - 1
+        let pivot = self[ endIndex ]
+        var j = range.startIndex
+        
+        for i in range.dropLast() {
+            if try order(self[i], pivot) {
+                if i != j { swap(&self[i], &self[j]) }
+                j += 1
+            }
+        }
+        
+        if j != endIndex { swap(&self[j], &self[ endIndex ]) }
+        
+        return j
+    }
 }
 
-func quickSort<T: Comparable>(inout unsorted: [T]) {
-    quickSort(&unsorted, 0..<unsorted.count)
+public extension Array where Element : Comparable {
+    public mutating func quickSort() {
+        self.quickSort(by: { $0 < $1 })
+    }
 }
-
-private func quickSort<T: Comparable>(inout array: [T], _ range: Range<Int>) {
-    if range.count < 2 { return }
-    let pivot = partition(&array, range)
-    if range.startIndex < pivot - 1 { quickSort(&array, range.startIndex..<(pivot-1)) }
-    if pivot + 1 < range.endIndex { quickSort(&array, (pivot+1)..<range.endIndex) }
-}
-
-func partition<T: Comparable>(inout array: [T], _ range: Range<Int>) -> Int {
-    //print("partition running, count: ", range.count)
-    var i = range.startIndex
-    var j = range.endIndex - 2
-    let rdm:Int = range.endIndex - 1 //Int(arc4random_uniform(UInt32(range.count)) + range.startIndex
-    let pivot = array[rdm]
-    repeat {
-        while array[i] <= pivot && i < j { i += 1 }
-        while array[j] >= pivot && j > i { j -= 1 }
-        if i < j { array[i] <-> array[j] }
-    } while i < j
-    if array[i] > pivot { array[i] <-> array[rdm] }
-    return i
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 

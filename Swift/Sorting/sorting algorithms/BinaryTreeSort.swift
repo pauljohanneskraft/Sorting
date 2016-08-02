@@ -8,88 +8,36 @@
 
 import Cocoa
 
-func binaryTreeSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
-    return ("BinaryTreeSort", binaryTreeSortRecursive(unsorted))
-}
-
-private func binaryTreeSortRecursive<T: Comparable>(unsorted: [T]) -> [T] {
-    return BinaryTree<T>(unsorted).array()
-}
-
-private class BinaryTree<T: Comparable> {
-    private var root: BinaryTreeElement<T>?
-    
-    convenience init(_ array: [T]) {
-        self.init(nil)
-        for i in array {
-            insert(i)
-        }
-        //print("\n\tnormal\n", dot())
-    }
-    
-    init(_ root: BinaryTreeElement<T>?) {
-        self.root = root
-    }
-    
-    func insert(newData: T) {
-        if root == nil { root = BinaryTreeElement(newData) }
-        else           { root!.insert(newData) }
-    }
-    
-    func array() -> [T] {
-        if root == nil { return [] }
-        return root!.array()
-    }
-    
-    func dot() -> String {
-        var res = "\tdigraph g { \n\t\tgraph [ordering = out] \n"
-        if root != nil { res += "\(root!.dot())"}
-        return  res + "\t}\n"
+extension Array where Element : Comparable {
+    mutating func binaryTreeSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
+        self = try BinaryTree(self, order: order).array
     }
 }
 
+private struct BinaryTree<E : Comparable> : BinTree {
+    typealias Element = E
+    typealias Node = BinaryTreeNode<E>
+    init(_ elements: [E], order: (E, E) throws -> Bool) rethrows {
+        guard elements.count > 1 else { self.order = order; return }
+        self.order = order
+        root = Node(elements.first!, order: order)
+        for e in elements {
+            try root!.insert(e, order: order)
+        }
+    }
+    
+    var root: BinaryTreeNode<E>? = nil
+    var order : (E, E) throws -> Bool
+}
 
-private class BinaryTreeElement<T: Comparable> {
-    private let data: T
-    private var  left: BinaryTreeElement<T>?
-    private var right: BinaryTreeElement<T>?
-    
-    convenience init(_ newData: T) {
-        self.init(newData, left: nil, right: nil)
+private final class BinaryTreeNode < E : Comparable > : BinTreeNode {
+    typealias Element = E
+    init(_ data: E, order: (E, E) throws -> Bool) {
+        self.data = data
+        self.order = order
     }
-    
-    init(_ newData: T, left: BinaryTreeElement<T>?, right: BinaryTreeElement<T>?) {
-        self.data = newData
-        self.left = left
-        self.right = right
-    }
-    
-    func insert(newData: T) {
-        if newData < self.data {
-            if  left == nil { left = BinaryTreeElement<T>(newData) }
-            else            { left!.insert(newData) }
-        }
-        else {
-            if right == nil { right = BinaryTreeElement<T>(newData) }
-            else            { right!.insert(newData) }
-        }
-    }
-    
-    func array() -> [T] {
-        var res: [T] = []
-        if left  != nil { res +=  left!.array() }
-        res.append(data)
-        if right != nil { res += right!.array() }
-        return res
-    }
-    
-    func dot() -> String {
-        var a = ""
-        if  left != nil { a += "\t\t\(self.data) -> \( left!.data) [label=left] \n" }
-        if right != nil { a += "\t\t\(self.data) -> \(right!.data) [label=right]\n" }
-        
-        if  left != nil { a +=  left!.dot() }
-        if right != nil { a += right!.dot() }
-        return a
-    }
+    private var data    : E
+    private var left    : BinaryTreeNode<E>? = nil
+    private var right   : BinaryTreeNode<E>? = nil
+    private let order   : (E, E) throws -> Bool
 }

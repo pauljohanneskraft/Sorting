@@ -8,15 +8,7 @@
 
 import Cocoa
 
-// retain/release traffic here
 infix operator <-> { associativity left precedence 140 }
-func <-> <T>(inout left: T, inout right: T) {
-    (left, right) = (right, left)
+func <-> <T>( left: inout T, right: inout T) {
+    swap(&left, &right)
 }
-
-/*
-infix operator += { associativity left precedence 140 }
-func += <T>(inout left: [T], inout right: T) {
-    left.append(right)
-}
-*/
