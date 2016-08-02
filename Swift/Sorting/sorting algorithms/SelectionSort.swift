@@ -7,7 +7,7 @@
 //
 
 extension Array {
-    mutating func selectionSort(by order: (Element, Element) throws -> Bool) rethrows {
+    public mutating func selectionSort(by order: (Element, Element) throws -> Bool) rethrows {
         for l in indices {
             var min = l
             for i in l+1..<count {
@@ -19,7 +19,7 @@ extension Array {
 }
 
 extension Array where Element : Comparable {
-    mutating func selectionSort() {
+    public mutating func selectionSort() {
         self.selectionSort(by: { $0 < $1 })
     }
 }

@@ -17,14 +17,14 @@ extension Array {
         for k in s..<columns.count {
             let h = columns[k]
             
-            for i in h..<count - 1 {
-                let t = self[i];
-                var j = i;
+            for i in h..<count {
+                let t = self[i]
+                var j = i
                 while try j >= h && order(t, self[j-h]) {
                     self[j] = self[j-h];
-                    j = j - h;
+                    j -= h
                 }
-                self[j] = t;
+                self[j] = t
             }
         }
     }

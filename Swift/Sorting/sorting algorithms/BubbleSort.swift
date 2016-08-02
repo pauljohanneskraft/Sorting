@@ -7,7 +7,7 @@
 //
 
 extension Array {
-    mutating func bubbleSort(by order: (Element, Element) throws -> Bool) rethrows {
+    public mutating func bubbleSort(by order: (Element, Element) throws -> Bool) rethrows {
         var didChange = false
         repeat {
             didChange = false
@@ -22,7 +22,7 @@ extension Array {
 }
 
 extension Array where Element : Comparable {
-    mutating func bubbleSort() {
+    public mutating func bubbleSort() {
         self.bubbleSort(by: { $0 < $1 })
     }
 }
