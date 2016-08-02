@@ -21,9 +21,18 @@ extension Array {
         try quickSort(in: (pivot+1) ..< range.endIndex  , by: order)
     }
     
+    private func medianOf3(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows -> Int {
+        let first = range.startIndex
+        let end = range.endIndex - 1
+        let mid = (end + first) >> 1
+        if try order(self[end], self[mid]) {
+            if try order(self[mid], self[first]) { return mid } else { return first }
+        } else if try order(self[first], self[end]) { return end } else { return first }
+    }
+    
     mutating func partition(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows -> Int {
         
-        let endIndex = range.endIndex - 1
+        let endIndex = range.endIndex - 1 // try medianOf3(in: range, by: order) --> doesn't work!
         let pivot = self[ endIndex ]
         var j = range.startIndex
         
