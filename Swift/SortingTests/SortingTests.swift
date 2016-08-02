@@ -15,14 +15,14 @@ class SortingTest : XCTestCase {
     var elements : [[N]] = []
     
     let arrayCount              = 20
-    let elementCount : UInt32   = 2_000
+    let elementCount : UInt32   = 20_000
     
     override func setUp() {
         for _ in 0..<arrayCount {
             let count = arc4random() % elementCount + 5
             var array = [Int]()
             for _ in 0..<count {
-                array.append(Int(arc4random()))
+                array.append(Int(arc4random() % UInt32(elementCount * 10)))
             }
             elements.append(array)
         }
@@ -39,12 +39,13 @@ class SortingTest : XCTestCase {
     
     func testFastOnes()         {
         testRadixSort()
-        // testQuickSort()
+        testQuickSort()
         testShellSort()
     }
     
     func forAll(_ desc: String = "Test", _ f: (inout [N]) -> ()) {
         var time = 0.0
+        print()
         for es in elements {
             var sorted = es
             let start = NSDate()
