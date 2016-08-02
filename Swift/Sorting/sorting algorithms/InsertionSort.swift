@@ -7,13 +7,19 @@
 //
 
 extension Array {
+    
     public mutating func insertionSort(by order: (Element, Element) throws -> Bool) rethrows {
-        for i in indices {
-            var k = 0
+        try self.insertionSort(in: 0..<count, by: order)
+    }
+    
+    mutating func insertionSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
+        for i in range {
+            var k = range.startIndex
             while try k < i && order(self[k], self[i]) { k += 1 }
             self.insert(self.remove(at: i), at: k)
         }
     }
+    
 }
 
 extension Array where Element : Comparable {
