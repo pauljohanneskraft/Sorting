@@ -14,8 +14,8 @@ class SortingTest : XCTestCase {
     
     var elements : [[N]] = []
     
-    let arrayCount              = 20
-    let elementCount : UInt32   = 20_000
+    var arrayCount              = 10
+    var elementCount : UInt32   = 500_000
     
     override func setUp() {
         for _ in 0..<arrayCount {
@@ -29,18 +29,20 @@ class SortingTest : XCTestCase {
     }
     
     func testRadixSort()        { forAll("RadixSort"        ) { $0.radixSort()          } }
-    // func testRadixSortInPlace() { forAll("RadixSortInPlace" ) { $0.radixSortInPlace()   } }
+    func testRadixSortInPlace() { forAll("RadixSortInPlace" ) { $0.radixSortInPlace()   } }
     func testSelectionSort()    { forAll("SelectionSort"    ) { $0.selectionSort()      } }
     func testInsertionSort()    { forAll("InsertionSort"    ) { $0.insertionSort()      } }
     func testShellSort()        { forAll("ShellSort"        ) { $0.shellSort()          } }
     func testMergeSort()        { forAll("MergeSort"        ) { $0.mergeSort()          } }
     func testQuickSort()        { forAll("QuickSort"        ) { $0.quickSort()          } }
-
+    func testSwiftSort()        { forAll("Swift"            ) { $0.sort()               } }
     
     func testFastOnes()         {
-        testRadixSort()
+        // testRadixSort()
+        testRadixSortInPlace()
         testQuickSort()
-        testShellSort()
+        // testShellSort()
+        testSwiftSort()
     }
     
     func forAll(_ desc: String = "Test", _ f: (inout [N]) -> ()) {
@@ -58,7 +60,7 @@ class SortingTest : XCTestCase {
             time += _time
             print(".", terminator: "")
         }
-        print("\n", desc, ":", elements.count, "tests successful.", "total time:", time, "per test:", time / Double(elements.count), "\n")
+        print("\n\n\(desc):", elements.count, "tests successful.", "total time:", time, "per test:", time / Double(elements.count), "\n")
     }
 
 }

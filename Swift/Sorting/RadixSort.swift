@@ -37,47 +37,41 @@ public extension Array {
         }
     }
     
+    // needs O(n) space --> works on copy of itself and the copies back
     public mutating func radixSortInPlace(by order: (Element) throws -> Int) rethrows {
-        
+        // ...
         let digitsAtOnce = 4
         let buckets = (1 << digitsAtOnce)
+        let mask = buckets - 1
         let hash = {
             (element: Int, digit: Int) -> Int in
-            return (element >> (digit * digitsAtOnce)) % buckets
+            return (element >> (digit * digitsAtOnce)) & mask
         }
+        var this = self
         
         func kSort(digit: Int) throws {
             var counts = [Int](repeating: 0, count: buckets)
-            for e in self {
-                let h = hash(try order(e), digit)
-                print("\(e) hashed to \(h)")
+            for i in self.indices {
+                let h = hash(try order(self[i]), digit)
                 counts[h] += 1
             }
+            if counts[0] == count { return }
             var marker = [Int](repeating: 0, count: buckets)
             marker[0] = 0
             for i in counts.indices.dropFirst() {
                 marker[i] = counts[i - 1] + marker[i - 1]
             }
-            print(self)
-            print(count, counts, "~>", marker)
             for i in self.indices {
                 let h = hash(try order(self[i]), digit)
-                print(self[i], "hashed to bucket:", h)
                 let indexInArray = marker[h]
-                print("hit marker", h, "resulting in index", indexInArray)
-                if indexInArray != i && ( h < buckets - 1 ? indexInArray < marker[h + 1] : indexInArray < count) {
-                    swap(&self[i], &self[indexInArray])
-                    marker[h] += 1
-                }
-                
-                print("incremented marker", h, "to value", marker[h])
-                print(marker)
+                swap(&self[i], &this[indexInArray])
+                marker[h] += 1
             }
+            swap(&self, &this)
         }
         
         for d in 0..<((sizeof(Int.self) * 8) / digitsAtOnce) {
             try kSort(digit: d)
-            // print(d, ",", terminator: "")
         }
     }
 }
