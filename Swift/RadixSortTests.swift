@@ -10,31 +10,28 @@ import XCTest
 @testable import Sorting
 
 class RadixSortTests: XCTestCase {
-
+    
     override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        for _ in 0..<300 {
+            let count = arc4random() % 10 + 5
+            var array = [Int]()
+            for _ in 0..<count {
+                array.append(Int(arc4random()))
+            }
+            elements.append(array)
+        }
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
+    var elements = [[Int]]()
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        var a : [Int] = [0,2,3,4,5,6,7,1]
-        a.radixSort()
-        print(a)
-        // print(a.radixSort(by: { $0 }))
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testAll() {
+        for es in elements {
+            var sorted = es
+            sorted.radixSort()
+            // print(es, "~>", sorted)
+            assert(sorted.isSorted)
         }
+        print("all", elements.count, "tests were succesfull")
     }
 
 }

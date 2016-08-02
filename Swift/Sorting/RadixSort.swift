@@ -14,7 +14,7 @@ public extension Array {
         let buckets = (1 << digitsAtOnce)
         let hash = {
             (element: Int, digit: Int) -> Int in
-            return (element >> (digit * digitsAtOnce)) % (2 * digitsAtOnce)
+            return (element >> (digit * digitsAtOnce)) % buckets
         }
         
         func kSort(digit: Int) throws {
