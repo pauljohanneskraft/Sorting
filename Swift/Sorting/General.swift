@@ -8,6 +8,11 @@
 
 import Foundation
 
+infix operator <-> { associativity left precedence 140 }
+func <-> <T>( left: inout T, right: inout T) {
+    swap(&left, &right)
+}
+
 public extension Array {
     public func isSorted(by order: (Element, Element) throws -> Bool) rethrows -> Bool {
         for i in self.indices.dropLast() {
