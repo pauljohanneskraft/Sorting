@@ -21,7 +21,7 @@ extension Array {
                 let t = self[i]
                 var j = i
                 while try j >= h && order(t, self[j-h]) {
-                    self[j] = self[j-h];
+                    self[j] = self[j-h]
                     j -= h
                 }
                 self[j] = t
