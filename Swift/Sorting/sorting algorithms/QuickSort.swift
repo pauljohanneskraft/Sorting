@@ -9,27 +9,39 @@
 import Cocoa
 
 extension Array {
-    mutating func quickSort(by order: (Element, Element) throws -> Bool) rethrows {
-        
+    public mutating func quickSort(by order: (Element, Element) throws -> Bool) rethrows {
+        try self.quickSort(in: 0..<count, by: order)
+    }
+    
+    public mutating func quickSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
+        guard range.count > 1 else { return }
+        let pivot = try partition(in: range, by: order)
+        if range.startIndex < pivot - 1 { try quickSort(in: range.startIndex..<(pivot-1),   by: order) }
+        if pivot + 1 < range.endIndex   { try quickSort(in: (pivot+1)..<range.endIndex,     by: order) }
+    }
+    
+    mutating func partition(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows -> Int {
+        var i = range.startIndex
+        var j = range.endIndex - 2
+        let rdm = range.endIndex - 1 //Int(arc4random_uniform(UInt32(range.count)) + range.startIndex
+        let pivot = self[rdm]
+        repeat {
+            while try order(self[i], pivot) && i < j { i += 1 }
+            while try order(pivot, self[j]) && j > i { j -= 1 }
+            if i < j { swap(&self[i], &self[j]) }
+        } while i < j
+        if try order(pivot, self[i]) { swap(&self[i], &self[rdm]) }
+        return i
     }
 }
 
-extension Array where Element : Comparable {
-    mutating func quickSort() {
+public extension Array where Element : Comparable {
+    public mutating func quickSort() {
         self.quickSort(by: { $0 < $1 })
     }
 }
 
 /*
-func quickSort<T: Comparable>(unsorted: [T]) -> (name: String, array: [T]) {
-    var sorted = unsorted
-    quickSort(&sorted, 0..<sorted.count)
-    return ("quickSortInPlace", sorted)
-}
-
-func quickSort<T: Comparable>( unsorted: inout [T]) {
-    quickSort(&unsorted, 0..<unsorted.count)
-}
 
 private func quickSort<T: Comparable>( array: inout [T], _ range: Range<Int>) {
     if range.count < 2 { return }

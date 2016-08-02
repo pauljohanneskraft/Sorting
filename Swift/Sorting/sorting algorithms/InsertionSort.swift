@@ -7,7 +7,7 @@
 //
 
 extension Array {
-    mutating func insertionSort(by order: (Element, Element) throws -> Bool) rethrows {
+    public mutating func insertionSort(by order: (Element, Element) throws -> Bool) rethrows {
         for i in indices {
             var k = 0
             while try k < i && order(self[k], self[i]) { k += 1 }
@@ -17,7 +17,7 @@ extension Array {
 }
 
 extension Array where Element : Comparable {
-    mutating func insertionSort() {
+    public mutating func insertionSort() {
         self.insertionSort(by: { $0 < $1 })
     }
 }
