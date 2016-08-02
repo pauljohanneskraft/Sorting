@@ -8,13 +8,25 @@
 //
 
 extension Array {
-    mutating func introSort(by order: (Element, Element) throws -> Bool) rethrows {
-        
+    public mutating func introSort(by order: (Element, Element) throws -> Bool) rethrows {
+        // ...
+        if count < 25 { try self.selectionSort(by: order); return }
+        let depth = Int(log2(Double(count)))
+        try self.introSort(in: 0..<count, maxDepth: depth, by: order)
+    }
+    
+    mutating func introSort(in range: CountableRange<Int>, maxDepth depth: Int, by order: (Element, Element) throws -> Bool) rethrows {
+        // ...
+        guard range.count > 25  else { try self.insertionSort(in: range, by: order); return }
+        // guard depth > 0         else { try self.shellSort    (in: range, by: order); return }
+        let pivot = try partition(in: range, by: order)
+        try introSort(in: range.startIndex ..< pivot    , maxDepth: depth - 1, by: order)
+        try introSort(in: (pivot+1) ..< range.endIndex  , maxDepth: depth - 1, by: order)
     }
 }
 
-extension Array where Element : Comparable {
-    mutating func introSort() {
+public extension Array where Element : Comparable {
+    public mutating func introSort() {
         self.introSort(by: { $0 < $1 })
     }
 }
