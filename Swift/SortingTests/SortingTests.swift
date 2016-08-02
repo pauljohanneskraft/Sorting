@@ -14,8 +14,8 @@ class SortingTest : XCTestCase {
     
     var elements : [[N]] = []
     
-    var arrayCount              = 10
-    var elementCount : UInt32   = 500_000
+    var arrayCount              = 1000
+    var elementCount : UInt32   = 1_000
     
     override func setUp() {
         for _ in 0..<arrayCount {
@@ -32,6 +32,7 @@ class SortingTest : XCTestCase {
     func testRadixSortInPlace() { forAll("RadixSortInPlace" ) { $0.radixSortInPlace()   } }
     func testSelectionSort()    { forAll("SelectionSort"    ) { $0.selectionSort()      } }
     func testInsertionSort()    { forAll("InsertionSort"    ) { $0.insertionSort()      } }
+    func testIntroSort()        { forAll("IntroSort"        ) { $0.introSort()          } }
     func testShellSort()        { forAll("ShellSort"        ) { $0.shellSort()          } }
     func testMergeSort()        { forAll("MergeSort"        ) { $0.mergeSort()          } }
     func testQuickSort()        { forAll("QuickSort"        ) { $0.quickSort()          } }
@@ -41,6 +42,7 @@ class SortingTest : XCTestCase {
         // testRadixSort()
         testRadixSortInPlace()
         testQuickSort()
+        testIntroSort()
         // testShellSort()
         testSwiftSort()
     }
