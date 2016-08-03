@@ -14,6 +14,7 @@ extension Array {
     
     public mutating func bubbleSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
         // ...
+        guard range.count > 1 else { return }
         var didChange = false
         repeat {
             didChange = false
