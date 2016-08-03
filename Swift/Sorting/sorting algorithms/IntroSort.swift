@@ -17,8 +17,9 @@ extension Array {
     
     mutating func introSort(in range: CountableRange<Int>, maxDepth depth: Int, by order: (Element, Element) throws -> Bool) rethrows {
         // ...
-        guard range.count > 25  else { try self.insertionSort(in: range, by: order); return }
-        // guard depth > 0         else { try self.shellSort    (in: range, by: order); return }
+        
+        guard range.count > 20  else { try self.selectionSort(in: range, by: order); return }
+        guard depth > 0         else { try self.shellSort    (in: range, by: order); return }
         let pivot = try partition(in: range, by: order)
         try introSort(in: range.startIndex ..< pivot    , maxDepth: depth - 1, by: order)
         try introSort(in: (pivot+1) ..< range.endIndex  , maxDepth: depth - 1, by: order)
