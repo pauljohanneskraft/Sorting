@@ -16,7 +16,10 @@ extension Array where Element : Comparable {
 
 extension Array {
     public mutating func binaryTreeSort(by order: (Element, Element) throws -> Bool) rethrows {
-        self = try BinaryTree(self, order: order).array
+        // ..
+        let e = try BinaryTree(self, order: order)
+        // print(e.dot)
+        self = e.array
     }
 }
 
@@ -27,7 +30,7 @@ private struct BinaryTree<E> : BinTree {
         guard elements.count > 1 else { self.order = order; return }
         self.order = order
         root = Node(elements.first!, order: order)
-        for e in elements {
+        for e in elements.dropFirst() {
             try root!.insert(e, order: order)
         }
     }
