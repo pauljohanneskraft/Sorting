@@ -13,6 +13,8 @@ extension Array {
     }
     
     mutating func insertionSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
+        // ...
+        
         for i in range {
             var k = range.startIndex
             while try k < i && order(self[k], self[i]) { k += 1 }

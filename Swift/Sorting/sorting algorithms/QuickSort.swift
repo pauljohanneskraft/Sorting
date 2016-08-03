@@ -14,8 +14,8 @@ extension Array {
     }
     
     public mutating func quickSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
+        // ...
         guard range.count > 1 else { return }
-        
         let pivot = try partition(in: range, by: order)
         try quickSort(in: range.startIndex ..< pivot    , by: order)
         try quickSort(in: (pivot+1) ..< range.endIndex  , by: order)
