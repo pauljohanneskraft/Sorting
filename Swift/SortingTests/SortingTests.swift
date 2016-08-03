@@ -14,7 +14,7 @@ class SortingTest : XCTestCase {
     
     var elements : [[N]] = []
     
-    var arrayCount              = 1000
+    var arrayCount              = 200
     var elementCount : UInt32   = 1_000
     
     override func setUp() {
@@ -37,12 +37,14 @@ class SortingTest : XCTestCase {
     func testMergeSort()        { forAll("MergeSort"        ) { $0.mergeSort()          } }
     func testQuickSort()        { forAll("QuickSort"        ) { $0.quickSort()          } }
     func testSwiftSort()        { forAll("Swift"            ) { $0.sort()               } }
+    func testBinaryTreeSort()   { forAll("BinaryTreeSort"   ) { $0.binaryTreeSort()     } }
     
     func testFastOnes()         {
         // testRadixSort()
         testRadixSortInPlace()
         testQuickSort()
         testIntroSort()
+        testBinaryTreeSort()
         // testShellSort()
         testSwiftSort()
     }
