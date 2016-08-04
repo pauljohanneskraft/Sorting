@@ -30,13 +30,15 @@ class SortingTest : XCTestCase {
         }
     }
 
-    
+    func testHeapSort()         { forAll("HeapSort         ") { $0.heapSort()           } }
     func testBubbleSort()       { forAll("BubbleSort       ") { $0.bubbleSort()         } }
     func testRadixSort()        { forAll("RadixSort        ") { $0.radixSort()          } }
     func testRadixSortInPlace() { forAll("RadixSortInPlace ") { $0.radixSortInPlace()   } }
     func testSelectionSort()    { forAll("SelectionSort    ") { $0.selectionSort()      } }
     func testInsertionSort()    { forAll("InsertionSort    ") { $0.insertionSort()      } }
+    
     func testIntroSort()        { forAll("IntroSort        ") { $0.introSort()          } }
+    
     func testShellSort()        { forAll("ShellSort        ") { $0.shellSort()          } }
     func testMergeSort()        { forAll("MergeSort        ") { $0.mergeSort()          } }
     func testQuickSort()        { forAll("QuickSort        ") { $0.quickSort()          } }
@@ -64,16 +66,17 @@ class SortingTest : XCTestCase {
     }
     
     func testFastOnes()         {
-        let arrayCount = 10
-        let elementCount : UInt32 = 10_000
+        let arrayCount = 100
+        let elementCount : UInt32 = 4000
         setUp(arrayCount: arrayCount, elementCount: elementCount)
         // testRadixSort()
-        testRadixSortInPlace()
+        // testRadixSortInPlace()
+        testHeapSort()
         testQuickSort()
         testIntroSort()
-        testBinaryTreeSort()
+        // testBinaryTreeSort()
         // testShellSort()
-        testSwiftSort()
+        // testSwiftSort()
         print("." * arrayCount)
     }
     
@@ -81,6 +84,11 @@ class SortingTest : XCTestCase {
         testSlowOnes()
         testMediumOnes()
         testFastOnes()
+    }
+    
+    func testQuickSelect() {
+        var e = [0,1,200,3,5,252436,54,543,7,65,46,867,568,56,9]
+        print(e.quickSelect(5, in: 1..<10))
     }
     
     func forAll(_ desc: String = "Test", _ f: (inout [N]) -> ()) {
@@ -101,6 +109,8 @@ class SortingTest : XCTestCase {
                     if ess[i] != sorted[i] { print(i, ":", ess[i], "!=", sorted[i]) }
                 }
                 assert(false)
+                print("\(desc) failed after", time, "s.")
+                return
             }
             time += _time
             print(".", terminator: "")
