@@ -104,6 +104,11 @@ class SortingTest : XCTestCase {
         print("]")
     }
     
+    func testBinarySearch() {
+        let e = [0,1,200,3,5,252436,9342,52,4524353,325,54,543,7,65,46,867,568,56,9].sorted()
+        print(e.binarySearch(3))
+    }
+    
     func forAll(_ desc: String = "Test", _ f: (inout [N]) -> ()) {
         var time = 0.0
         var elementCount = 0
