@@ -10,7 +10,8 @@ import Foundation
 
 public extension Array {
     public mutating func radixSort(by order: (Element) throws -> Int) rethrows {
-        let digitsAtOnce = 4
+        // ...
+        let digitsAtOnce = 8
         let buckets = (1 << digitsAtOnce)
         let hash = {
             (element: Int, digit: Int) -> Int in
@@ -45,7 +46,7 @@ public extension Array {
     /// needs O(n) space --> works on copy of itself and then copies back
     public mutating func radixSortInPlace(in range: CountableRange<Int>, by order: (Element) throws -> Int) rethrows {
         // ...
-        let digitsAtOnce = 4
+        let digitsAtOnce = (range.count > 70_000 ? 16 : (range.count > 400 ? 8 : 4))
         let buckets = (1 << digitsAtOnce)
         let mask = buckets - 1
         let hash = {

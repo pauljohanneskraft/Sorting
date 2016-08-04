@@ -47,11 +47,12 @@ class SortingTest : XCTestCase {
     
     func testSlowOnes()         {
         let arrayCount = 10
-        let elementCount : UInt32 = 500
+        let elementCount : UInt32 = 300
         setUp(arrayCount: arrayCount, elementCount: elementCount)
         testBubbleSort()
         testInsertionSort()
         testSelectionSort()
+        testRadixSortInPlace()
         print("." * arrayCount)
     }
     
@@ -62,17 +63,18 @@ class SortingTest : XCTestCase {
         testRadixSort()
         testShellSort()
         testMergeSort()
+        testRadixSortInPlace()
         print("." * arrayCount)
     }
     
     func testFastOnes()         {
         let arrayCount = 2
-        let elementCount : UInt32 = 400_000
+        let elementCount : UInt32 = 100_000
         setUp(arrayCount: arrayCount, elementCount: elementCount)
         // testRadixSort()
         testRadixSortInPlace()
         // testHeapSort()
-        testQuickSort()
+        // testQuickSort()
         // testIntroSort()
         // testBinaryTreeSort()
         // testShellSort()
