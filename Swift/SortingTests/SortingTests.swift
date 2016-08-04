@@ -87,8 +87,21 @@ class SortingTest : XCTestCase {
     }
     
     func testQuickSelect() {
-        var e = [0,1,200,3,5,252436,54,543,7,65,46,867,568,56,9]
-        print(e.quickSelect(5, in: 1..<10))
+        let e = [0,1,200,3,5,252436,9342,52,4524353,325,54,543,7,65,46,867,568,56,9]
+        let r = 3..<14
+        var es = e
+        es.quickSort(in: r, by: { $0 < $1 })
+        print(e)
+        print(es)
+        print(es[r])
+        print("[", terminator: "")
+        for k in 0..<r.count {
+            let qs = e.quickSelect(k + 1, in: r)
+            print(qs, terminator: "")
+            assert(qs == es[k + r.startIndex])
+            if k != r.count - 1 { print(", ", terminator: "") }
+        }
+        print("]")
     }
     
     func forAll(_ desc: String = "Test", _ f: (inout [N]) -> ()) {
