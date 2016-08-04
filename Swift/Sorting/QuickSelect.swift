@@ -54,7 +54,29 @@ public extension CountableRange {
     }
 }
 
+public extension Array where Element : Comparable {
+    public func binarySearch(_ elem: Element) -> Int? {
+        return binarySearch(elem, in: self.range, orderedBy: { $0 < $1 })
+    }
+}
 
-
+public extension Array where Element : Equatable {
+    public func binarySearch(_ elem: Element, orderedBy order: (Element, Element) throws -> Bool) rethrows -> Int? {
+        return try binarySearch(elem, in: self.range, orderedBy: order)
+    }
+    
+    public func binarySearch(_ elem: Element, in range: CountableRange<Int>, orderedBy order: (Element, Element) throws -> Bool) rethrows -> Int? {
+        let pivotIndex = (range.startIndex + range.endIndex) >> 1
+        let pivot = self[pivotIndex]
+        if pivot == elem { return pivotIndex }
+        guard range.count > 1 else { return nil }
+        if try order(elem, pivot) { // elem < pivot
+            return try binarySearch(elem, in: range.startIndex ..< pivotIndex, orderedBy: order)
+        } else {
+            return try binarySearch(elem, in: pivotIndex ..< range.endIndex, orderedBy: order)
+        }
+    }
+    
+}
 
 
