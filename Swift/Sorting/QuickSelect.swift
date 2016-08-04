@@ -40,9 +40,10 @@ extension Array {
 
 public extension Array where Element : Comparable {
     public mutating func quickSelect(_ k: Int) -> Element {
-        return self.quickSelect(k: k, in: self.range, by: { $0 < $1 })
+        return self.quickSelect(k: k, selectingIn: self.range, searchingIn: self.range, by: { $0 < $1 })
     }
+    
     public mutating func quickSelect(_ k: Int, in range: CountableRange<Int>) -> Element {
-        return self.quickSelect(k: k, in: range, by: { $0 < $1 })
+        return self.quickSelect(k: k, selectingIn: range, searchingIn: range, by: { $0 < $1 })
     }
 }
