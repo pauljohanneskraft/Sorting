@@ -47,11 +47,12 @@ class SortingTest : XCTestCase {
     
     func testSlowOnes()         {
         let arrayCount = 10
-        let elementCount : UInt32 = 500
+        let elementCount : UInt32 = 300
         setUp(arrayCount: arrayCount, elementCount: elementCount)
         testBubbleSort()
         testInsertionSort()
         testSelectionSort()
+        testRadixSortInPlace()
         print("." * arrayCount)
     }
     
@@ -62,21 +63,22 @@ class SortingTest : XCTestCase {
         testRadixSort()
         testShellSort()
         testMergeSort()
+        testRadixSortInPlace()
         print("." * arrayCount)
     }
     
     func testFastOnes()         {
-        let arrayCount = 100
-        let elementCount : UInt32 = 4000
+        let arrayCount = 2
+        let elementCount : UInt32 = 100_000
         setUp(arrayCount: arrayCount, elementCount: elementCount)
         // testRadixSort()
-        // testRadixSortInPlace()
-        testHeapSort()
-        testQuickSort()
-        testIntroSort()
+        testRadixSortInPlace()
+        // testHeapSort()
+        // testQuickSort()
+        // testIntroSort()
         // testBinaryTreeSort()
         // testShellSort()
-        // testSwiftSort()
+        testSwiftSort()
         print("." * arrayCount)
     }
     
@@ -84,6 +86,12 @@ class SortingTest : XCTestCase {
         testSlowOnes()
         testMediumOnes()
         testFastOnes()
+    }
+    
+    func testDoubles() {
+        var e = [0,1,200,3,5,-252436,9342,52.0,4524353,325,54,543,7,65,46,867,568,56,9, 1e50, 2e-20]
+        e.radixSortInPlace()
+        print(e)
     }
     
     func testQuickSelect() {
@@ -107,6 +115,14 @@ class SortingTest : XCTestCase {
     func testBinarySearch() {
         let e = [0,1,200,3,5,252436,9342,52,4524353,325,54,543,7,65,46,867,568,56,9].sorted()
         print(e.binarySearch(3))
+    }
+    
+    func testRadixSortInPlaceInRange() {
+        var e = [0,1,200,3,5,252436,9342,52,4524353,325,54,543,7,65,46,867,568,56,9]
+        let range = 2..<5
+        e.radixSortInPlace(in: range, by: { $0 })
+        //print(e[range])
+        if !e[range].isSorted { fatalError() }
     }
     
     func forAll(_ desc: String = "Test", _ f: (inout [N]) -> ()) {

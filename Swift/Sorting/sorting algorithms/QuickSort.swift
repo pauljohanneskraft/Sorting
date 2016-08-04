@@ -10,6 +10,7 @@ import Cocoa
 
 extension Array {
     public mutating func quickSort(by order: (Element, Element) throws -> Bool) rethrows {
+        // ...
         try self.quickSort(in: 0..<count, by: order)
     }
     
