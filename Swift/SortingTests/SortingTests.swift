@@ -88,6 +88,12 @@ class SortingTest : XCTestCase {
         testFastOnes()
     }
     
+    func testDoubles() {
+        var e = [0,1,200,3,5,-252436,9342,52.0,4524353,325,54,543,7,65,46,867,568,56,9, 1e50, 2e-20]
+        e.radixSortInPlace()
+        print(e)
+    }
+    
     func testQuickSelect() {
         let e = [0,1,200,3,5,252436,9342,52,4524353,325,54,543,7,65,46,867,568,56,9]
         let r = 3..<14
