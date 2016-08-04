@@ -13,15 +13,13 @@ extension Array {
     }
     
     public mutating func mergeSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
+        // ...
         guard range.count > 1 else { return }
+        
         let mid = (range.startIndex + range.endIndex) / 2
         try self.mergeSort(in: range.startIndex..<mid, by: order)
         try self.mergeSort(in: mid..<range.endIndex, by: order)
-        // print("will merge", self[range])
         try self.merge(range: range, mid: mid, by: order)
-        let inRange = self[range]
-        // print("merged to", inRange, try inRange.isSorted(by: order))
-        assert(try! inRange.isSorted(by: order))
     }
     
     // in-place merging
