@@ -33,12 +33,17 @@ public extension Array {
         
         for d in 0..<((sizeof(Int.self) * 8) / digitsAtOnce) {
             try kSort(digit: d)
-            // print(d, ",", terminator: "")
         }
     }
     
-    // needs O(n) space --> works on copy of itself and the copies back
+    /// needs O(n) space --> works on copy of itself and then copies back
     public mutating func radixSortInPlace(by order: (Element) throws -> Int) rethrows {
+        // ...
+        try self.radixSortInPlace(in: self.range, by: order)
+    }
+    
+    /// needs O(n) space --> works on copy of itself and then copies back
+    public mutating func radixSortInPlace(in range: CountableRange<Int>, by order: (Element) throws -> Int) rethrows {
         // ...
         let digitsAtOnce = 4
         let buckets = (1 << digitsAtOnce)
@@ -49,26 +54,26 @@ public extension Array {
         }
         var this = self
         var counts = [Int](repeating: 0, count: buckets)
-        var marker = [Int](repeating: 0, count: buckets)
+        var marker = [Int](repeating: range.startIndex, count: buckets)
         
         func kSort(digit: Int) throws {
             for c in counts.indices { counts[c] = 0 }
-            for i in self.indices {
+            for i in range {
                 let h = hash(try order(self[i]), digit)
                 counts[h] += 1
             }
-            if counts[0] == count { return }
-            marker[0] = 0
+            if counts[0] == range.count { return }
+            marker[0] = range.startIndex
             for i in counts.indices.dropFirst() {
                 marker[i] = counts[i - 1] + marker[i - 1]
             }
-            for i in self.indices {
+            for i in range {
                 let h = hash(try order(self[i]), digit)
                 let indexInArray = marker[h]
                 swap(&self[i], &this[indexInArray])
                 marker[h] += 1
             }
-            swap(&self, &this)
+            self = this
         }
         
         for d in 0..<((sizeof(Int.self) * 8) / digitsAtOnce) {
@@ -79,10 +84,13 @@ public extension Array {
 
 public extension Array where Element : Hashable {
     public mutating func radixSort() {
-        radixSort(by: { $0.hashValue })
+        self.radixSort(by: { $0.hashValue })
     }
     public mutating func radixSortInPlace() {
-        radixSortInPlace(by: { $0.hashValue })
+        self.radixSortInPlace(in: self.range, by: { $0.hashValue })
+    }
+    public mutating func radixSortInPlace(in range: CountableRange<Int>) {
+        self.radixSortInPlace(in: range, by: { $0.hashValue })
     }
 }
 

@@ -66,17 +66,17 @@ class SortingTest : XCTestCase {
     }
     
     func testFastOnes()         {
-        let arrayCount = 100
-        let elementCount : UInt32 = 4000
+        let arrayCount = 2
+        let elementCount : UInt32 = 400_000
         setUp(arrayCount: arrayCount, elementCount: elementCount)
         // testRadixSort()
-        // testRadixSortInPlace()
-        testHeapSort()
+        testRadixSortInPlace()
+        // testHeapSort()
         testQuickSort()
-        testIntroSort()
+        // testIntroSort()
         // testBinaryTreeSort()
         // testShellSort()
-        // testSwiftSort()
+        testSwiftSort()
         print("." * arrayCount)
     }
     
@@ -107,6 +107,14 @@ class SortingTest : XCTestCase {
     func testBinarySearch() {
         let e = [0,1,200,3,5,252436,9342,52,4524353,325,54,543,7,65,46,867,568,56,9].sorted()
         print(e.binarySearch(3))
+    }
+    
+    func testRadixSortInPlaceInRange() {
+        var e = [0,1,200,3,5,252436,9342,52,4524353,325,54,543,7,65,46,867,568,56,9]
+        let range = 2..<5
+        e.radixSortInPlace(in: range, by: { $0 })
+        //print(e[range])
+        if !e[range].isSorted { fatalError() }
     }
     
     func forAll(_ desc: String = "Test", _ f: (inout [N]) -> ()) {
