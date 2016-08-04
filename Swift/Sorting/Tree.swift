@@ -80,7 +80,9 @@ extension BinTree where Node : BinTreeNode, Node.Element == Self.Element {
 
 extension BinTree where Node.Element == Self.Element {
     var dot: String {
-        return "\tdigraph g { \n\t\tgraph [ordering = out] \n\(root?.dot) \t}\n"
+        var result = "\tdigraph g { \n\t\tgraph [ordering = out] \n"
+        if root != nil { result += root!.dot }
+        return result + "\t}\n"
     }
     var array : [Element] {
         if root == nil { return [] }
@@ -88,7 +90,18 @@ extension BinTree where Node.Element == Self.Element {
     }
 }
 
+protocol BinTreeCompositeNode : TreeNode {
+    init(_: Element, order: (Element, Element) throws -> Bool)
+    mutating func insert(_ data: Element, order: (Element, Element) throws -> Bool) rethrows
+}
 
+// ...
+extension BinTree where Node: BinTreeCompositeNode, Node.Element == Self.Element {
+    mutating func insert(_ elem: Element, order: (Element, Element) throws -> Bool) rethrows {
+        if root != nil { try root!.insert(elem, order: order) }
+        else { root = Node(elem, order: order) }
+    }
+}
 
 
 

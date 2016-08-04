@@ -48,15 +48,16 @@ public extension Array {
             return (element >> (digit * digitsAtOnce)) & mask
         }
         var this = self
+        var counts = [Int](repeating: 0, count: buckets)
+        var marker = [Int](repeating: 0, count: buckets)
         
         func kSort(digit: Int) throws {
-            var counts = [Int](repeating: 0, count: buckets)
+            for c in counts.indices { counts[c] = 0 }
             for i in self.indices {
                 let h = hash(try order(self[i]), digit)
                 counts[h] += 1
             }
             if counts[0] == count { return }
-            var marker = [Int](repeating: 0, count: buckets)
             marker[0] = 0
             for i in counts.indices.dropFirst() {
                 marker[i] = counts[i - 1] + marker[i - 1]
