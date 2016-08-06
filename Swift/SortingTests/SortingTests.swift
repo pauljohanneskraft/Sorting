@@ -15,13 +15,13 @@ class SortingTest : XCTestCase {
     var elements : [[N]] = []
     
     override func setUp() {
-        self.setUp(arrayCount: 200, elementCount: 100)
+        self.setUp(arrayCount: 20, elementCount: 10)
     }
     
     func setUp(arrayCount: Int, elementCount: UInt32) {
         elements = []
         for _ in 0..<arrayCount {
-            let count = (arc4random() % (elementCount)) + (elementCount / 2)
+            let count = (arc4random() % (elementCount)) + (elementCount / 2) + 5
             var array = [Int]()
             for _ in 0..<count {
                 array.append(Int(arc4random() % UInt32(elementCount * 10)))
@@ -47,7 +47,7 @@ class SortingTest : XCTestCase {
     
     func testSlowOnes()         {
         let arrayCount = 10
-        let elementCount : UInt32 = 300
+        let elementCount : UInt32 = 30
         setUp(arrayCount: arrayCount, elementCount: elementCount)
         testBubbleSort()
         testInsertionSort()
@@ -58,7 +58,7 @@ class SortingTest : XCTestCase {
     
     func testMediumOnes() {
         let arrayCount = 10
-        let elementCount : UInt32 = 5_000
+        let elementCount : UInt32 = 50
         setUp(arrayCount: arrayCount, elementCount: elementCount)
         testRadixSort()
         testShellSort()
@@ -69,7 +69,7 @@ class SortingTest : XCTestCase {
     
     func testFastOnes()         {
         let arrayCount = 2
-        let elementCount : UInt32 = 100_000
+        let elementCount : UInt32 = 100
         setUp(arrayCount: arrayCount, elementCount: elementCount)
         // testRadixSort()
         testRadixSortInPlace()
