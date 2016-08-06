@@ -6,4 +6,4 @@ script:
 xcode_project: Swift/Sorting.xcodeproj
 xcode_scheme: SortingTests
 notifications:
-  - email: no
+  - email: false
