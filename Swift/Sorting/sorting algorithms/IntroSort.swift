@@ -32,82 +32,7 @@ public extension Array where Element : Comparable {
     }
 }
 
-
-// import Cocoa
-// import Foundation
 /*
-func introSortInPlace<T: Comparable>(inout unsorted: [T]) -> (String, [T]) {
-    let maxDepth = Int(log2(Double(unsorted.count)))
-    introSortInPlaceRecursive(&unsorted, 0..<unsorted.count, maxDepth)
-    return ("IntroSortInPlace", unsorted)
-}
-
-func introSortInPlace<T: Comparable>(unsorted: [T]) -> (String, [T]) {
-    var sorted = unsorted
-    return introSortInPlace(&sorted)
-}
-
-private func introSortInPlaceRecursive<T: Comparable>(inout unsorted: [T], _ range : Range<Int>, _ depthLimit: Int){
-    if range.count < 20 {
-        insertionSort(&unsorted, range)
-        return
-    }
-    if depthLimit == 0 {
-        shellSort(&unsorted, range)
-        //heapSort(&unsorted, range)
-        //quickSortInPlace(&unsorted)
-        return
-    }
-    print("did run")
-    let pivot:Int = partition(&unsorted, range)
-    introSortInPlaceRecursive(&unsorted, range.startIndex..<pivot, depthLimit - 1)
-    introSortInPlaceRecursive(&unsorted, (pivot+1)..<range.endIndex, depthLimit - 1)
-}
-*/
-/*
-private func partitionInPlace<T: Comparable>(inout unsorted : [T], _ range: Range<Int>) -> Int {
-    var low :Int = range.startIndex
-    var high:Int = range.endIndex-1
-    
-    if low == high {
-        return low
-    }
-    
-    let pivot = unsorted[range.startIndex]
-    
-    while low < high {
-        while unsorted[low] < pivot {
-            low++
-            if low == high {
-                (unsorted[low], unsorted[high]) = (unsorted[high], unsorted[low])
-                return low
-            }
-        }
-        
-        while unsorted[high] > pivot {
-            high--
-            if low == high {
-                (unsorted[low], unsorted[high]) = (unsorted[high], unsorted[low])
-                return low
-            }
-        }
-        (unsorted[low], unsorted[high]) = (unsorted[high], unsorted[low])
-    }
-    return low
-}
-*/
-/*
-private func insertionSort<T:Comparable>(inout unsorted: [T], _ left: Int, _ right: Int) {
-    for i in left..<right {
-        var k = left
-        while(k < i && unsorted[k] < unsorted[i]) { k++ }
-        unsorted[i] <-> unsorted[k]
-    }
-}*/
-/*
-func introSortMedianThreaded<T: Comparable>(unsorted: [T]) -> (String, [T]) {
-    return ("IntroSortMedianThreaded", introSortMedianThreadedRecursive(unsorted, Int(floor(log(Double(unsorted.count))))))
-}
 
 private func introSortMedianThreadedRecursive<T: Comparable>(unsorted: [T], _ maxDepth: Int) -> [T] {
     if unsorted.count <  2 { return unsorted } //empty or one element
@@ -143,10 +68,6 @@ private func introSortMedianThreadedRecursive<T: Comparable>(unsorted: [T], _ ma
     return l + r
 }
 
-func introSortMedian<T: Comparable>(unsorted: [T]) -> (String, [T]) {
-    return ("IntroSortMedian", introSortMedianRecursive(unsorted, Int(floor(log(Double(unsorted.count))))))
-}
-
 private func introSortMedianRecursive<T: Comparable>(unsorted: [T], _ maxDepth: Int) -> [T] {
     if unsorted.count <  2 { return unsorted } //empty or one element
     if unsorted.count < 20 { return selectionSort(unsorted).array }
@@ -168,47 +89,5 @@ private func introSortMedianRecursive<T: Comparable>(unsorted: [T], _ maxDepth: 
     l.append(pivot)
     return l + r
 }
-
-
-func introSortInPlaceNew<T: Comparable>(array: [T]) -> (String, [T]) {
-    var sorted = array
-    introSortInPlaceRecursiveNew(&sorted, 0, sorted.count - 1, 10)
-    return ("introSortInPlace", sorted)
-}
-
-private func introSortInPlaceRecursiveNew<T: Comparable>(inout array: [T], _ left: Int, _ right: Int, _ depthlimit: Int){
-    if right < left { return }
-    if right - left < 20 {
-        //insertionSort(&array, left, right)
-        //return
-    }
-    
-    if depthlimit <= 0 {
-        //heapSort(&array, left..<right)
-        //return
-    }
-    /*
-    let pivot = partitionInPlace(&array, left, right)
-    introSortInPlaceRecursiveNew(&array, left, pivot - 1, depthlimit - 1)
-    introSortInPlaceRecursiveNew(&array, pivot + 1, right, depthlimit - 1)
-    */
-}
-
-/*
-private func partitionInPlace<T:Comparable>(inout array: [T], _ left: Int, _ right: Int) -> Int {
-    var i = left
-    var j = right - 1
-    let pivot = right
-    
-    repeat {
-        while array[i] < array[pivot] && i < right { i++ }
-        while array[j] > array[pivot] && j > left  { j-- }
-        if i < j { array[i] <-> array[j] }
-    } while i < j
-    
-    if array[i] > array[pivot] { array[pivot] <-> array[i] }
-    
-    return i
-}
 */
-*/
+

@@ -23,10 +23,11 @@ extension Array {
         assert(k > 0)
         assert(searchRange.count >= k)
         assert(searchRange.contains(selectionRange))
-        // assert(searchrange.contains(selectionRange))
-        // assert(selectionRange.contains(k + selectionRange.startIndex))
+        
+        // partition (like in QuickSort)
         let p = try partition(in: selectionRange, by: order)
-        // print(searchRange, selectionRange, p, k, self[selectionRange])
+
+        // unlike QuickSort, QuickSelect only recursively calls itself on half of the array
         if p > k {
             return try quickSelect(k: k, selectingIn: selectionRange.startIndex ..< p, searchingIn: searchRange, by: order)
         }
@@ -65,14 +66,27 @@ public extension Array where Element : Equatable {
         return try binarySearch(elem, in: self.indices, orderedBy: order)
     }
     
+    /// needs a sorted array
     public func binarySearch(_ elem: Element, in range: CountableRange<Int>, orderedBy order: (Element, Element) throws -> Bool) rethrows -> Int? {
+        
+        // pivotIndex is in the middle --> (start + end) / 2
         let pivotIndex = (range.startIndex + range.endIndex) >> 1
+        
+        // pivot is element at pivotIndex
         let pivot = self[pivotIndex]
+        
+        // if they equal --> return index
         if pivot == elem { return pivotIndex }
+        
+        // if they don't equal and range <= 1 --> there is no such element
         guard range.count > 1 else { return nil }
-        if try order(elem, pivot) { // elem < pivot
+        
+        // elem < pivot
+        if try order(elem, pivot) {
+            // search in first half
             return try binarySearch(elem, in: range.startIndex ..< pivotIndex, orderedBy: order)
-        } else {
+        } else { // pivot < elem
+            // search in second half
             return try binarySearch(elem, in: pivotIndex ..< range.endIndex, orderedBy: order)
         }
     }

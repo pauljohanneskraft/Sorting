@@ -14,7 +14,9 @@ extension Array {
     
     public mutating func selectionSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
         // ...
+        // an array with 1 element doesn't need to be sorted
         guard range.count > 1 else { return }
+        
         for l in range {
             var min = l
             for i in l+1..<range.endIndex {
