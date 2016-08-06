@@ -2,4 +2,4 @@ language: objective-c
 os: osx
 osx_image: xcode8
 script:
-  - xcodebuild test -project Swift/Sorting.xcworkspace -scheme Sorting
+  - xcodebuild test -workspace Swift/Sorting.xcworkspace -scheme Sorting
