@@ -23,6 +23,7 @@ extension Array {
     }
 }
 
+
 private struct BinaryTree<E> : BinTree {
     typealias Element = E
     typealias Node = BinaryTreeNode<E>
