@@ -9,7 +9,7 @@
 extension Array {
     public mutating func bubbleSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
-        try self.bubbleSort(in: 0..<count, by: order)
+        try self.bubbleSort(in: self.indices, by: order)
     }
     
     public mutating func bubbleSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {

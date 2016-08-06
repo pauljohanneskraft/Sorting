@@ -11,7 +11,7 @@ import Foundation
 extension Array {
     
     public func quickSelect(k: Int, by order: (Element, Element) throws -> Bool) rethrows -> Element {
-        return try quickSelect(k: k, in: self.range, by: order)
+        return try quickSelect(k: k, in: self.indices, by: order)
     }
     
     public func quickSelect(k: Int, in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows -> Element {
@@ -40,7 +40,7 @@ extension Array {
 
 public extension Array where Element : Comparable {
     public func quickSelect(_ k: Int) -> Element {
-        return self.quickSelect(k: k, in: self.range, by: { $0 < $1 })
+        return self.quickSelect(k: k, in: self.indices, by: { $0 < $1 })
     }
     
     public func quickSelect(_ k: Int, in range: CountableRange<Int>) -> Element {
@@ -56,13 +56,13 @@ public extension CountableRange {
 
 public extension Array where Element : Comparable {
     public func binarySearch(_ elem: Element) -> Int? {
-        return binarySearch(elem, in: self.range, orderedBy: { $0 < $1 })
+        return binarySearch(elem, in: self.indices, orderedBy: { $0 < $1 })
     }
 }
 
 public extension Array where Element : Equatable {
     public func binarySearch(_ elem: Element, orderedBy order: (Element, Element) throws -> Bool) rethrows -> Int? {
-        return try binarySearch(elem, in: self.range, orderedBy: order)
+        return try binarySearch(elem, in: self.indices, orderedBy: order)
     }
     
     public func binarySearch(_ elem: Element, in range: CountableRange<Int>, orderedBy order: (Element, Element) throws -> Bool) rethrows -> Int? {

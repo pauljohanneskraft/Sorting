@@ -9,7 +9,7 @@
 extension Array {
     public mutating func selectionSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
-        try self.selectionSort(in: self.range, by: order)
+        try self.selectionSort(in: self.indices, by: order)
     }
     
     public mutating func selectionSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {

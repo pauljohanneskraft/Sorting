@@ -142,8 +142,8 @@ class SortingTest : XCTestCase {
                 for i in 0..<min(es.count, sorted.count) {
                     if ess[i] != sorted[i] { print(i, ":", ess[i], "!=", sorted[i]) }
                 }
-                assert(false)
                 print("\(desc) failed after", time, "s.")
+                XCTAssert(false)
                 return
             }
             time += _time

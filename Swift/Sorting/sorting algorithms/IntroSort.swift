@@ -12,7 +12,7 @@ extension Array {
         // ...
         if count < 25 { try self.selectionSort(by: order); return }
         let depth = Int(log2(Double(count)))
-        try self.introSort(in: 0..<count, maxDepth: depth, by: order)
+        try self.introSort(in: self.indices, maxDepth: depth, by: order)
     }
     
     mutating func introSort(in range: CountableRange<Int>, maxDepth depth: Int, by order: (Element, Element) throws -> Bool) rethrows {

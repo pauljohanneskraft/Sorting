@@ -9,7 +9,7 @@
 extension Array {
     public mutating func mergeSort(by order: (Element, Element) throws -> Bool) rethrows {
         guard count > 1 else { return }
-        try self.mergeSort(in: 0..<count, by: order)
+        try self.mergeSort(in: self.indices, by: order)
     }
     
     public mutating func mergeSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {

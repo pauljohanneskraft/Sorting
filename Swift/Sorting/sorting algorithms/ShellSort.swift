@@ -9,7 +9,7 @@
 extension Array {
     public mutating func shellSort
         (by order: (Element, Element) throws -> Bool) rethrows {
-        try shellSort(in: range, by: order)
+        try shellSort(in: self.indices, by: order)
     }
     
     public mutating func shellSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {

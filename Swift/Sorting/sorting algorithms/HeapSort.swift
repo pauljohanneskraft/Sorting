@@ -9,7 +9,7 @@
 extension Array {
     mutating func heapSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
-        try self.heapSort(in: range, by: order)
+        try self.heapSort(in: self.indices, by: order)
     }
     
     mutating func heapSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
@@ -71,7 +71,7 @@ extension Array {
 
 extension Array where Element : Comparable {
     public mutating func heapSort() {
-        self.heapSort(in: range, by: { $0 < $1 })
+        self.heapSort(in: self.indices, by: { $0 < $1 })
     }
 }
 
