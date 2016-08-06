@@ -1,14 +1,9 @@
-matrix:
-  include:
-    - os: linux
-      language: generic
-      dist: trusty
-      sudo: required
-    - os: osx
-      language: objective-c
-      osx_image: xcode7.3
+os: osx
+language: objective-c
 script:
   - swift build
   - swift test
+xcode_project: Swift/Sorting.xcodeproj
+xcode_scheme: SortingTests
 notifications:
-  email: false
+  - email: no
