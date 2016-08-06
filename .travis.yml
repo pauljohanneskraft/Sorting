@@ -1,4 +1,5 @@
 language: objective-c
+os: osx
 osx_image: xcode8
-xcode_project: Swift/Sorting.xcodeproj
-xcode_scheme: SortingTests
+script:
+  - xcodebuild test -workspace Swift/Sorting.xcworkspace -scheme Sorting
