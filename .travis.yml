@@ -1,9 +1,1 @@
-os: osx
 language: objective-c
-script:
-  - swift build
-  - swift test
-xcode_project: Swift/Sorting.xcodeproj
-xcode_scheme: SortingTests
-notifications:
-  - email: false
