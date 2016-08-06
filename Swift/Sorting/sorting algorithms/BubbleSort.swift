@@ -8,10 +8,17 @@
 
 extension Array {
     public mutating func bubbleSort(by order: (Element, Element) throws -> Bool) rethrows {
+        // ...
+        try self.bubbleSort(in: 0..<count, by: order)
+    }
+    
+    public mutating func bubbleSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
+        // ...
+        guard range.count > 1 else { return }
         var didChange = false
         repeat {
             didChange = false
-            for i in indices.dropLast() {
+            for i in range.dropLast() {
                 if try order(self[i+1], self[i]) {
                     didChange = true
                     swap(&self[i], &self[i+1])

@@ -9,19 +9,28 @@
 import Cocoa
 
 extension Array where Element : Comparable {
-    mutating func binaryTreeSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
-        self = try BinaryTree(self, order: order).array
+    public mutating func binaryTreeSort() {
+        self.binaryTreeSort(by: { $0 < $1 })
     }
 }
 
-private struct BinaryTree<E : Comparable> : BinTree {
+extension Array {
+    public mutating func binaryTreeSort(by order: (Element, Element) throws -> Bool) rethrows {
+        // ..
+        let e = try BinaryTree(self, order: order)
+        // print(e.dot)
+        self = e.array
+    }
+}
+
+private struct BinaryTree<E> : BinTree {
     typealias Element = E
     typealias Node = BinaryTreeNode<E>
     init(_ elements: [E], order: (E, E) throws -> Bool) rethrows {
         guard elements.count > 1 else { self.order = order; return }
         self.order = order
         root = Node(elements.first!, order: order)
-        for e in elements {
+        for e in elements.dropFirst() {
             try root!.insert(e, order: order)
         }
     }
@@ -30,7 +39,7 @@ private struct BinaryTree<E : Comparable> : BinTree {
     var order : (E, E) throws -> Bool
 }
 
-private final class BinaryTreeNode < E : Comparable > : BinTreeNode {
+private final class BinaryTreeNode < E > : BinTreeNode {
     typealias Element = E
     init(_ data: E, order: (E, E) throws -> Bool) {
         self.data = data

@@ -8,9 +8,16 @@
 
 extension Array {
     public mutating func selectionSort(by order: (Element, Element) throws -> Bool) rethrows {
-        for l in indices {
+        // ...
+        try self.selectionSort(in: self.range, by: order)
+    }
+    
+    public mutating func selectionSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
+        // ...
+        guard range.count > 1 else { return }
+        for l in range {
             var min = l
-            for i in l+1..<count {
+            for i in l+1..<range.endIndex {
                 if try order(self[i], self[min]) { min = i }
             }
             if l != min { swap(&self[l], &self[min]) }
