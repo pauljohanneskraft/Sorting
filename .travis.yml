@@ -10,9 +10,6 @@ matrix:
 script:
   - swift build
   - swift test
-before_install:
-  - chmod ugo+x ./scripts/run-tests.sh
-  - . ./scripts/run-tests.sh
 notifications:
   email: false
 view raw
