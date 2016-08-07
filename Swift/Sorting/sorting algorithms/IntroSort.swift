@@ -7,11 +7,11 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Array {
+extension Sortable {
     public mutating func introSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         if count < 25 { try self.selectionSort(by: order); return }
-        let depth = Int(log2(Double(count)))
+        let depth = Int(log2(Double(indices.count)))
         try self.introSort(in: self.indices, maxDepth: depth, by: order)
     }
     

@@ -6,7 +6,7 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Array {
+extension Sortable {
     public mutating func mergeSort(by order: (Element, Element) throws -> Bool) rethrows {
         guard count > 1 else { return }
         try self.mergeSort(in: self.indices, by: order)
