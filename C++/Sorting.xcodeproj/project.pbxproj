@@ -19,6 +19,7 @@
 		9B3E87971CB9A91D00C667EF /* ShellSort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E87951CB9A91D00C667EF /* ShellSort.cpp */; };
 		9B3E879A1CB9ADFA00C667EF /* AVLBinaryTreeSort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E87981CB9ADFA00C667EF /* AVLBinaryTreeSort.cpp */; };
 		9B3E879D1CB9BDF400C667EF /* IntroSort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E879B1CB9BDF400C667EF /* IntroSort.cpp */; };
+		9B672EA81D56881A00E155FA /* SortingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B672EA71D56881A00E155FA /* SortingTests.swift */; };
 		9BED57D61CB7F349008F4D67 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BED57D51CB7F349008F4D67 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -59,11 +60,21 @@
 		9B3E87991CB9ADFA00C667EF /* AVLBinaryTreeSort.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AVLBinaryTreeSort.hpp; path = "sorting algorithms/AVLBinaryTreeSort.hpp"; sourceTree = "<group>"; };
 		9B3E879B1CB9BDF400C667EF /* IntroSort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IntroSort.cpp; sourceTree = "<group>"; };
 		9B3E879C1CB9BDF400C667EF /* IntroSort.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IntroSort.hpp; sourceTree = "<group>"; };
+		9B672EA51D56881A00E155FA /* SortingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SortingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B672EA71D56881A00E155FA /* SortingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingTests.swift; sourceTree = "<group>"; };
+		9B672EA91D56881A00E155FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BED57D21CB7F349008F4D67 /* Sorting */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sorting; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BED57D51CB7F349008F4D67 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9B672EA21D56881A00E155FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BED57CF1CB7F349008F4D67 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -74,10 +85,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B672EA61D56881A00E155FA /* SortingTests */ = {
+			isa = PBXGroup;
+			children = (
+				9B672EA71D56881A00E155FA /* SortingTests.swift */,
+				9B672EA91D56881A00E155FA /* Info.plist */,
+			);
+			path = SortingTests;
+			sourceTree = "<group>";
+		};
 		9BED57C91CB7F349008F4D67 = {
 			isa = PBXGroup;
 			children = (
 				9BED57D41CB7F349008F4D67 /* Sorting */,
+				9B672EA61D56881A00E155FA /* SortingTests */,
 				9BED57D31CB7F349008F4D67 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				9BED57D21CB7F349008F4D67 /* Sorting */,
+				9B672EA51D56881A00E155FA /* SortingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,6 +163,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9B672EA41D56881A00E155FA /* SortingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B672EAC1D56881A00E155FA /* Build configuration list for PBXNativeTarget "SortingTests" */;
+			buildPhases = (
+				9B672EA11D56881A00E155FA /* Sources */,
+				9B672EA21D56881A00E155FA /* Frameworks */,
+				9B672EA31D56881A00E155FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SortingTests;
+			productName = SortingTests;
+			productReference = 9B672EA51D56881A00E155FA /* SortingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		9BED57D11CB7F349008F4D67 /* Sorting */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BED57D91CB7F349008F4D67 /* Build configuration list for PBXNativeTarget "Sorting" */;
@@ -164,9 +203,15 @@
 		9BED57CA1CB7F349008F4D67 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = pauljohanneskraft;
 				TargetAttributes = {
+					9B672EA41D56881A00E155FA = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = TJSHMGE2VX;
+						ProvisioningStyle = Automatic;
+					};
 					9BED57D11CB7F349008F4D67 = {
 						CreatedOnToolsVersion = 7.3;
 					};
@@ -185,11 +230,30 @@
 			projectRoot = "";
 			targets = (
 				9BED57D11CB7F349008F4D67 /* Sorting */,
+				9B672EA41D56881A00E155FA /* SortingTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		9B672EA31D56881A00E155FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		9B672EA11D56881A00E155FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B672EA81D56881A00E155FA /* SortingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BED57CE1CB7F349008F4D67 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -213,6 +277,41 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		9B672EAA1D56881A00E155FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = TJSHMGE2VX;
+				INFOPLIST_FILE = SortingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Kraft.SortingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		9B672EAB1D56881A00E155FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = TJSHMGE2VX;
+				INFOPLIST_FILE = SortingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Kraft.SortingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		9BED57D71CB7F349008F4D67 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -311,6 +410,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9B672EAC1D56881A00E155FA /* Build configuration list for PBXNativeTarget "SortingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B672EAA1D56881A00E155FA /* Debug */,
+				9B672EAB1D56881A00E155FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		9BED57CD1CB7F349008F4D67 /* Build configuration list for PBXProject "Sorting" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
