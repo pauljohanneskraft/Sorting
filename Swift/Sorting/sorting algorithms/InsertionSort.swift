@@ -9,7 +9,7 @@
 extension Array {
     
     public mutating func insertionSort(by order: (Element, Element) throws -> Bool) rethrows {
-        try self.insertionSort(in: 0..<count, by: order)
+        try self.insertionSort(in: self.indices, by: order)
     }
     
     mutating func insertionSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
