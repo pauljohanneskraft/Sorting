@@ -9,7 +9,7 @@
 extension Array {
     public mutating func mergeSort(by order: (Element, Element) throws -> Bool) rethrows {
         guard count > 1 else { return }
-        try self.mergeSort(in: 0..<count, by: order)
+        try self.mergeSort(in: self.indices, by: order)
     }
     
     public mutating func mergeSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
@@ -22,18 +22,18 @@ extension Array {
         try self.merge(range: range, mid: mid, by: order)
     }
     
-    // in-place merging
+    /// in-place merging
     private mutating func merge(range: CountableRange<Int>, mid: Int, by order: (Element, Element) throws -> Bool) rethrows {
+        // ...
         var mid = mid
         for left in range {
-            // print(self[range], left, range, mid)
-            if left > mid { /* print("left > mid");*/ return }
+            
+            if left >= mid || range.endIndex <= mid { return }
+            
             if try order(self[mid], self[left]) {
                 insert(remove(at: mid), at: left)
                 mid += 1
             }
-            if range.endIndex <= mid { /* print("endIndex <= mid"); */ return }
-            // print(self[range], left, range, mid)
         }
     }
 }
@@ -46,45 +46,6 @@ public extension Array where Element : Comparable {
 
 
 /*
-import Cocoa // threads
-
-// in-place, single-threaded, faster for smaller arrays
-func mergeSort<T: Comparable>(unsorted: [T]) -> (String, [T]) {
-    var sorted = unsorted
-    mergeSort(&sorted)
-    return ("MergeSort", sorted)
-}
-
-func mergeSort<T: Comparable>(inout array: [T]) {
-    mergeSort(&array, 0..<array.count)
-}
- 
-private func mergeSort<T: Comparable>(inout array: [T], _ range: Range<Int>) {
-    if range.count < 2 { return }
-    let mid = (range.startIndex + range.endIndex) / 2
-    mergeSort(&array, range.startIndex..<mid)
-    mergeSort(&array, mid..<range.endIndex)
-    merge(&array, range, mid)
-}
-
-// in-place merging
-private func merge<T: Comparable>(inout array: [T], _ range: Range<Int>, _ mid: Int) {
-    var mid = mid
-    for left in range {
-        if left >= mid { return }
-        if array[left] > array[mid] {
-            array.insert(array.removeAtIndex(mid), atIndex: left)
-            mid += 1
-        }
-        if range.endIndex <= mid { return }
-    }
-}
-
-
-// multi-threaded variant, out-of-place, faster for bigger arrays
-func mergeSortThreaded<T: Comparable>(unsorted: [T]) -> (String, [T]) {
-    return ("MergeSortThreaded", mergeSortThreadedRecursive(unsorted))
-}
 
 private func mergeSortThreadedRecursive<T: Comparable>(unsorted: [T]) -> [T] {
     if unsorted.count < 2 { return unsorted }

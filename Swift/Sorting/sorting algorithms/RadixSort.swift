@@ -40,7 +40,7 @@ public extension Array {
     /// needs O(n) space --> works on copy of itself and then copies back
     public mutating func radixSortInPlace(by order: (Element) throws -> Int) rethrows {
         // ...
-        try self.radixSortInPlace(in: self.range, by: order)
+        try self.radixSortInPlace(in: self.indices, by: order)
     }
     
     /// needs O(n) space --> works on copy of itself and then copies back
@@ -88,7 +88,7 @@ public extension Array where Element : Hashable {
         self.radixSort(by: { $0.hashValue })
     }
     public mutating func radixSortInPlace() {
-        self.radixSortInPlace(in: self.range, by: { $0.hashValue })
+        self.radixSortInPlace(in: self.indices, by: { $0.hashValue })
     }
     public mutating func radixSortInPlace(in range: CountableRange<Int>) {
         self.radixSortInPlace(in: range, by: { $0.hashValue })

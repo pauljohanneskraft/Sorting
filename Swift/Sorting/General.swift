@@ -13,9 +13,7 @@ func <-> <T>( left: inout T, right: inout T) {
     swap(&left, &right)
 }
 
-public extension Array {
-    public var range : CountableRange<Int> { return 0..<count }
-    
+public extension Array {    
     public func isSorted(by order: (Element, Element) throws -> Bool) rethrows -> Bool {
         for i in self.indices.dropLast() {
             if try order(self[i + 1], self[i]) {

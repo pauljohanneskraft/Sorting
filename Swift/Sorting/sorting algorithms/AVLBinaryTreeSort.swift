@@ -10,11 +10,52 @@ import Cocoa
 
 extension Array where Element : Comparable {
     mutating func avlBinaryTreeSort(by order: (Element, Element) throws -> Bool = { $0 < $1 }) rethrows {
-        
         // ...
+        self = try AVLBinaryTree(self, order: order).array
     }
 }
 
+// TODO! currently not an AVL-Tree!
+
+private struct AVLBinaryTree<E> : BinTree {
+    typealias Element = E
+    typealias Node = AVLBinaryTreeNode<E>
+    init(_ elements: [E], order: (E, E) throws -> Bool) rethrows {
+        guard elements.count > 1 else { self.order = order; return }
+        self.order = order
+        root = Node(elements.first!, order: order)
+        for e in elements {
+            try root!.insert(e, order: order)
+        }
+    }
+    
+    var root: AVLBinaryTreeNode<E>? = nil
+    var order : (E, E) throws -> Bool
+}
+
+private final class AVLBinaryTreeNode < E > : BinTreeNode {
+    typealias Element = E
+    init(_ data: E, order: (E, E) throws -> Bool) {
+        self.data = data
+        self.order = order
+    }
+    
+    func insert(_ data: Element, order: (Element, Element) throws -> Bool) rethrows {
+        // ...
+        if try order(data, self.data) {
+            if  left == nil { left = AVLBinaryTreeNode(data, order: order) }
+            else            { try left!.insert(data, order: order) }
+        } else {
+            if right == nil { right = AVLBinaryTreeNode(data, order: order) }
+            else            { try right!.insert(data, order: order) }
+        }
+    }
+    
+    private var data    : E
+    private var left    : AVLBinaryTreeNode<E>? = nil
+    private var right   : AVLBinaryTreeNode<E>? = nil
+    private let order   : (E, E) throws -> Bool
+}
 
 
 
