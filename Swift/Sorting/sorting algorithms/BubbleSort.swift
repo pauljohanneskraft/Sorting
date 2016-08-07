@@ -6,7 +6,7 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Sortable {
+extension SortableCollection {
     /// - complexity: O(n^2)
     public mutating func bubbleSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
@@ -37,7 +37,7 @@ extension Sortable {
     }
 }
 
-extension Array where Element : Comparable {
+extension SortableCollection where Element : Comparable {
     /// complexity: O(n^2)
     public mutating func bubbleSort() {
         self.bubbleSort(by: { $0 < $1 })

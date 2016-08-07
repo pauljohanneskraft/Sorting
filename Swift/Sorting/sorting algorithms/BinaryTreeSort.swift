@@ -30,7 +30,7 @@ private struct BinaryTree<E> : BinTree {
     init(_ elements: [E], order: (E, E) throws -> Bool) rethrows {
         guard elements.count > 1 else { self.order = order; return }
         self.order = order
-        root = Node(elements.first!, order: order)
+        root = Node(elements[0], order: order)
         for e in elements.dropFirst() {
             try root!.insert(e, order: order)
         }

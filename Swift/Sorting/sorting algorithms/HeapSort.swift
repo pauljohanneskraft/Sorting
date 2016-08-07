@@ -6,25 +6,26 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Sortable {
+extension SortableCollection{
     mutating func heapSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         try self.heapSort(in: self.indices, by: order)
     }
     
+    // O(n log n)
     mutating func heapSort(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         guard range.count > 1 else { return }
         
         try generateMaxHeap(in: range, by: order)
         
-        for i in range.reversed() {
+        for i in range.reversed() { // O(n)
             
             // deleteMin()
             swap(&self[i], &self[range.startIndex])
             
             // siftDown to ensure invariant
-            try siftDown(index: range.startIndex, in: range.startIndex..<i, by: order)
+            try siftDown(index: range.startIndex, in: range.startIndex..<i, by: order) // O(log n)
         }
     }
     
@@ -67,7 +68,7 @@ extension Sortable {
     }
 }
 
-extension Array where Element : Comparable {
+extension SortableCollection where Element : Comparable {
     public mutating func heapSort() {
         self.heapSort(in: self.indices, by: { $0 < $1 })
     }
