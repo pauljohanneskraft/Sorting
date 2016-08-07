@@ -15,7 +15,7 @@ class SortingTest : XCTestCase {
     var elements : [[N]] = []
     
     override func setUp() {
-        self.setUp(arrayCount: 20, elementCount: 10)
+        self.setUp(arrayCount: 20, elementCount: 100)
     }
     
     func setUp(arrayCount: Int, elementCount: UInt32) {
@@ -24,26 +24,34 @@ class SortingTest : XCTestCase {
             let count = (arc4random() % (elementCount)) + (elementCount / 2) + 5
             var array = [Int]()
             for _ in 0..<count {
-                array.append(Int(arc4random() % UInt32(elementCount * 10)))
+                array.append(Int(arc4random() % UInt32(elementCount * 100)))
             }
             elements.append(array)
         }
     }
-
-    func testHeapSort()         { forAll("HeapSort         ") { $0.heapSort()           } }
-    func testBubbleSort()       { forAll("BubbleSort       ") { $0.bubbleSort()         } }
-    func testRadixSort()        { forAll("RadixSort        ") { $0.radixSort()          } }
-    func testRadixSortInPlace() { forAll("RadixSortInPlace ") { $0.radixSortInPlace()   } }
-    func testSelectionSort()    { forAll("SelectionSort    ") { $0.selectionSort()      } }
-    func testInsertionSort()    { forAll("InsertionSort    ") { $0.insertionSort()      } }
     
+    // blazingly fast
+    func testSwiftSort()        { forAll("Swift            ") { $0.sort()               } }
+
+    // O(n + K) complexity
+    func testRadixSortInPlace() { forAll("RadixSortInPlace ") { $0.radixSortInPlace()   } }
+    func testRadixSort()        { forAll("RadixSort        ") { $0.radixSort()          } }
+    
+    // QuickSort - variants: average case: O(n log n), worst case: O(n^2)
+    func testQuickSort()        { forAll("QuickSort        ") { $0.quickSort()          } }
     func testIntroSort()        { forAll("IntroSort        ") { $0.introSort()          } }
     
+    // O(n log n) complexity
+    func testHeapSort()         { forAll("HeapSort         ") { $0.heapSort()           } }
+    func testBinaryTreeSort()   { forAll("BinaryTreeSort   ") { $0.binaryTreeSort()     } }
     func testShellSort()        { forAll("ShellSort        ") { $0.shellSort()          } }
     func testMergeSort()        { forAll("MergeSort        ") { $0.mergeSort()          } }
-    func testQuickSort()        { forAll("QuickSort        ") { $0.quickSort()          } }
-    func testSwiftSort()        { forAll("Swift            ") { $0.sort()               } }
-    func testBinaryTreeSort()   { forAll("BinaryTreeSort   ") { $0.binaryTreeSort()     } }
+    
+    // O(n^2) complexity
+    func testSelectionSort()    { forAll("SelectionSort    ") { $0.selectionSort()      } }
+    func testInsertionSort()    { forAll("InsertionSort    ") { $0.insertionSort()      } }
+    func testBubbleSort()       { forAll("BubbleSort       ") { $0.bubbleSort()         } }
+
     
     func testSlowOnes()         {
         let arrayCount = 10
@@ -74,18 +82,12 @@ class SortingTest : XCTestCase {
         // testRadixSort()
         testRadixSortInPlace()
         // testHeapSort()
-        // testQuickSort()
-        // testIntroSort()
+        testQuickSort()
+        testIntroSort()
         // testBinaryTreeSort()
         // testShellSort()
         testSwiftSort()
         print("." * arrayCount)
-    }
-    
-    func testAll() {
-        testSlowOnes()
-        testMediumOnes()
-        testFastOnes()
     }
     
     func testDoubles() {
@@ -115,14 +117,6 @@ class SortingTest : XCTestCase {
     func testBinarySearch() {
         let e = [0,1,200,3,5,252436,9342,52,4524353,325,54,543,7,65,46,867,568,56,9].sorted()
         print(e.binarySearch(3))
-    }
-    
-    func testRadixSortInPlaceInRange() {
-        var e = [0,1,200,3,5,252436,9342,52,4524353,325,54,543,7,65,46,867,568,56,9]
-        let range = 2..<5
-        e.radixSortInPlace(in: range, by: { $0 })
-        //print(e[range])
-        if !e[range].isSorted { fatalError() }
     }
     
     func forAll(_ desc: String = "Test", _ f: (inout [N]) -> ()) {
