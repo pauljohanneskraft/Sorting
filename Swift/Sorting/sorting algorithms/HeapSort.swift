@@ -6,7 +6,7 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Array {
+extension Sortable {
     mutating func heapSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         try self.heapSort(in: self.indices, by: order)

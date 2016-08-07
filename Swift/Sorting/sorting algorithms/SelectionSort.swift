@@ -6,7 +6,7 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Array {
+extension Sortable {
     public mutating func selectionSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         try self.selectionSort(in: self.indices, by: order)

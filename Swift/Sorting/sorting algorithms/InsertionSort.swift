@@ -6,7 +6,7 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Array {
+extension Sortable {
     
     public mutating func insertionSort(by order: (Element, Element) throws -> Bool) rethrows {
         try self.insertionSort(in: self.indices, by: order)

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-extension Array {
+extension Sortable {
     public mutating func quickSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         try self.quickSort(in: self.indices, by: order)
