@@ -13,7 +13,7 @@ func <-> <T>( left: inout T, right: inout T) {
     swap(&left, &right)
 }
 
-public extension Sortable {
+public extension SortableCollection {
     public func isSorted(by order: (Element, Element) throws -> Bool) rethrows -> Bool {
         for i in self.indices.dropLast() {
             if try order(self[i + 1], self[i]) {
@@ -25,7 +25,7 @@ public extension Sortable {
     }
 }
 
-public extension Sortable where Element : Comparable {
+public extension SortableCollection where Element : Comparable {
     public var isSorted : Bool {
         return isSorted(by: { $0 < $1 })
     }

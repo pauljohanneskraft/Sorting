@@ -7,7 +7,7 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Sortable {
+extension SortableCollection {
     public mutating func introSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         if count < 25 { try self.selectionSort(by: order); return }
@@ -18,7 +18,7 @@ extension Sortable {
     mutating func introSort(in range: CountableRange<Int>, maxDepth depth: Int, by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         
-        guard range.count > 20  else { try self.insertionSort(in: range, by: order); return }
+        guard range.count > 20  else { try self.selectionSort(in: range, by: order); return }
         guard depth > 0         else { try self.heapSort     (in: range, by: order); return }
         let pivot = try partition(in: range, by: order)
         try introSort(in: range.startIndex ..< pivot    , maxDepth: depth - 1, by: order)
@@ -26,7 +26,7 @@ extension Sortable {
     }
 }
 
-public extension Array where Element : Comparable {
+public extension SortableCollection where Element : Comparable {
     public mutating func introSort() {
         self.introSort(by: { $0 < $1 })
     }
