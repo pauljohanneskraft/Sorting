@@ -6,7 +6,7 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Array {
+extension SortableCollection {
     public mutating func selectionSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         try self.selectionSort(in: self.indices, by: order)
@@ -27,7 +27,7 @@ extension Array {
     }
 }
 
-extension Array where Element : Comparable {
+extension SortableCollection where Element : Comparable {
     public mutating func selectionSort() {
         self.selectionSort(by: { $0 < $1 })
     }
