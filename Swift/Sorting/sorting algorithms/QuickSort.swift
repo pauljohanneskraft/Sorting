@@ -8,7 +8,7 @@
 
 import Cocoa
 
-extension Array {
+extension SortableCollection {
     public mutating func quickSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         try self.quickSort(in: self.indices, by: order)
@@ -50,7 +50,7 @@ extension Array {
     }
 }
 
-public extension Array where Element : Comparable {
+public extension SortableCollection where Element : Comparable {
     public mutating func quickSort() {
         self.quickSort(by: { $0 < $1 })
     }

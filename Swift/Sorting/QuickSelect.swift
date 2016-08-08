@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Array {
+extension SortableCollection {
     
     public func quickSelect(k: Int, by order: (Element, Element) throws -> Bool) rethrows -> Element {
         return try quickSelect(k: k, in: self.indices, by: order)
@@ -39,7 +39,7 @@ extension Array {
     
 }
 
-public extension Array where Element : Comparable {
+public extension SortableCollection where Element : Comparable {
     public func quickSelect(_ k: Int) -> Element {
         return self.quickSelect(k: k, in: self.indices, by: { $0 < $1 })
     }
@@ -55,13 +55,13 @@ public extension CountableRange {
     }
 }
 
-public extension Array where Element : Comparable {
+public extension SortableCollection where Element : Comparable {
     public func binarySearch(_ elem: Element) -> Int? {
-        return binarySearch(elem, in: self.indices, orderedBy: { $0 < $1 })
+        return binarySearch(elem, in: indices, orderedBy: { $0 < $1 })
     }
 }
 
-public extension Array where Element : Equatable {
+public extension SortableCollection where Element : Equatable {
     public func binarySearch(_ elem: Element, orderedBy order: (Element, Element) throws -> Bool) rethrows -> Int? {
         return try binarySearch(elem, in: self.indices, orderedBy: order)
     }

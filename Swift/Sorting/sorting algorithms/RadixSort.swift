@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Array {
+public extension SortableCollection where Self.Iterator.Element == Self.Element {
     public mutating func radixSort(by order: (Element) throws -> Int) rethrows {
         // ...
         let digitsAtOnce = 8
@@ -83,7 +83,7 @@ public extension Array {
     }
 }
 
-public extension Array where Element : Hashable {
+public extension SortableCollection where Element : Hashable, Self.Iterator.Element == Self.Element {
     public mutating func radixSort() {
         self.radixSort(by: { $0.hashValue })
     }

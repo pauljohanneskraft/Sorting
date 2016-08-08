@@ -6,7 +6,7 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension Array {
+extension SortableCollection {
     public mutating func shellSort
         (by order: (Element, Element) throws -> Bool) rethrows {
         try shellSort(in: self.indices, by: order)
@@ -38,7 +38,7 @@ extension Array {
     }
 }
 
-extension Array where Element : Comparable {
+extension SortableCollection where Element : Comparable {
     public mutating func shellSort() {
         self.shellSort { $0 < $1 }
     }

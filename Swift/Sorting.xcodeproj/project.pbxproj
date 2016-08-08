@@ -11,6 +11,7 @@
 		9B1B04081D513D22008D1F9C /* RadixSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1B04071D513D22008D1F9C /* RadixSort.swift */; };
 		9B322A7D1D500B9400F36853 /* SortingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B322A7C1D500B9400F36853 /* SortingTests.swift */; };
 		9B322A7F1D500B9400F36853 /* Sorting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB950441D4FC28900D1075A /* Sorting.framework */; };
+		9B9F3CF81D575D7C004913EB /* SortableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9F3CF71D575D7C004913EB /* SortableCollection.swift */; };
 		9BA35A0C1D5017150094223A /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA35A0B1D5017150094223A /* General.swift */; };
 		9BB950491D4FC28900D1075A /* Sorting.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB950471D4FC28900D1075A /* Sorting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9BB950681D4FC30D00D1075A /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB950611D4FC30D00D1075A /* Semaphore.swift */; };
@@ -45,6 +46,7 @@
 		9B322A7A1D500B9400F36853 /* SortingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SortingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B322A7C1D500B9400F36853 /* SortingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingTests.swift; sourceTree = "<group>"; };
 		9B322A7E1D500B9400F36853 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B9F3CF71D575D7C004913EB /* SortableCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortableCollection.swift; sourceTree = "<group>"; };
 		9BA35A0B1D5017150094223A /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		9BB950441D4FC28900D1075A /* Sorting.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Sorting.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB950471D4FC28900D1075A /* Sorting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sorting.h; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			children = (
 				9BB950611D4FC30D00D1075A /* Semaphore.swift */,
 				9BA35A0B1D5017150094223A /* General.swift */,
+				9B9F3CF71D575D7C004913EB /* SortableCollection.swift */,
 				9BB950831D4FC36500D1075A /* sorting algorithms */,
 				9BB950471D4FC28900D1075A /* Sorting.h */,
 				9BB950481D4FC28900D1075A /* Info.plist */,
@@ -281,6 +284,7 @@
 				9BB9507E1D4FC35F00D1075A /* IntroSort.swift in Sources */,
 				9BB950791D4FC35F00D1075A /* BinaryTreeCompositeSort.swift in Sources */,
 				9B0FC2311D53498500366916 /* QuickSelect.swift in Sources */,
+				9B9F3CF81D575D7C004913EB /* SortableCollection.swift in Sources */,
 				9BB9507A1D4FC35F00D1075A /* BinaryTreeSort.swift in Sources */,
 				9BB950821D4FC35F00D1075A /* ShellSort.swift in Sources */,
 				9BB950781D4FC35F00D1075A /* AVLBinaryTreeSort.swift in Sources */,
