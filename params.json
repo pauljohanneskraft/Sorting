@@ -1,1 +1,7 @@
-{"name":"Sort","tagline":"Sorting algorithms in different languages, including Swift, Java, C# and so on","body":"Hello.","google":"","note":"Don't delete this file! It's used internally to help with page regeneration."}
+{
+  "name": "Sorting",
+  "tagline": "Sorting algorithms in different languages, including Swift, Java, C# and so on",
+  "body": "# Sorting [![Build Status](https://travis-ci.org/pauljohanneskraft/Sorting.svg?branch=master)](https://travis-ci.org/pauljohanneskraft/Sorting)\r\n\r\nIn the repository Sorting you'll find multiple sorting algorithms, such as QuickSort, InsertionSort, BubbleSort, etc.\r\nHopefully in the future they will be implemented in as many languages as possible, e.g. in Swift, Java, C#, Python, C++, F#, ...\r\n\r\n[See also](https://pauljohanneskraft.github.io/Sort)\r\n\r\n# Wiki\r\nIf you want to know more about a specific algorithm or want to have a cleaner, more general implementation, please also visit the wiki.\r\n\r\n# Notes\r\n\r\nBecause Swift is a pretty rapidly evolving programming language, some implementations might not be correct anymore. They were written with Swift 2 and will constantly be updated, but depending on the changes, it could take some time.\r\n",
+  "google": "",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
