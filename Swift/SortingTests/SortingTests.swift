@@ -77,7 +77,7 @@ class SortingTest : XCTestCase {
     
     func testFastOnes()         {
         let arrayCount = 2
-        let elementCount : UInt32 = 100
+        let elementCount : UInt32 = 1000
         setUp(arrayCount: arrayCount, elementCount: elementCount)
         // testRadixSort()
         testRadixSortInPlace()

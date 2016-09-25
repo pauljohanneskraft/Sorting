@@ -8,7 +8,7 @@
 
 import Foundation
 
-infix operator <-> { associativity left precedence 140 }
+infix operator <->
 func <-> <T>( left: inout T, right: inout T) {
     swap(&left, &right)
 }

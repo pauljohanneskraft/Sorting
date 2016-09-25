@@ -33,8 +33,9 @@ extension SortableCollection {
     
     mutating func partition(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows -> Int {
         
-        let endIndex = range.endIndex - 1 // try medianOf3(in: range, by: order) --> doesn't work!
-        let pivot = self[ endIndex ]
+        let pivotIndex = range.endIndex - 1 // try medianOf3(in: range, by: order) --> doesn't work!
+		if pivotIndex != range.endIndex - 1 { swap(&self[ pivotIndex ], &self[ range.endIndex - 1 ] ) }
+        let pivot = self[ pivotIndex ]
         var j = range.startIndex
         
         for i in range.dropLast() {
@@ -44,7 +45,7 @@ extension SortableCollection {
             }
         }
         
-        if j != endIndex { swap(&self[j], &self[ endIndex ]) }
+        if j != pivotIndex { swap(&self[j], &self[ pivotIndex ]) }
         
         return j
     }

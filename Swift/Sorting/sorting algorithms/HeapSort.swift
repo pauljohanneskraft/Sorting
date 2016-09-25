@@ -6,7 +6,8 @@
 //  Copyright © 2015 Paul Kraft. All rights reserved.
 //
 
-extension SortableCollection{
+extension SortableCollection {
+    
     mutating func heapSort(by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         try self.heapSort(in: self.indices, by: order)
@@ -17,29 +18,31 @@ extension SortableCollection{
         // ...
         guard range.count > 1 else { return }
         
-        try generateMaxHeap(in: range, by: order)
+        try generateMaxHeap(in: range, by: order) // O(n log n)
         
         for i in range.reversed() { // O(n)
             
-            // deleteMin()
-            swap(&self[i], &self[range.startIndex])
+            swap(&self[i], &self[range.startIndex]) // O(1)
             
             // siftDown to ensure invariant
             try siftDown(index: range.startIndex, in: range.startIndex..<i, by: order) // O(log n)
-        }
+			
+        } // loop: O(n log n)
     }
     
+    // O(n log n)
     private mutating func generateMaxHeap(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         
-        // r = (0..<Int(n/2)) but in a specific range (n is count)
-        let r = ((range.startIndex)..<((range.count >> 1) + range.startIndex)).reversed()
+        // r = 0 ..< (n/2) but in a specific range (n is count)
+        let r = ((range.startIndex)..<((range.count >> 1) + range.startIndex)).reversed() // O(n)
         
         for i in r {
-            try siftDown(index: i, in: range, by: order)
+            try siftDown(index: i, in: range, by: order) // O(log n)
         }
     }
     
+    // O(log n)
     private mutating func siftDown(index: Int, in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows {
         // ...
         var i = index

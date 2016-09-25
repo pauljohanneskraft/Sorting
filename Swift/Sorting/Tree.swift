@@ -27,7 +27,7 @@ extension TreeNode {}
 
 protocol BinTreeNode : TreeNode {
     associatedtype Element
-    init(_: Element, order: (Element, Element) throws -> Bool)
+    init(_: Element, order: @escaping (Element, Element) throws -> Bool)
     var left : Self? { get set }
     var right: Self? { get set }
     var order : (Element, Element) throws -> Bool { get }
@@ -47,7 +47,7 @@ extension BinTreeNode {
         return result
     }
     
-    mutating func insert(_ data: Element, order: (Element, Element) throws -> Bool) rethrows {
+    mutating func insert(_ data: Element, order: @escaping (Element, Element) throws -> Bool) rethrows {
         if try order(data, self.data) {
             if  left == nil { left = Self(data, order: order) }
             else            { try left!.insert(data, order: order) }
@@ -72,7 +72,7 @@ protocol BinTree : Tree {
 }
 
 extension BinTree where Node : BinTreeNode, Node.Element == Self.Element {
-    mutating func insert(_ elem: Element, order: (Element, Element) throws -> Bool) rethrows {
+    mutating func insert(_ elem: Element, order: @escaping (Element, Element) throws -> Bool) rethrows {
         if root != nil { try root!.insert(elem, order: order) }
         else { root = Node(elem, order: order) }
     }
@@ -98,8 +98,9 @@ protocol BinTreeCompositeNode : TreeNode {
 // ...
 extension BinTree where Node: BinTreeCompositeNode, Node.Element == Self.Element {
     mutating func insert(_ elem: Element, order: (Element, Element) throws -> Bool) rethrows {
-        if root != nil { try root!.insert(elem, order: order) }
-        else { root = Node(elem, order: order) }
+        // ...
+        if root != nil  { try root!.insert(elem, order: order) }
+        else            { root = Node(elem, order: order) }
     }
 }
 
