@@ -1,7 +1,3 @@
-branches:
-  only:
-  - master
-  - Development
 language: objective-c
 os: osx
 osx_image: xcode8
