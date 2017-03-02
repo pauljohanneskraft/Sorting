@@ -20,7 +20,7 @@ extension SortableCollection {
         guard range.count > 1 else { return }
         
         // while it is not sorted, didChange will always be true after one cycle
-        var didChange = false // reduces best case to O(n), when array is sorted at the beginning, otherwise Theta()
+        var didChange = false // reduces best case to O(n), when array is sorted at the beginning, otherwise Theta(n^2)
         for j in range.reversed() {
             
             didChange = false
@@ -29,7 +29,7 @@ extension SortableCollection {
                 // self[i + 1] < self[i]
                 if try order(self[i + 1], self[i]) {
                     didChange = true
-                    swap(&self[i], &self[i + 1])
+                    self[i] <-> self[i + 1]
                 }
             }
             if !didChange { return }
@@ -39,7 +39,5 @@ extension SortableCollection {
 
 extension SortableCollection where Element : Comparable {
     /// complexity: O(n^2)
-    public mutating func bubbleSort() {
-        self.bubbleSort(by: { $0 < $1 })
-    }
+    public mutating func bubbleSort() { bubbleSort(by: <) }
 }

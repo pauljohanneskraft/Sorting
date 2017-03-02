@@ -39,8 +39,6 @@ extension SortableCollection {
 }
 
 extension SortableCollection where Element : Comparable {
-    public mutating func shellSort() {
-        self.shellSort { $0 < $1 }
-    }
+    public mutating func shellSort() { self.shellSort(by: <) }
 }
 
