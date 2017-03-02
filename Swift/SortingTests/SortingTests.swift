@@ -9,6 +9,19 @@
 import XCTest
 import Sorting
 
+protocol N_protocol : Comparable {
+    init(_: Int)
+}
+
+struct myInt : N_protocol {
+    init(_ v: Int) { self.value = v }
+    let value : Int
+    var str = "ljalkdfskldjslgjgkfljkvknbdjks jhözmcsgduignosmv c dgaghsd kjl jsgdajhg sflv"
+}
+
+func  < (a: myInt, b: myInt) -> Bool { return a.value < b.value }
+func == (a: myInt, b: myInt) -> Bool { return a.value == b.value }
+
 class SortingTest : XCTestCase {
     typealias N = Int
     
@@ -22,7 +35,7 @@ class SortingTest : XCTestCase {
         elements = []
         for _ in 0..<arrayCount {
             let count = (arc4random() % (elementCount)) + (elementCount / 2) + 5
-            var array = [Int]()
+            var array = [N]()
             for _ in 0..<count {
                 array.append(Int(arc4random() % UInt32(elementCount * 100)))
             }
@@ -39,6 +52,7 @@ class SortingTest : XCTestCase {
     
     // QuickSort - variants: average case: O(n log n), worst case: O(n^2)
     func testQuickSort()        { forAll("QuickSort        ") { $0.quickSort()          } }
+    func testQuickSortConc()    { forAll("QuickSortConc    ") { $0.quickSortConcurrent()} }
     func testIntroSort()        { forAll("IntroSort        ") { $0.introSort()          } }
     
     // O(n log n) complexity
@@ -46,6 +60,7 @@ class SortingTest : XCTestCase {
     func testBinaryTreeSort()   { forAll("BinaryTreeSort   ") { $0.binaryTreeSort()     } }
     func testShellSort()        { forAll("ShellSort        ") { $0.shellSort()          } }
     func testMergeSort()        { forAll("MergeSort        ") { $0.mergeSort()          } }
+    func testMergeSortConc()    { forAll("MergeSortConc    ") { $0.mergeSortConcurrent()} }
     
     // O(n^2) complexity
     func testSelectionSort()    { forAll("SelectionSort    ") { $0.selectionSort()      } }
@@ -66,32 +81,40 @@ class SortingTest : XCTestCase {
     
     func testMediumOnes() {
         let arrayCount = 10
-        let elementCount : UInt32 = 50
+        let elementCount : UInt32 = 5000
         setUp(arrayCount: arrayCount, elementCount: elementCount)
         testRadixSort()
         testShellSort()
         testMergeSort()
+        testMergeSortConc()
+        testQuickSortConc()
         testRadixSortInPlace()
         print("." * arrayCount)
     }
     
+    
     func testFastOnes()         {
-        let arrayCount = 2
-        let elementCount : UInt32 = 100
+        let arrayCount = 10
+        let elementCount : UInt32 = 10000
         setUp(arrayCount: arrayCount, elementCount: elementCount)
-        // testRadixSort()
+        testRadixSort()
         testRadixSortInPlace()
+        
         // testHeapSort()
+        
         testQuickSort()
-        testIntroSort()
+        testQuickSortConc()
+        
+        // testIntroSort()
         // testBinaryTreeSort()
         // testShellSort()
         testSwiftSort()
+        
         print("." * arrayCount)
     }
     
     func testDoubles() {
-        var e = [0,1,200,3,5,-252436,9342,52.0,4524353,325,54,543,7,65,46,867,568,56,9, 1e50, 2e-20]
+        var e = [0,1,200,3,5,-252436,9342,52.0,-4524353,325,54,543,7,65,46,867,568,56,9, 1e50, 2e-20]
         e.radixSortInPlace()
         print(e)
     }
@@ -116,7 +139,7 @@ class SortingTest : XCTestCase {
     
     func testBinarySearch() {
         let e = [0,1,200,3,5,252436,9342,52,4524353,325,54,543,7,65,46,867,568,56,9].sorted()
-        print(e.binarySearch(3))
+        print(e.binarySearch(3)!)
     }
     
     func forAll(_ desc: String = "Test", _ f: (inout [N]) -> ()) {

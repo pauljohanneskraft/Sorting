@@ -25,7 +25,5 @@ extension SortableInsertingCollection {
 }
 
 extension SortableInsertingCollection where Element : Comparable {
-    public mutating func insertionSort() {
-        self.insertionSort(by: { $0 < $1 })
-    }
+    public mutating func insertionSort() { self.insertionSort(by: <) }
 }

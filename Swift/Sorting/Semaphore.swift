@@ -8,6 +8,9 @@
 
 import Cocoa
 
+// internal let threadCountSemaphore = DispatchSemaphore(value: 4)
+
+
 /*
 class Semaphore {
     private static let MAX = 13

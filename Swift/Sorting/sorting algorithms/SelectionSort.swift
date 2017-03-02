@@ -28,7 +28,5 @@ extension SortableCollection {
 }
 
 extension SortableCollection where Element : Comparable {
-    public mutating func selectionSort() {
-        self.selectionSort(by: { $0 < $1 })
-    }
+    public mutating func selectionSort() { self.selectionSort(by: <) }
 }

@@ -15,7 +15,7 @@ extension Array where Element : Comparable {
 }
 
 extension Array {
-    public mutating func binaryTreeSort(by order: (Element, Element) throws -> Bool) rethrows {
+    public mutating func binaryTreeSort(by order: @escaping (Element, Element) throws -> Bool) rethrows {
         // ..
         let e = try BinaryTree(self, order: order)
         // print(e.dot)
@@ -27,7 +27,7 @@ extension Array {
 private struct BinaryTree<E> : BinTree {
     typealias Element = E
     typealias Node = BinaryTreeNode<E>
-    init(_ elements: [E], order: (E, E) throws -> Bool) rethrows {
+    init(_ elements: [E], order: @escaping (E, E) throws -> Bool) rethrows {
         guard elements.count > 1 else { self.order = order; return }
         self.order = order
         root = Node(elements[0], order: order)
@@ -42,12 +42,12 @@ private struct BinaryTree<E> : BinTree {
 
 private final class BinaryTreeNode < E > : BinTreeNode {
     typealias Element = E
-    init(_ data: E, order: (E, E) throws -> Bool) {
+    init(_ data: E, order: @escaping (E, E) throws -> Bool) {
         self.data = data
         self.order = order
     }
-    private var data    : E
-    private var left    : BinaryTreeNode<E>? = nil
-    private var right   : BinaryTreeNode<E>? = nil
-    private let order   : (E, E) throws -> Bool
+    fileprivate var data    : E
+    fileprivate var left    : BinaryTreeNode<E>? = nil
+    fileprivate var right   : BinaryTreeNode<E>? = nil
+    fileprivate let order   : (E, E) throws -> Bool
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 public extension SortableCollection where Self.Iterator.Element == Self.Element {
-    public mutating func radixSort(by order: (Element) throws -> Int) rethrows {
+    public mutating func radixSort(by order: @escaping (Element) throws -> Int) rethrows {
         // ...
         let digitsAtOnce = 8
         let buckets = (1 << digitsAtOnce)
@@ -32,19 +32,19 @@ public extension SortableCollection where Self.Iterator.Element == Self.Element 
             }
         }
         
-        for d in 0..<((sizeof(Int.self) * 8) / digitsAtOnce) {
+        for d in 0..<((MemoryLayout<Int>.size * 8) / digitsAtOnce) {
             try kSort(digit: d)
         }
     }
     
     /// needs O(n) space --> works on copy of itself and then copies back
-    public mutating func radixSortInPlace(by order: (Element) throws -> Int) rethrows {
+    public mutating func radixSortInPlace(by order: @escaping (Element) throws -> Int) rethrows {
         // ...
         try self.radixSortInPlace(in: self.indices, by: order)
     }
     
     /// needs O(n) space --> works on copy of itself and then copies back
-    public mutating func radixSortInPlace(in range: CountableRange<Int>, by order: (Element) throws -> Int) rethrows {
+    public mutating func radixSortInPlace(in range: CountableRange<Int>, by order: @escaping (Element) throws -> Int) rethrows {
         // ...
         let digitsAtOnce = (range.count > 70_000 ? 16 : (range.count > 400 ? 8 : 4))
         let buckets = (1 << digitsAtOnce)
@@ -77,7 +77,7 @@ public extension SortableCollection where Self.Iterator.Element == Self.Element 
             self = this
         }
         
-        for d in 0..<((sizeof(Int.self) * 8) / digitsAtOnce) {
+        for d in 0..<((MemoryLayout<Int>.size * 8) / digitsAtOnce) {
             try kSort(digit: d)
         }
     }

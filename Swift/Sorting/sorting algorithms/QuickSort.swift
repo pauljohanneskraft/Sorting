@@ -10,7 +10,6 @@ import Cocoa
 
 extension SortableCollection {
     public mutating func quickSort(by order: (Element, Element) throws -> Bool) rethrows {
-        // ...
         try self.quickSort(in: self.indices, by: order)
     }
     
@@ -21,7 +20,7 @@ extension SortableCollection {
         try quickSort(in: range.startIndex ..< pivot    , by: order)
         try quickSort(in: (pivot+1) ..< range.endIndex  , by: order)
     }
-    
+    /*
     private func medianOf3(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows -> Int {
         let first = range.startIndex
         let end = range.endIndex - 1
@@ -30,7 +29,7 @@ extension SortableCollection {
             if try order(self[mid], self[first]) { return mid } else { return first }
         } else if try order(self[first], self[end]) { return end } else { return first }
     }
-    
+    */
     mutating func partition(in range: CountableRange<Int>, by order: (Element, Element) throws -> Bool) rethrows -> Int {
         
         let endIndex = range.endIndex - 1 // try medianOf3(in: range, by: order) --> doesn't work!
@@ -51,10 +50,49 @@ extension SortableCollection {
 }
 
 public extension SortableCollection where Element : Comparable {
-    public mutating func quickSort() {
-        self.quickSort(by: { $0 < $1 })
+    public mutating func quickSort() { self.quickSort(by: <) }
+}
+
+public extension SortableInsertingCollection where Element : Comparable {
+    public mutating func quickSortConcurrent() {
+        var array = self.array
+        quickSortConcurrently(&array, by: { $0 < $1 }, numberOfRemainingCores: 8)
+        self = Self(array)
     }
 }
+
+internal func quickSortConcurrently< Element >(_ array: inout [Element], by order: @escaping (Element, Element) -> Bool, numberOfRemainingCores: UInt) {
+    guard array.count > 1 else { return }
+    let pivot = array.partition(in: array.indices, by: order)
+    var l = [] + array[array.startIndex..<pivot]
+    var r = [] + array[(pivot+1)..<array.endIndex]
+    
+    let leftQueue   = DispatchQueue(label: "Left_Dispatch_Queue")
+    let rightQueue  = DispatchQueue(label: "Right_Dispatch_Queue")
+    
+    if numberOfRemainingCores >= 2 {
+        leftQueue .async { quickSortConcurrently(&l, by: order, numberOfRemainingCores: numberOfRemainingCores >> 1) }
+        rightQueue.async { quickSortConcurrently(&r, by: order, numberOfRemainingCores: numberOfRemainingCores >> 1) }
+    } else {
+        leftQueue .async { l.quickSort(by: order) }
+        rightQueue.async { r.quickSort(by: order) }
+    }
+    
+    leftQueue.sync {}
+    rightQueue.sync {}
+    
+    l.append(array[pivot])
+    
+    array = l + r
+}
+
+
+
+
+
+
+
+
 
 /*
 

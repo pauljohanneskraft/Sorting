@@ -27,10 +27,10 @@ extension SortableCollection {
 }
 
 public extension SortableCollection where Element : Comparable {
-    public mutating func introSort() {
-        self.introSort(by: { $0 < $1 })
-    }
+    public mutating func introSort() { self.introSort(by: <) }
 }
+
+
 
 /*
 

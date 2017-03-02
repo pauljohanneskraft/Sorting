@@ -8,7 +8,6 @@
 
 extension SortableInsertingCollection {
     public mutating func mergeSort(by order: (Element, Element) throws -> Bool) rethrows {
-        guard count > 1 else { return }
         try self.mergeSort(in: self.indices, by: order)
     }
     
@@ -38,12 +37,59 @@ extension SortableInsertingCollection {
     }
 }
 
-public extension SortableInsertingCollection where Element : Comparable {
-    public mutating func mergeSort() {
-        self.mergeSort(by: { $0 < $1 })
+public extension SortableInsertingCollection {
+    public mutating func mergeSortConcurrent(by order: @escaping (Element, Element) -> Bool) {
+        let slice = self.array
+        let sortedSlice = mergeSortConcurrently(slice, by: order, numberOfRemainingCores: 2)
+        self = Self(sortedSlice)
     }
 }
 
+public extension SortableInsertingCollection where Element : Comparable {
+    public mutating func mergeSort()            { self.mergeSort            (by: <)   }
+    public mutating func mergeSortConcurrent()  { self.mergeSortConcurrent  (by: <)   }
+}
+
+internal func mergeSortConcurrently< Element >(_ array: [Element], by order: @escaping (Element, Element) -> Bool, numberOfRemainingCores: UInt) -> [Element] {
+    guard array.count > 1 else { return array }
+
+    let mid = (array.startIndex + array.endIndex) / 2
+    var l = [] + array[array.startIndex..<mid]
+    var r = [] + array[mid..<array.endIndex]
+    
+    let leftQueue   = DispatchQueue(label: "Left_Dispatch_Queue")
+    let rightQueue  = DispatchQueue(label: "Right_Dispatch_Queue")
+    
+    if numberOfRemainingCores >= 2 {
+        leftQueue .async { l = mergeSortConcurrently(l, by: order, numberOfRemainingCores: numberOfRemainingCores >> 1) }
+        rightQueue.async { r = mergeSortConcurrently(r, by: order, numberOfRemainingCores: numberOfRemainingCores >> 1) }
+    } else {
+        leftQueue .async { l.mergeSort(by: order) }
+        rightQueue.async { r.mergeSort(by: order) }
+    }
+    
+    
+    leftQueue.sync {}
+    rightQueue.sync {}
+    
+    return merge(l, r, by: order)
+}
+
+private func merge< Element > (_ a: [Element], _ b: [Element], by order: @escaping (Element, Element) -> Bool) -> Array<Element> {
+    var a = Array(a), b = Array(b)
+    var res = [Element]()
+    // print("start merging...")
+    while a.count > 0 && b.count > 0 {
+        if order(a[0], b[0]) { res.append(a.remove(at: a.startIndex)) }
+        else                 { res.append(b.remove(at: b.startIndex)) }
+    }
+    // print("filling up...")
+    while a.count > 0     { res.append(a.remove(at: a.startIndex)) }
+    while b.count > 0     { res.append(b.remove(at: b.startIndex)) }
+    // print("filling up...")
+    // print(res)
+    return res
+}
 
 /*
 
