@@ -1,0 +1,416 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9B03E40E1CBFD7E200C4C4C1 /* Sort.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B03E40D1CBFD7E200C4C4C1 /* Sort.m */; };
+		9B03E4111CBFDBA900C4C4C1 /* BubbleSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B03E4101CBFDBA900C4C4C1 /* BubbleSort.m */; };
+		9B03E4141CBFE58600C4C4C1 /* InsertionSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B03E4131CBFE58600C4C4C1 /* InsertionSort.m */; };
+		9B21D8F21CBD37BD00446095 /* QuickSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B21D8F11CBD37BD00446095 /* QuickSort.m */; };
+		9B672E9C1D56872000E155FA /* SortingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B672E9B1D56872000E155FA /* SortingTests.swift */; };
+		9B6FCDCC1CC01A2C009E5457 /* SelectionSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FCDCB1CC01A2C009E5457 /* SelectionSort.m */; };
+		9B6FCDCF1CC01E02009E5457 /* MergeSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FCDCE1CC01E02009E5457 /* MergeSort.m */; };
+		9B6FCDD21CC03098009E5457 /* IntroSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FCDD11CC03098009E5457 /* IntroSort.m */; };
+		9B6FCDD51CC03218009E5457 /* HeapSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FCDD41CC03218009E5457 /* HeapSort.m */; };
+		9B6FCDD81CC038A8009E5457 /* BinaryTreeSort.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FCDD71CC038A8009E5457 /* BinaryTreeSort.m */; };
+		9B782A4C1CBAA04E00EE7BCD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B782A4B1CBAA04E00EE7BCD /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9B782A461CBAA04D00EE7BCD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		9B03E40C1CBFD7E100C4C4C1 /* Sort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sort.h; path = "sorting algorithms/Sort.h"; sourceTree = "<group>"; };
+		9B03E40D1CBFD7E200C4C4C1 /* Sort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sort.m; path = "sorting algorithms/Sort.m"; sourceTree = "<group>"; };
+		9B03E40F1CBFDBA900C4C4C1 /* BubbleSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BubbleSort.h; path = "sorting algorithms/BubbleSort.h"; sourceTree = "<group>"; };
+		9B03E4101CBFDBA900C4C4C1 /* BubbleSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BubbleSort.m; path = "sorting algorithms/BubbleSort.m"; sourceTree = "<group>"; };
+		9B03E4121CBFE58600C4C4C1 /* InsertionSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InsertionSort.h; path = "sorting algorithms/InsertionSort.h"; sourceTree = "<group>"; };
+		9B03E4131CBFE58600C4C4C1 /* InsertionSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InsertionSort.m; path = "sorting algorithms/InsertionSort.m"; sourceTree = "<group>"; };
+		9B21D8F01CBD37BD00446095 /* QuickSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuickSort.h; path = "sorting algorithms/QuickSort.h"; sourceTree = "<group>"; };
+		9B21D8F11CBD37BD00446095 /* QuickSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QuickSort.m; path = "sorting algorithms/QuickSort.m"; sourceTree = "<group>"; };
+		9B672E991D56872000E155FA /* SortingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SortingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B672E9B1D56872000E155FA /* SortingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingTests.swift; sourceTree = "<group>"; };
+		9B672E9D1D56872000E155FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B6FCDCA1CC01A2C009E5457 /* SelectionSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionSort.h; path = "sorting algorithms/SelectionSort.h"; sourceTree = "<group>"; };
+		9B6FCDCB1CC01A2C009E5457 /* SelectionSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectionSort.m; path = "sorting algorithms/SelectionSort.m"; sourceTree = "<group>"; };
+		9B6FCDCD1CC01E02009E5457 /* MergeSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MergeSort.h; path = "sorting algorithms/MergeSort.h"; sourceTree = "<group>"; };
+		9B6FCDCE1CC01E02009E5457 /* MergeSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MergeSort.m; path = "sorting algorithms/MergeSort.m"; sourceTree = "<group>"; };
+		9B6FCDD01CC03098009E5457 /* IntroSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroSort.h; path = "sorting algorithms/IntroSort.h"; sourceTree = "<group>"; };
+		9B6FCDD11CC03098009E5457 /* IntroSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroSort.m; path = "sorting algorithms/IntroSort.m"; sourceTree = "<group>"; };
+		9B6FCDD31CC03217009E5457 /* HeapSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeapSort.h; path = "sorting algorithms/HeapSort.h"; sourceTree = "<group>"; };
+		9B6FCDD41CC03218009E5457 /* HeapSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HeapSort.m; path = "sorting algorithms/HeapSort.m"; sourceTree = "<group>"; };
+		9B6FCDD61CC038A8009E5457 /* BinaryTreeSort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryTreeSort.h; path = "sorting algorithms/BinaryTreeSort.h"; sourceTree = "<group>"; };
+		9B6FCDD71CC038A8009E5457 /* BinaryTreeSort.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BinaryTreeSort.m; path = "sorting algorithms/BinaryTreeSort.m"; sourceTree = "<group>"; };
+		9B782A481CBAA04E00EE7BCD /* Sorting */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sorting; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B782A4B1CBAA04E00EE7BCD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9B672E961D56872000E155FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B782A451CBAA04D00EE7BCD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9B672E9A1D56872000E155FA /* SortingTests */ = {
+			isa = PBXGroup;
+			children = (
+				9B672E9B1D56872000E155FA /* SortingTests.swift */,
+				9B672E9D1D56872000E155FA /* Info.plist */,
+			);
+			path = SortingTests;
+			sourceTree = "<group>";
+		};
+		9B782A3F1CBAA04D00EE7BCD = {
+			isa = PBXGroup;
+			children = (
+				9B782A4A1CBAA04E00EE7BCD /* Sorting */,
+				9B672E9A1D56872000E155FA /* SortingTests */,
+				9B782A491CBAA04E00EE7BCD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9B782A491CBAA04E00EE7BCD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9B782A481CBAA04E00EE7BCD /* Sorting */,
+				9B672E991D56872000E155FA /* SortingTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9B782A4A1CBAA04E00EE7BCD /* Sorting */ = {
+			isa = PBXGroup;
+			children = (
+				9B782A4B1CBAA04E00EE7BCD /* main.m */,
+				9BA8D1591CBFD3A00040B4DD /* sorting algorithms */,
+			);
+			path = Sorting;
+			sourceTree = "<group>";
+		};
+		9BA8D1591CBFD3A00040B4DD /* sorting algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				9B03E40C1CBFD7E100C4C4C1 /* Sort.h */,
+				9B03E40D1CBFD7E200C4C4C1 /* Sort.m */,
+				9B6FCDD01CC03098009E5457 /* IntroSort.h */,
+				9B6FCDD11CC03098009E5457 /* IntroSort.m */,
+				9B6FCDD61CC038A8009E5457 /* BinaryTreeSort.h */,
+				9B6FCDD71CC038A8009E5457 /* BinaryTreeSort.m */,
+				9B6FCDD31CC03217009E5457 /* HeapSort.h */,
+				9B6FCDD41CC03218009E5457 /* HeapSort.m */,
+				9B6FCDCD1CC01E02009E5457 /* MergeSort.h */,
+				9B6FCDCE1CC01E02009E5457 /* MergeSort.m */,
+				9B03E40F1CBFDBA900C4C4C1 /* BubbleSort.h */,
+				9B03E4101CBFDBA900C4C4C1 /* BubbleSort.m */,
+				9B03E4121CBFE58600C4C4C1 /* InsertionSort.h */,
+				9B03E4131CBFE58600C4C4C1 /* InsertionSort.m */,
+				9B6FCDCA1CC01A2C009E5457 /* SelectionSort.h */,
+				9B6FCDCB1CC01A2C009E5457 /* SelectionSort.m */,
+				9B21D8F01CBD37BD00446095 /* QuickSort.h */,
+				9B21D8F11CBD37BD00446095 /* QuickSort.m */,
+			);
+			name = "sorting algorithms";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9B672E981D56872000E155FA /* SortingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B672EA01D56872000E155FA /* Build configuration list for PBXNativeTarget "SortingTests" */;
+			buildPhases = (
+				9B672E951D56872000E155FA /* Sources */,
+				9B672E961D56872000E155FA /* Frameworks */,
+				9B672E971D56872000E155FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SortingTests;
+			productName = SortingTests;
+			productReference = 9B672E991D56872000E155FA /* SortingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9B782A471CBAA04D00EE7BCD /* Sorting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B782A4F1CBAA04E00EE7BCD /* Build configuration list for PBXNativeTarget "Sorting" */;
+			buildPhases = (
+				9B782A441CBAA04D00EE7BCD /* Sources */,
+				9B782A451CBAA04D00EE7BCD /* Frameworks */,
+				9B782A461CBAA04D00EE7BCD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sorting;
+			productName = Sorting;
+			productReference = 9B782A481CBAA04E00EE7BCD /* Sorting */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9B782A401CBAA04D00EE7BCD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = pauljohanneskraft;
+				TargetAttributes = {
+					9B672E981D56872000E155FA = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = TJSHMGE2VX;
+						ProvisioningStyle = Automatic;
+					};
+					9B782A471CBAA04D00EE7BCD = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 9B782A431CBAA04D00EE7BCD /* Build configuration list for PBXProject "Sorting" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9B782A3F1CBAA04D00EE7BCD;
+			productRefGroup = 9B782A491CBAA04E00EE7BCD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9B782A471CBAA04D00EE7BCD /* Sorting */,
+				9B672E981D56872000E155FA /* SortingTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9B672E971D56872000E155FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9B672E951D56872000E155FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B672E9C1D56872000E155FA /* SortingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B782A441CBAA04D00EE7BCD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B6FCDCF1CC01E02009E5457 /* MergeSort.m in Sources */,
+				9B6FCDCC1CC01A2C009E5457 /* SelectionSort.m in Sources */,
+				9B6FCDD81CC038A8009E5457 /* BinaryTreeSort.m in Sources */,
+				9B6FCDD21CC03098009E5457 /* IntroSort.m in Sources */,
+				9B6FCDD51CC03218009E5457 /* HeapSort.m in Sources */,
+				9B03E40E1CBFD7E200C4C4C1 /* Sort.m in Sources */,
+				9B03E4141CBFE58600C4C4C1 /* InsertionSort.m in Sources */,
+				9B782A4C1CBAA04E00EE7BCD /* main.m in Sources */,
+				9B21D8F21CBD37BD00446095 /* QuickSort.m in Sources */,
+				9B03E4111CBFDBA900C4C4C1 /* BubbleSort.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9B672E9E1D56872000E155FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = TJSHMGE2VX;
+				INFOPLIST_FILE = SortingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Kraft.SortingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		9B672E9F1D56872000E155FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = TJSHMGE2VX;
+				INFOPLIST_FILE = SortingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Kraft.SortingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		9B782A4D1CBAA04E00EE7BCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9B782A4E1CBAA04E00EE7BCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9B782A501CBAA04E00EE7BCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9B782A511CBAA04E00EE7BCD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9B672EA01D56872000E155FA /* Build configuration list for PBXNativeTarget "SortingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B672E9E1D56872000E155FA /* Debug */,
+				9B672E9F1D56872000E155FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9B782A431CBAA04D00EE7BCD /* Build configuration list for PBXProject "Sorting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B782A4D1CBAA04E00EE7BCD /* Debug */,
+				9B782A4E1CBAA04E00EE7BCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B782A4F1CBAA04E00EE7BCD /* Build configuration list for PBXNativeTarget "Sorting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B782A501CBAA04E00EE7BCD /* Debug */,
+				9B782A511CBAA04E00EE7BCD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9B782A401CBAA04D00EE7BCD /* Project object */;
+}
